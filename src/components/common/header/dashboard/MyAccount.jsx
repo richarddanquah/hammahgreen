@@ -18,12 +18,12 @@ const MyAccount = () => {
   return (
     <>
       <div className="user_set_header">
-        <img
+        {/* <img
           className="rounded-circle"
           src={session.user.image}
           alt="e1.png"
           width={60}
-        />
+        /> */}
         <p>
           {session.user.name}
           <br />

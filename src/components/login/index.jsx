@@ -12,6 +12,11 @@ import { useRouter } from "next/router";
 const Index = () => {
   const { data: session, status } = useSession();
   const route = useRouter();
+
+  if (status === "authenticated") {
+    route.push("/");
+  }
+
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -45,7 +50,7 @@ const Index = () => {
               {status === "authenticated" && (
                 <>
                   <div className="pt100 pb100">
-                    <img
+                    {/* <img
                       className="rounded-circle"
                       src={session.user.image}
                       alt="Profile Image"
@@ -53,7 +58,7 @@ const Index = () => {
                       height={60}
                     />
                     <br />
-                    <br />
+                    <br /> */}
                     <h4>You are signed in as {session.user.email}</h4>
                     {/* <Link href="/my-dashboard">
                       <button type="button" className="btn btn-green btn-thm">
@@ -77,7 +82,7 @@ const Index = () => {
                 </>
               )}
               {status === "unauthenticated" && (
-                <div className="login_form  inner_page">
+                <div className="login_form  inner_page pt500 pb500">
                   <Form />
                 </div>
               )}

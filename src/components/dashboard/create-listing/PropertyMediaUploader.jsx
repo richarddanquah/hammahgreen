@@ -74,7 +74,7 @@ const PropertyMediaUploader = () => {
       </div>
       {/* End .col */}
 
-      <div className="col-xl-6">
+      {/* <div className="col-xl-6">
         <div className="resume_uploader mb30">
           <h3>Attachments</h3>
           <form className="form-inline d-flex flex-wrap wrap">
@@ -85,7 +85,7 @@ const PropertyMediaUploader = () => {
             </label>
           </form>
         </div>
-      </div>
+      </div> */}
       {/* End .col */}
 
       <div className="col-xl-12">

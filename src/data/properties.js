@@ -140,8 +140,7 @@ module.exports = [
     price: "11000",
     type: "House",
     title: "Gorgeous Villa Bay View",
-    location: `1421 San Pedro
-St, Los Angeles, CA 900015`,
+    location: `1421 San Pedro St, Los Angeles, CA 900015`,
     saleTag: ["Featured", "For Rent"],
     itemDetails: [
       {

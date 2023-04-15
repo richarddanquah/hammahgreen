@@ -8,21 +8,7 @@ const Form = () => {
 
   const [email, setEmail] = useState("");
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-
-  //   // Read the form data
-  //   const form = e.target;
-  //   const formData = new FormData(form);
-
-  //   // You can pass formData as a fetch body directly:
-  //   //  fetch('/some-api', { method: form.method, body: formData });
-
-  //   // Or you can work with it as a plain object:
-  //   const formJson = Object.fromEntries(formData.entries());
-  //   console.log(formJson);
-  // }
-
+  
   function handleSubmit(e) {
     e.preventDefault();
 
@@ -38,22 +24,32 @@ const Form = () => {
       <div className="heading text-center">
         <h3>Login</h3>
         <p className="text-center">
-          Dont have an account?{" "}
-          <Link href="/register">
-            <a>Sign Up!</a>
-          </Link>
+          Dont have an account? Contact an <Link href="">Agent</Link>.
         </p>
       </div>
       {/* End .heading */}
 
-      {/* <form className="pt20 pb20" method="post"> */}
+      <div className="col-lg-12">
+        <button
+          type="button"
+          className="btn btn1 bgc-git color-white mb10 w-100"
+          onClick={() => {
+            signIn();
+          }}
+        >
+          <i className="fa fa-sign-in float-end mt5"></i>
+          Sign in with your Credentials
+        </button>
+      </div>
+      {/* End .col */}
 
-      {/* <div className="input-group mb-2 mr-sm-2">
+      {/* <form className="pt20 pb20" method="post">
+        <div className="input-group mb-2 mr-sm-2">
           <input
             type="text"
             className="form-control"
             required
-            placeholder="User Name Or Email"
+            placeholder="Enter your Email"
             name="username"
           />
           <div className="input-group-prepend">
@@ -62,9 +58,9 @@ const Form = () => {
             </div>
           </div>
         </div> */}
-      {/* End .input-group */}
+        {/* End .input-group */}
 
-      {/* <div className="input-group form-group">
+        {/* <div className="input-group form-group">
           <input
             type="password"
             className="form-control"
@@ -78,9 +74,9 @@ const Form = () => {
             </div>
           </div>
         </div> */}
-      {/* End .input-group */}
+        {/* End .input-group */}
 
-      {/* <div className="form-group form-check custom-checkbox mb-3">
+        {/* <div className="form-group form-check custom-checkbox mb-3">
           <input
             className="form-check-input"
             type="checkbox"
@@ -99,13 +95,13 @@ const Form = () => {
             Forgot password?
           </a>
         </div> */}
-      {/* End .form-group */}
+        {/* End .form-group */}
 
-      {/* <button type="submit" className="btn btn-green w-100 btn-thm">
+        {/* <button type="submit" className="btn btn-green w-100 btn-thm">
           Log In
         </button> */}
-      {/* login button */}
-
+        {/* login button */}
+        
       {/* </form> */}
 
       {/* <div className="divide">
@@ -116,7 +112,7 @@ const Form = () => {
 
       {/* Sign In with Email */}
 
-      <form className="pt20 pb20" method="post" onSubmit={handleSubmit}>
+      {/* <form className="pt20 pb20" method="post" onSubmit={handleSubmit}>
         <div className="input-group mb-2 mr-sm-2">
           <input
             onChange={(e) => {
@@ -128,7 +124,7 @@ const Form = () => {
             required
             placeholder="Enter Your Email"
             name="email"
-            // value={email}
+            value={email}
           />
           <div className="input-group-prepend">
             <div className="input-group-text">
@@ -136,22 +132,29 @@ const Form = () => {
             </div>
           </div>
         </div>
-        {/* End .input-group */}
+        End .input-group
 
         <button type="submit" className="btn btn-green w-100 btn-thm">
           Email Signin
         </button>
-      </form>
+      </form> */}
 
-      <div className="divide">
+      {/* <div className="divide">
         <span className="lf_divider">Or</span>
         <hr />
-      </div>
+      </div> */}
       {/* devider */}
 
-      {/* Sign in with google fb */}
+      {/* more signin options */}
 
-      <div className="row">
+
+      {/* <div className="divide">
+        <span className="lf_divider">Or</span>
+        <hr />
+      </div> */}
+      {/* devider */}
+
+      {/* <div className="row">
         <div className="col-lg-6">
           <button
             type="button"
@@ -163,7 +166,7 @@ const Form = () => {
             <i className="fa fa-facebook float-start mt5"></i> facebook
           </button>
         </div>
-        {/* End .col */}
+        End .col
 
         <div className="col-lg-6">
           <button
@@ -176,8 +179,8 @@ const Form = () => {
             <i className="fa fa-google float-start mt5"></i> Google
           </button>
         </div>
-        {/* End .col */}
-      </div>
+        End .col
+      </div> */}
 
       {/* more signin options */}
     </>

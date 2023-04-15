@@ -4,6 +4,7 @@ import Header from "../common/header/DefaultHeader";
 import MobileMenu from "../common/header/MobileMenu";
 import PopupSignInUp from "../common/PopupSignInUp";
 import BreadCrumbBanner from "./BreadCrumbBanner";
+import Link from "next/link";
 import Form from "./Form";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -11,6 +12,11 @@ import { useRouter } from "next/router";
 const Index = () => {
   const { data: session, status } = useSession();
   const route = useRouter();
+
+  if (status === "authenticated") {
+    route.push("/");
+  }
+
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -40,7 +46,7 @@ const Index = () => {
               {status === "authenticated" && (
                 <>
                   <div className="pt100 pb100">
-                    <img
+                    {/* <img
                       className="rounded-circle"
                       src={session.user.image}
                       alt="Profile Image"
@@ -48,14 +54,14 @@ const Index = () => {
                       height={60}
                     />
                     <br />
-                    <br />
+                    <br /> */}
                     <h4>You are signed in as {session.user.email}</h4>
-                    {/* <Link href="/my-dashboard">
+                    <Link href="/my-dashboard">
                       <button type="button" className="btn btn-green btn-thm">
                         Go to dashboard
                       </button>
                     </Link>
-                    &nbsp; &nbsp; */}
+                    &nbsp; &nbsp;
                     <button
                       onClick={async () => {
                         signOut({
@@ -73,6 +79,12 @@ const Index = () => {
               )}
               {status === "unauthenticated" && (
                 <div className="login_form  inner_page">
+                  {/* {Users.map((user) => (
+                    <div key={user._id}>
+                      <p>{user.fname}</p>
+                      <p>{user.email}</p>
+                    </div>
+                  ))} */}
                   <Form />
                 </div>
               )}

@@ -86,6 +86,20 @@ const SidebarMenu = () => {
             </li>
             <li
               className={`treeview ${
+                isSinglePageActive("/create-user", route.pathname)
+                  ? "active"
+                  : ""
+              }`}
+            >
+              <Link href="/create-user">
+                <a>
+                  <i className="flaticon-user-1"></i>
+                  <span> Create User</span>
+                </a>
+              </Link>
+            </li>
+            <li
+              className={`treeview ${
                 isSinglePageActive("/my-message", route.pathname)
                   ? "active"
                   : ""

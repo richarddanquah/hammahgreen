@@ -479,12 +479,12 @@ const HeaderMenuContent = ({ float = "" }) => {
               href="#"
               data-bs-toggle="dropdown"
             >
-              <img
+              {/* <img
                 className="rounded-circle"
                 src={session.user.image}
                 alt="e1.png"
                 width={40}
-              />
+              /> */}
               <span className="dn-1199 ms-1">
                 {session.user.name}
               </span>
