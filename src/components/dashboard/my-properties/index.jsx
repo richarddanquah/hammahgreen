@@ -8,12 +8,12 @@ import SearchBox from "./SearchBox";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({ Listings }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
   console.log(status);
 
-  if(status === "unauthenticated" ){
+  if (status === "unauthenticated") {
     // signIn();
     router.push("/login");
   }
@@ -63,13 +63,13 @@ const Index = () => {
 
                 <div className="col-lg-4 col-xl-4 mb10">
                   <div className="breadcrumb_content style2 mb30-991">
-                    <h2 className="breadcrumb_title">My Favorites</h2>
-                    <p>We are glad to see you again!</p>
+                    <h2 className="breadcrumb_title">Listings</h2>
+                    <p>View all property listings here</p>
                   </div>
                 </div>
                 {/* End .col */}
 
-                <div className="col-lg-8 col-xl-8">
+                {/* <div className="col-lg-8 col-xl-8">
                   <div className="candidate_revew_select style2 text-end mb30-991">
                     <ul className="mb0">
                       <li className="list-inline-item">
@@ -77,28 +77,28 @@ const Index = () => {
                           <SearchBox />
                         </div>
                       </li>
-                      {/* End li */}
+                      End li
 
                       <li className="list-inline-item">
                         <Filtering />
                       </li>
-                      {/* End li */}
+                      End li
                     </ul>
                   </div>
-                </div>
+                </div> */}
                 {/* End .col */}
 
                 <div className="col-lg-12">
                   <div className="my_dashboard_review mb40">
                     <div className="property_table">
                       <div className="table-responsive mt0">
-                        <TableData />
+                        <TableData Listings={Listings} />
                       </div>
                       {/* End .table-responsive */}
 
-                      <div className="mbp_pagination">
+                      {/* <div className="mbp_pagination">
                         <Pagination />
-                      </div>
+                      </div> */}
                       {/* End .mbp_pagination */}
                     </div>
                     {/* End .property_table */}
@@ -111,7 +111,11 @@ const Index = () => {
               <div className="row mt50">
                 <div className="col-lg-12">
                   <div className="copyright-widget text-center">
-                    <p>© 2020 Find House. Made with love.</p>
+                    <p>
+                      {" "}
+                      © {new Date().getFullYear()} HammahGreen. All rights
+                      reserved.
+                    </p>
                   </div>
                 </div>
               </div>

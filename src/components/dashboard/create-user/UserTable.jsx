@@ -82,8 +82,8 @@ const TableData = ({ Users }) => {
           type="submit"
         >
           <span className="flaticon-edit"></span>
-        </button> */}
-        {/* End edit button */}
+        </button>
+        End edit button */}
 
         <form onSubmit={handleSubmit} style={{ display: "inline-block" }}>
           <input

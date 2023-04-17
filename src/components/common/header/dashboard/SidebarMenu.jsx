@@ -11,9 +11,9 @@ const SidebarMenu = () => {
   const { data: session, status } = useSession();
 
   const myProperties = [
-    { id: 1, name: "General Elements", route: "/my-properties" },
-    { id: 2, name: "Advanced Elements", route: "/my-properties" },
-    { id: 3, name: "Editors", route: "/my-properties" },
+    { id: 1, name: "All Property Listings", route: "/my-properties" },
+    // { id: 2, name: "Advanced Elements", route: "/my-properties" },
+    // { id: 3, name: "Editors", route: "/my-properties" },
   ];
   const reviews = [
     { id: 1, name: "My Reviews", route: "/my-review" },

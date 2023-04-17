@@ -18,6 +18,7 @@ export default async function handler(req, res) {
     sqft,
     garages,
     postername,
+    posted
   } = req.body;
 
 //   console.log(req.body);
@@ -37,12 +38,13 @@ export default async function handler(req, res) {
         price: price,
         type: type,
         location: location,
-        saleTage: saletag,
+        saleTag: saletag,
         garages: garages,
         bedrooms: bedrooms,
         baths: baths,
         sqft: sqft,
         posterName: postername,
+        posted: posted,
     });
 
     const listingCreated = await newListing.save();

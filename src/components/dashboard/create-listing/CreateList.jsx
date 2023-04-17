@@ -1,4 +1,5 @@
 const CreateList = () => {
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -14,6 +15,7 @@ const CreateList = () => {
       sqft: event.target.sqft.value,
       garages: event.target.garages.value,
       postername: event.target.postername.value,
+      posted: event.target.posted.value,
     };
 
     // console.log(data);
@@ -49,9 +51,10 @@ const CreateList = () => {
     console.log(returnedData);
 
     if (returnedData) {
-      alert(`${returnedData.title} listing created successfully`);
+      alert(`${returnedData.title} listing created successfully. Go My Properties to see all listings`);
+      window.location.reload();
     } else if (returnedError) {
-      alert("The \"title\" of your listing already exists.");
+      alert('The "title" of your listing already exists.');
     }
   };
 
@@ -272,23 +275,41 @@ const CreateList = () => {
           {/* End .col */}
         </div>
 
-        <div className="col-lg-6">
-          <div className="my_profile_setting_input form-group">
-            <label htmlFor="posterName">Poster Name</label>
-            <input
-              type="text"
-              className="form-control"
-              id="posterName"
-              name="postername"
-              required
-            />
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="posted">Date Posted</label>
+              <input
+                type="text"
+                className="form-control"
+                id="posted"
+                name="posted"
+                value={new Date().toDateString()}
+                required
+                disabled
+              />
+            </div>
           </div>
+          {/* End .col */}
+
+          <div className="col-lg-6">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="posterName">Poster Name</label>
+              <input
+                type="text"
+                className="form-control"
+                id="posterName"
+                name="postername"
+                required
+              />
+            </div>
+          </div>
+          {/* End .col */}
         </div>
-        {/* End .col */}
 
         <div className="col-xl-12">
           <div className="my_profile_setting_input">
-            {/* <button className="btn btn1 float-start">Back</button> */}
+            <button type="reset" className="btn btn1 float-start">Clear</button>
             <button type="submit" className="btn btn2 float-end">
               Create
             </button>

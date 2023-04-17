@@ -11,16 +11,13 @@ const listingSchema = new Schema({
   price: String,
   type: String,
   location: String,
-  saleTage: String,
+  saleTag: String,
   garages: String,
   bedrooms: String,
   baths: String,
   sqft: String,
   posterName: String,
-  posted: {
-    type: Date,
-    default: Date.now,
-  },
+  posted: String,
 });
 
 const Listing = models.Listing || model("Listing", listingSchema);
