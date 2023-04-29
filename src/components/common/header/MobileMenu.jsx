@@ -3,7 +3,7 @@ import MobileMenuContent from "./MobileMenuContent";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const MobileMenu = () => {
+const MobileMenu = ({theUser}) => {
   const { data: session, status } = useSession();
   const route = useRouter();
 
@@ -76,7 +76,7 @@ const MobileMenu = () => {
         aria-labelledby="offcanvasMenuLabel"
         data-bs-scroll="true"
       >
-        <MobileMenuContent />
+        <MobileMenuContent theUser={theUser} />
       </div>
     </div>
   );

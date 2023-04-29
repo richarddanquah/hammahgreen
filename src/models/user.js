@@ -1,4 +1,5 @@
 import { Schema, model, models } from "mongoose";
+import { notificationSchema } from "./notificaiton";
 
 const userSchema = new Schema({
   fname: {
@@ -22,6 +23,7 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  notifications: [notificationSchema],
 });
 
 const User = models.User || model("User", userSchema);

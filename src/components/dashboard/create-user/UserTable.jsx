@@ -1,4 +1,4 @@
-// import properties from "../../../data/properties";
+import Link from "next/link";
 import { useState } from "react";
 
 const TableData = ({ Users }) => {
@@ -51,6 +51,7 @@ const TableData = ({ Users }) => {
         <div className="feat_property list favorite_page style2">
           <div className="details">
             <div className="tc_content">
+              <p style={{ fontSize: "10px" }}>{item._id}</p>
               <span className="flaticon-user"></span>
               <h4>{item.email}</h4>
               <p>
@@ -80,11 +81,29 @@ const TableData = ({ Users }) => {
             color: "red",
           }}
           type="submit"
+          title="Edit user"
         >
-          <span className="flaticon-edit"></span>
-        </button>
-        End edit button */}
+          <span className="fa fa-pencil"></span>
+        </button> */}
+        {item.role === "User" && (
+          <Link href={`/notifyuser/${item.email}`}>
+            <button
+              style={{
+                border: "none",
+                padding: "10px 15px",
+                marginRight: "5px",
+                borderRadius: "5px",
+                color: "red",
+              }}
+              type="submit"
+              title="Send a notification"
+            >
+              <span className="flaticon-envelope"></span>
+            </button>
+          </Link>
+        )}
 
+        {/* End edit button */}
         <form onSubmit={handleSubmit} style={{ display: "inline-block" }}>
           <input
             style={{ display: "none" }}
@@ -102,6 +121,7 @@ const TableData = ({ Users }) => {
               borderRadius: "5px",
               color: "red",
             }}
+            title="Delete User"
             type="submit"
           >
             <span className="flaticon-garbage"></span>

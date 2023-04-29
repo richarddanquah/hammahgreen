@@ -1,4 +1,4 @@
-
+import Link from "next/link";
 
 const handleSubmit = async (e) => {
   e.preventDefault();
@@ -107,18 +107,21 @@ const TableData = ({ Listings }) => {
           End li
         </ul> */}
 
-        {/* <button
-          style={{
-            border: "none",
-            padding: "5px 15px",
-            marginRight: "5px",
-            borderRadius: "5px",
-            color: "red",
-          }}
-          type="submit"
-        >
-          <span className="flaticon-edit"></span>
-        </button> */}
+        <Link href={`/edit-listing/${item._id}`}>
+          <button
+            style={{
+              border: "none",
+              padding: "5px 15px",
+              marginRight: "5px",
+              borderRadius: "5px",
+              color: "red",
+            }}
+            type="submit"
+            title="Edit this property listing"
+          >
+            <span className="flaticon-edit"></span>
+          </button>
+        </Link>
         {/* End edit button */}
 
         <form onSubmit={handleSubmit} style={{ display: "inline-block" }}>
@@ -139,6 +142,7 @@ const TableData = ({ Listings }) => {
               color: "red",
             }}
             type="submit"
+            title="Delete this property listing"
           >
             <span className="flaticon-garbage"></span>
           </button>

@@ -43,7 +43,7 @@ const SidebarMenu = () => {
             <a>
               <img
                 className="logo1 img-fluid"
-                src="assets/images/hg-logo2.png"
+                src="/assets/images/hg-logo2.png"
                 alt="hg-logo.png"
                 width={250}
               />

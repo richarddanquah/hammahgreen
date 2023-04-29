@@ -488,6 +488,8 @@ const HeaderMenuContent = ({ float = "" }) => {
               <span className="dn-1199 ms-1">
                 {session.user.name}
               </span>
+              &nbsp;
+              <span className="fa fa-angle-down"></span> 
             </a>
             <div className="dropdown-menu">
               <MyAccount />

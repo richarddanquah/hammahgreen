@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const HeaderMenuContent = ({ float = "" }) => {
+const HeaderMenuContent = ({ float = "", theUser }) => {
   const route = useRouter();
   const { data: session, status } = useSession();
   console.log(session);
@@ -272,7 +272,6 @@ const HeaderMenuContent = ({ float = "" }) => {
           ))}
         </ul>
       </li>
-
       <li className="last">
         <Link href="/homes">
           <a className={route.pathname === "/homes" ? "ui-active" : undefined}>
@@ -281,7 +280,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </Link>
       </li>
       {/* End .dropitem */}
-
       <li className="last">
         <Link href="/green-packages">
           <a
@@ -294,7 +292,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </Link>
       </li>
       {/* End .dropitem */}
-
       <li className="last">
         <Link href="/about-us">
           <a
@@ -305,8 +302,7 @@ const HeaderMenuContent = ({ float = "" }) => {
         </Link>
       </li>
       {/* End .dropitem */}
-
-      <li className="last">
+      {/* <li className="last">
         <Link href="/contact">
           <a
             className={route.pathname === "/contact" ? "ui-active" : undefined}
@@ -314,10 +310,10 @@ const HeaderMenuContent = ({ float = "" }) => {
             Contact
           </a>
         </Link>
-      </li>
+      </li> */}
       {/* End .dropitem */}
-
-      {session && (
+      {/* session && theUser.role === "Admin" && */}
+      {theUser && session && theUser.role === "Admin" && (
         <li className="dropitem">
           <a>
             <span className="flaticon-user"></span>
@@ -356,6 +352,47 @@ const HeaderMenuContent = ({ float = "" }) => {
       )}
       {/* End .dropitem */}
 
+      {/* session && theUser.role === "User" && */}
+      {theUser && session && theUser.role === "User" && (
+        <li className="dropitem">
+          <a>
+            <span className="flaticon-user"></span>
+            &nbsp;
+            <span className="title">{session.user.name}</span>
+            <span className="arrow"></span>
+          </a>
+          <ul className="sub-menu">
+            <li>
+              <Link href="/client-user/profile">
+                <a
+                  className={
+                    route.pathname === "/client-user/profile"
+                      ? "ui-active"
+                      : undefined
+                  }
+                >
+                  My Profile
+                </a>
+              </Link>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={async () => {
+                  const data = await signOut({
+                    redirect: false,
+                    callbackUrl: "/login",
+                  });
+                  route.push(data.url);
+                }}
+              >
+                <span className="flaticon-logout"> Sign out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      )}
+      {/* End .dropitem */}
       {!session && (
         <li className="last">
           <Link href="/login">
@@ -367,7 +404,6 @@ const HeaderMenuContent = ({ float = "" }) => {
           </Link>
         </li>
       )}
-
       {/* <li className="dropitem">
         <a
           href="#"
@@ -399,7 +435,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className="dropitem">
         <a
           href="#"
@@ -453,7 +488,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className="dropitem">
         <a
           href="#"
@@ -513,7 +547,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className="dropitem">
         <a
           href="#"
@@ -543,7 +576,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className="dropitem">
         <a
           href="#"
@@ -580,7 +612,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </ul>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className={`list-inline-item list_s ${float}`}>
         <a
           href="#"
@@ -592,7 +623,6 @@ const HeaderMenuContent = ({ float = "" }) => {
         </a>
       </li> */}
       {/* End .dropitem */}
-
       {/* <li className={`list-inline-item add_listing ${float}`}>
         <Link href="/create-listing">
           <a>

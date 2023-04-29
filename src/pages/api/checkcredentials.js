@@ -20,7 +20,6 @@ export default async function handler(req, res) {
 
     if (foundUser[0] === undefined) {
       console.log(foundUser[0]);
-      console.log("That email does not exist. Try again...");
         return res
           .status(401)
           .send({ Unauthorized: "That email does not exist. Try again..." });
@@ -33,6 +32,7 @@ export default async function handler(req, res) {
             const user = {
                 name: `${foundUser[0].fname} ${foundUser[0].lname}`,
                 email: foundUser[0].email,
+                role: foundUser[0].role,
             }
             console.log(user);
           return res.status(200).send(user);

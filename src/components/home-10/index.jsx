@@ -14,14 +14,14 @@ import Footer from "../common/footer/Footer";
 import CopyrightFooter from "../common/footer/CopyrightFooter";
 import PopupSignInUp from "../common/PopupSignInUp";
 
-const index = () => {
+const index = ({ theUser }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
-      <MobileMenu />
+      <MobileMenu theUser={theUser} />
 
       {/* <!-- Modal --> */}
       <PopupSignInUp />
@@ -107,7 +107,9 @@ const index = () => {
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
                 <h2 className="color-white">Testimonials</h2>
-                <p className="color-white">Top clients happy with our services.</p>
+                <p className="color-white">
+                  Top clients happy with our services.
+                </p>
               </div>
             </div>
           </div>

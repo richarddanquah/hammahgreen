@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import HeaderMenuContent from "./HeaderMenuContent";
 
-const Header = () => {
+const Header = ({theUser}) => {
   const [navbar, setNavbar] = useState(false);
 
   const changeBackground = () => {
@@ -45,7 +45,7 @@ const Header = () => {
         {/* site logo brand */}
 
         <nav>
-          <HeaderMenuContent />
+          <HeaderMenuContent theUser={theUser} />
         </nav>
         {/* End .navbar */}
       </div>

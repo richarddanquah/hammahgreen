@@ -1,9 +1,50 @@
+import { useState } from "react";
+import { useSession } from "next-auth/react";
+// import { uploadFile } from "../../../lib/s3";
+
 const CreateList = () => {
+  const [mainImg, setMainImg] = useState(null);
+  const { data: session } = useSession();
+
+  // upload main Image
+  const uploadMainImg = (e) => {
+    setMainImg(e.target.files[0]);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    // // Get selected file
+    // const file = event.target.mainImg.files[0];
+    // // console.log(file);
+
+    // if (!file) {
+    //   alert("Please select an image file.");
+    //   return;
+    // }
+
+
+    // // create a new FileReader object
+    // const reader = new FileReader();
+
+    // // read the file as a data URL
+    // reader.readAsDataURL(file);
+
+    // // when the file is loaded, send it to the server
+    // reader.onload = () => {
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open("POST", "/api/uploadListingImg");
+    //   xhr.setRequestHeader("Content-Type", "application/json");
+    //   xhr.send(
+    //     JSON.stringify({
+    //       filename: file.name,
+    //       data: reader.result,
+    //     })
+    //   );
+    // };
+
     const data = {
+      mainImg:"",
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,
@@ -18,7 +59,7 @@ const CreateList = () => {
       posted: event.target.posted.value,
     };
 
-    // console.log(data);
+    console.log(data);
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data);
@@ -51,16 +92,47 @@ const CreateList = () => {
     console.log(returnedData);
 
     if (returnedData) {
-      alert(`${returnedData.title} listing created successfully. Go My Properties to see all listings`);
+      alert(
+        `${returnedData.title} listing created successfully. Go My Properties to see all listings`
+      );
       window.location.reload();
     } else if (returnedError) {
       alert('The "title" of your listing already exists.');
     }
+
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} enctype="multipart/form-data">
+        <div className="col-lg-12">
+          <div className="wrap-custom-file2">
+            <input
+              type="file"
+              id="mainImg"
+              accept="image/*"
+              onChange={uploadMainImg}
+            />
+            <label
+              style={
+                mainImg
+                  ? {
+                      backgroundImage: `url(${URL.createObjectURL(mainImg)})`,
+                    }
+                  : undefined
+              }
+              htmlFor="mainImg"
+            >
+              <span>
+                <i className="flaticon-download"></i> Upload Main Image{" "}
+              </span>
+            </label>
+          </div>
+          <p>*minimum 752 x 450</p>
+        </div>
+
+        <br />
+
         <div className="col-lg-12">
           <div className="my_profile_setting_input form-group">
             <label htmlFor="propertyTitle">Property Title</label>
@@ -112,7 +184,7 @@ const CreateList = () => {
               <label htmlFor="formGroupExamplePrice">Price</label>
               <input
                 type="number"
-                min="10000"
+                min="50000"
                 className="form-control"
                 id="formGroupExamplePrice"
                 name="price"
@@ -300,7 +372,9 @@ const CreateList = () => {
                 className="form-control"
                 id="posterName"
                 name="postername"
+                value={session.user.name}
                 required
+                disabled
               />
             </div>
           </div>
@@ -309,7 +383,9 @@ const CreateList = () => {
 
         <div className="col-xl-12">
           <div className="my_profile_setting_input">
-            <button type="reset" className="btn btn1 float-start">Clear</button>
+            <button type="reset" className="btn btn1 float-start">
+              Clear
+            </button>
             <button type="submit" className="btn btn2 float-end">
               Create
             </button>

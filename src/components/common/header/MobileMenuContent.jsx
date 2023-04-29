@@ -307,7 +307,7 @@ const pages = [
   },
 ];
 
-const MobileMenuContent = () => {
+const MobileMenuContent = ({theUser}) => {
   const route = useRouter();
   const { data: session, status } = useSession();
 
@@ -343,7 +343,7 @@ const MobileMenuContent = () => {
 
       <SidebarContent>
         <Menu>
-          {session && (
+          {theUser && session && theUser.role === "Admin" && (
             <SubMenu
               title={session.user.email}
               // className={
@@ -355,6 +355,41 @@ const MobileMenuContent = () => {
               <MenuItem>
                 <Link href="/my-dashboard">
                   <a>Dashboard</a>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <a
+                  onClick={async () => {
+                    const data = await signOut({
+                      redirect: false,
+                      callbackUrl: "/login",
+                    });
+                    route.push(data.url);
+                  }}
+                >
+                  <span className="flaticon-logout"></span> Signout
+                </a>
+              </MenuItem>
+            </SubMenu>
+          )}
+
+          {theUser && session && theUser.role === "User" && (
+            <SubMenu
+              title={session.user.email}
+              // className={
+              //   cities.some((page) => page.routerPath === route.pathname)
+              //     ? "parent-menu-active"
+              //     : undefined
+              // }
+            >
+              <MenuItem>
+                <Link href="/client-user/profile">
+                  <a>My Profile</a>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <Link href="/client-user/notifications">
+                  <a>Notifications</a>
                 </Link>
               </MenuItem>
               <MenuItem>

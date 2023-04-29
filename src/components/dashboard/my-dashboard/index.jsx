@@ -10,7 +10,6 @@ import { useRouter } from "next/router";
 const Index = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  console.log(status);
 
   if(status === "unauthenticated" ){
     // signIn();

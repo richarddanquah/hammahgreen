@@ -7,6 +7,7 @@ export default async function handler(req, res) {
   }
 
   const {
+    mainImg,
     title,
     description,
     saletag,
@@ -18,12 +19,11 @@ export default async function handler(req, res) {
     sqft,
     garages,
     postername,
-    posted
+    posted,
   } = req.body;
 
-//   console.log(req.body);
-//   const data = req.body;
-//   return res.status(200).send({ data });
+  //   const data = req.body;
+  //   return res.status(200).send({ data });
 
   try {
     console.log("CONNECTING TO DATABASE...");
@@ -32,25 +32,24 @@ export default async function handler(req, res) {
 
     console.log("CREATING DOCUMENT...");
     const newListing = await new Listing({
-        // img: ,
-        title: title,
-        description: description,
-        price: price,
-        type: type,
-        location: location,
-        saleTag: saletag,
-        garages: garages,
-        bedrooms: bedrooms,
-        baths: baths,
-        sqft: sqft,
-        posterName: postername,
-        posted: posted,
+      mainImage: mainImg,
+      title: title,
+      description: description,
+      price: price,
+      type: type,
+      location: location,
+      saleTag: saletag,
+      garages: garages,
+      bedrooms: bedrooms,
+      baths: baths,
+      sqft: sqft,
+      posterName: postername,
+      posted: posted,
     });
 
     const listingCreated = await newListing.save();
     console.log("LISTING DOCUMENT CREATED SUCCESSFULLY ✔");
     return res.status(200).send({ listingCreated });
-
   } catch (error) {
     console.log(error);
     return res.status(500).send({ error });

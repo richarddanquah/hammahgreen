@@ -1,7 +1,7 @@
 import { Schema, models, model } from "mongoose";
 
 const listingSchema = new Schema({
-  img: String,
+  mainImage: String,
   title: {
     type: String,
     required: true,

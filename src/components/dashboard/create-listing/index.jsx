@@ -63,8 +63,8 @@ const Index = () => {
 
                 <div className="col-lg-12 mb10">
                   <div className="breadcrumb_content style2">
-                    <h2 className="breadcrumb_title">Add New Property</h2>
-                    <p>We are glad to see you again!</p>
+                    <h2 className="breadcrumb_title">Create A New Property Listing</h2>
+                    <p>Basically add a new property</p>
                   </div>
                 </div>
                 {/* End .col */}
@@ -72,10 +72,6 @@ const Index = () => {
                 <div className="col-lg-12">
                   <div className="my_dashboard_review">
                     <div className="row">
-                      <div className="col-lg-12">
-                        <h3 className="mb30">Create Listing</h3>
-                      </div>
-
                       <CreateList />
                     </div>
                   </div>

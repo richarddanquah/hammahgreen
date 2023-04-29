@@ -9,7 +9,7 @@ import Image from "next/image";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({theUser}) => {
   const { data: session, status } = useSession();
   const route = useRouter();
 
@@ -20,7 +20,7 @@ const Index = () => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
       <MobileMenu />

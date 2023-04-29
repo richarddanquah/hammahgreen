@@ -5,7 +5,6 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 const MyAccount = () => {
   const { data: session, status } = useSession();
-  console.log(session);
   const router = useRouter();
   const profileMenuItems = [
     { id: 1, name: "My Profile", ruterPath: "/my-profile" },
