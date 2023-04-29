@@ -22,11 +22,10 @@ export default dynamic(() => Promise.resolve(index), { ssr: false });
 export async function getServerSideProps(context) {
   const session = await getSession(context);
 
-  if (session) {
-    const sessionEmail = session.user.email;
-    console.log(session);
+  try {
+    if (session) {
+      const sessionEmail = session.user.email;
 
-    try {
       console.log("CONNECTING TO DATABASE...");
       await connectDB();
       console.log("CONNECTED TO DATABASE ✔");
@@ -47,14 +46,23 @@ export async function getServerSideProps(context) {
           session,
         },
       };
-    } catch (error) {
-      console.log(error);
+      
+    } else if (!session) {
+      console.log("CONNECTING TO DATABASE...");
+      await connectDB();
+      console.log("CONNECTED TO DATABASE ✔");
+
+      console.log("FETCHING Listing...");
+      const listing = await Listing.find();
+      console.log(listing);
+
+      return {
+        props: {
+          propertyListings: JSON.parse(JSON.stringify(listing)),
+        },
+      };
     }
-  } else {
-    return {
-      props: {
-        null: {},
-      },
-    };
+  } catch (error) {
+    console.log(error);
   }
 }
