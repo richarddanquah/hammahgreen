@@ -7,7 +7,7 @@ const FeaturedProperties = ({ propertyListings }) => {
     dots: true,
     arrows: false,
     slidesToShow: 2,
-    slidesToScroll: 2,
+    slidesToScroll: 1,
     autoplay: false,
     speed: 1200,
     responsive: [
@@ -22,7 +22,7 @@ const FeaturedProperties = ({ propertyListings }) => {
         breakpoint: 576,
         settings: {
           slidesToShow: 1,
-          slidesToScroll: 3,
+          slidesToScroll: 1,
         },
       },
     ],
