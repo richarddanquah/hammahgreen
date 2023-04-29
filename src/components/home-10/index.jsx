@@ -14,7 +14,7 @@ import Footer from "../common/footer/Footer";
 import CopyrightFooter from "../common/footer/CopyrightFooter";
 import PopupSignInUp from "../common/PopupSignInUp";
 
-const index = ({ theUser }) => {
+const index = ({ theUser, propertyListings }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -58,7 +58,7 @@ const index = ({ theUser }) => {
             </div>
             <div className="col-lg-12">
               <div className="feature_property_slider gutter-x15">
-                <FeaturedProperties />
+                <FeaturedProperties propertyListings={propertyListings} />
               </div>
             </div>
           </div>

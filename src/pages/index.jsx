@@ -5,13 +5,14 @@ import Home10 from "../components/home-10";
 import { getSession } from "next-auth/react";
 import connectDB from "../lib/connectMongoDB";
 import User from "../models/user";
+import Listing from "../models/listing";
 
-const index = ({ theUser }) => {
+const index = ({ theUser, propertyListings }) => {
   return (
     <>
       <Seo pageTitle="Home" />
       {/* <HomeMain /> */}
-      <Home10 theUser={theUser} />
+      <Home10 theUser={theUser} propertyListings={propertyListings} />
     </>
   );
 };
@@ -35,9 +36,14 @@ export async function getServerSideProps(context) {
       console.log("FETCHED USER SUCCESSFULLY ✔");
       console.log(user[0]);
 
+      console.log("FETCHING Listing...");
+      const listing = await Listing.find();
+      console.log(listing);
+
       return {
         props: {
           theUser: JSON.parse(JSON.stringify(user[0])),
+          propertyListings: JSON.parse(JSON.stringify(listing)),
           session,
         },
       };

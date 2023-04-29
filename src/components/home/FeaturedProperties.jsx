@@ -2,12 +2,12 @@ import Link from "next/link";
 import Slider from "react-slick";
 import properties from "../../data/properties";
 
-const FeaturedProperties = () => {
+const FeaturedProperties = ({ propertyListings }) => {
   const settings = {
     dots: true,
     arrows: false,
-    slidesToShow: 3,
-    slidesToScroll: 3,
+    slidesToShow: 2,
+    slidesToScroll: 2,
     autoplay: false,
     speed: 1200,
     responsive: [
@@ -28,21 +28,24 @@ const FeaturedProperties = () => {
     ],
   };
 
-  let content = properties?.slice(0, 3)?.map((item) => (
+  let content = propertyListings?.slice(0, 3)?.reverse()?.map((item) => (
     <div className="item" key={item.id}>
       <div className="feat_property">
         <div className="thumb">
-          <img className="img-whp" src={item.img} alt="fp1.jpg" />
+          {/* <img className="img-whp" src={item.img} alt="fp1.jpg" /> */}
           <div className="thmb_cntnt">
             <ul className="tag mb0">
-              {item.saleTag.map((val, i) => (
+              <li className="list-inline-item">
+                <a href="#">{item.saleTag}</a>
+              </li>
+              {/* {item.saleTag.map((val, i) => (
                 <li className="list-inline-item" key={i}>
                   <a href="#">{val}</a>
                 </li>
-              ))}
+              ))} */}
             </ul>
             {/* End .tag */}
-
+            {/* 
             <ul className="icon mb0">
               <li className="list-inline-item">
                 <a href="#">
@@ -54,7 +57,7 @@ const FeaturedProperties = () => {
                   <span className="flaticon-heart"></span>
                 </a>
               </li>
-            </ul>
+            </ul> */}
             {/* End .icon */}
 
             <Link href={`/listing-details-v1/${item.id}`}>
@@ -69,25 +72,32 @@ const FeaturedProperties = () => {
 
         <div className="details">
           <div className="tc_content">
+            <h3>$ {item.price}</h3>
             <p className="text-thm">{item.type}</p>
             <h4>
-              <Link href={`/listing-details-v2/${item.id}`}>
+              {/* <Link href={`/listing-details-v2/${item.id}`}> */}
                 <a>{item.title}</a>
-              </Link>
+              {/* </Link> */}
             </h4>
             <p>
-              <span className="flaticon-placeholder"></span>
+              <span className="flaticon-placeholder"></span> &nbsp;
               {item.location}
             </p>
 
             <ul className="prop_details mb0">
-              {item.itemDetails.map((val, i) => (
+              <li className="list-inline-item">
+                <a href="#">Bedrooms: {item.bedrooms}</a>
+              </li>
+              <li className="list-inline-item">
+                <a href="#">Bedrooms: {item.baths}</a>
+              </li>
+              {/* {item.itemDetails.map((val, i) => (
                 <li className="list-inline-item" key={i}>
                   <a href="#">
                     {val.name}: {val.number}
                   </a>
                 </li>
-              ))}
+              ))} */}
             </ul>
           </div>
           {/* End .tc_content */}
@@ -95,11 +105,11 @@ const FeaturedProperties = () => {
           <div className="fp_footer">
             <ul className="fp_meta float-start mb0">
               <li className="list-inline-item">
-                <Link href="/agent-v2">
+                {/* <Link href="/agent-v2">
                   <a>
                     <img src={item.posterAvatar} alt="pposter1.png" />
                   </a>
-                </Link>
+                </Link> */}
               </li>
               <li className="list-inline-item">
                 <Link href="/agent-v2">
@@ -107,7 +117,7 @@ const FeaturedProperties = () => {
                 </Link>
               </li>
             </ul>
-            <div className="fp_pdate float-end">{item.postedYear}</div>
+            <div className="fp_pdate float-end">{item.posted}</div>
           </div>
           {/* End .fp_footer */}
         </div>
