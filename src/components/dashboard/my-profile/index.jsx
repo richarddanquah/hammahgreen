@@ -11,7 +11,7 @@ const Index = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  if(status === "unauthenticated" ){
+  if (status === "unauthenticated") {
     // signIn();
     router.push("/login");
   }
@@ -108,7 +108,11 @@ const Index = () => {
               <div className="row mt50">
                 <div className="col-lg-12">
                   <div className="copyright-widget text-center">
-                    <p>© 2020 Find House. Made with love.</p>
+                    <p>
+                      {" "}
+                      © {new Date().getFullYear()} HammahGreen. All rights
+                      reserved.
+                    </p>
                   </div>
                 </div>
               </div>

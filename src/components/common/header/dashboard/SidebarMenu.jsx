@@ -20,12 +20,12 @@ const SidebarMenu = () => {
     { id: 2, name: "Visitor Reviews", route: "/my-review" },
   ];
   const manageAccount = [
-    {
-      id: 1,
-      name: "My Package",
-      route: "/my-package",
-      icon: "flaticon-box",
-    },
+    // {
+    //   id: 1,
+    //   name: "My Package",
+    //   route: "/my-package",
+    //   icon: "flaticon-box",
+    // },
     {
       id: 2,
       name: "My Profile",
@@ -98,7 +98,7 @@ const SidebarMenu = () => {
                 </a>
               </Link>
             </li>
-            <li
+            {/* <li
               className={`treeview ${
                 isSinglePageActive("/my-message", route.pathname)
                   ? "active"
@@ -111,7 +111,7 @@ const SidebarMenu = () => {
                   <span> Message</span>
                 </a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </li>
         {/* End Main */}
@@ -125,7 +125,7 @@ const SidebarMenu = () => {
               }`}
             >
               <a data-bs-toggle="collapse" href="#my-property">
-                <i className="flaticon-home"></i> <span>My Properties</span>
+                <i className="flaticon-home"></i> <span>Properties</span>
                 <i className="fa fa-angle-down pull-right"></i>
               </a>
               <ul className="treeview-menu collapse" id="my-property">
@@ -142,7 +142,7 @@ const SidebarMenu = () => {
             </li>
             {/* end properties */}
 
-            <li
+            {/* <li
               className={`treeview ${
                 isParentPageActive(reviews, route.pathname) ? "active" : ""
               }`}
@@ -163,10 +163,10 @@ const SidebarMenu = () => {
                   </li>
                 ))}
               </ul>
-            </li>
+            </li> */}
             {/* End Review */}
 
-            <li
+            {/* <li
               className={`treeview ${
                 isSinglePageActive("/my-favourites", route.pathname)
                   ? "active"
@@ -193,7 +193,7 @@ const SidebarMenu = () => {
                   <span> Saved Search</span>
                 </a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </li>
         {/* End manage listing */}

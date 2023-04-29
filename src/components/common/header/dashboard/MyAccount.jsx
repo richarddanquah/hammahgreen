@@ -8,10 +8,9 @@ const MyAccount = () => {
   const router = useRouter();
   const profileMenuItems = [
     { id: 1, name: "My Profile", ruterPath: "/my-profile" },
-    { id: 2, name: " My Message", ruterPath: "/my-message" },
-    { id: 3, name: " My Favourite", ruterPath: "/my-favourites" },
-    { id: 4, name: " My Package", ruterPath: "/my-package" },
-    // { id: 5, name: " Log out", ruterPath: "/login" },
+    // { id: 2, name: " My Message", ruterPath: "/my-message" },
+    // { id: 3, name: " My Favourite", ruterPath: "/my-favourites" },
+    // { id: 4, name: " My Package", ruterPath: "/my-package" },
   ];
   const route = useRouter();
   return (
@@ -43,6 +42,7 @@ const MyAccount = () => {
                   : undefined
               }
             >
+              <span className="flaticon-user"></span>
               {item.name}
             </a>
           </Link>
@@ -58,7 +58,7 @@ const MyAccount = () => {
           href="#"
           className="dropdown-item"
         >
-          Sign out
+          <span className="flaticon-logout"></span> Sign out
         </a>
       </div>
     </>

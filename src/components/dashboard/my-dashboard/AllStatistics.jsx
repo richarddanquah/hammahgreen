@@ -4,30 +4,31 @@ const AllStatistics = () => {
       id: 1,
       blockStyle: "",
       icon: "flaticon-home",
-      timer: "37",
+      timer: "N/A",
       name: "All Properties",
+      alert: "Coming soon"
     },
-    {
-      id: 2,
-      blockStyle: "style2",
-      icon: "flaticon-view",
-      timer: "24",
-      name: "Total Views",
-    },
-    {
-      id: 3,
-      blockStyle: "style3",
-      icon: "flaticon-chat",
-      timer: "12",
-      name: "Total Visitor Reviews",
-    },
-    {
-      id: 4,
-      blockStyle: "style4",
-      icon: "flaticon-heart",
-      timer: "18",
-      name: "Total Favorites",
-    },
+    // {
+    //   id: 2,
+    //   blockStyle: "style2",
+    //   icon: "flaticon-view",
+    //   timer: "24",
+    //   name: "Total Views",
+    // },
+    // {
+    //   id: 3,
+    //   blockStyle: "style3",
+    //   icon: "flaticon-chat",
+    //   timer: "12",
+    //   name: "Total Visitor Reviews",
+    // },
+    // {
+    //   id: 4,
+    //   blockStyle: "style4",
+    //   icon: "flaticon-heart",
+    //   timer: "18",
+    //   name: "Total Favorites",
+    // },
   ];
 
   return (
@@ -36,6 +37,7 @@ const AllStatistics = () => {
         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-3" key={item.id}>
           <div className={`ff_one ${item.blockStyle}`}>
             <div className="detais">
+              <span style={{fontSize:"11px", color:"red"}}>{item.alert}</span>
               <div className="timer">{item.timer}</div>
               <p>{item.name}</p>
             </div>
