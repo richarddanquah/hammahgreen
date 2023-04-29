@@ -45,7 +45,7 @@ const TableData = ({ Users }) => {
   };
 
   let theadConent = ["User Details", "Role", "Action"];
-  let tbodyContent = Users?.slice(0, 4)?.map((item) => (
+  let tbodyContent = Users?.slice(0, 20)?.map((item) => (
     <tr key={item._id}>
       <td scope="row">
         <div className="feat_property list favorite_page style2">

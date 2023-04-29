@@ -45,12 +45,13 @@ const handleSubmit = async (e) => {
 const TableData = ({ Listings }) => {
   let theadConent = [
     "Listing Title",
+    "Description & Other Details",
     "Date published",
-    "Property Type",
+    "Sale Tag",
     "Posted By",
     "Action",
   ];
-  let tbodyContent = Listings?.slice(0, 4)?.map((item) => (
+  let tbodyContent = Listings?.slice(0, 20)?.map((item) => (
     <tr key={item.id}>
       <td scope="row">
         <div className="feat_property list favorite_page style2">
@@ -66,7 +67,12 @@ const TableData = ({ Listings }) => {
           </div> */}
           <div className="details">
             <div className="tc_content">
-              <h4>{item.title}</h4>
+              <h4>
+                {item.title}
+                <br />
+                <span style={{ fontSize: "11px" }}>{item.type}</span>
+              </h4>
+
               <p>
                 <span className="flaticon-placeholder"></span>
                 {item.location}
@@ -81,15 +87,41 @@ const TableData = ({ Listings }) => {
       </td>
       {/* End td */}
 
-      <td>{item.posted.slice(0, 10)}</td>
-      {/* End td */}
+      <td style={{ lineHeight: "normal" }}>
+        <p style={{ color: "#000" }}>
+          <b>{item.description}</b>
+        </p>
+        <span style={{ fontSize: "12px" }}>
+          <b>Bedrooms</b> • {item.bedrooms}
+        </span>
+        <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Baths</b> • {item.baths}
+        </span>
+        <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Garages</b> • {item.garages}
+        </span>
+        <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Sqft</b> • {item.sqft}
+        </span>
+        <br />
+      </td>
 
-      <td>
-        <span className="status_tag badge">{item.type}</span>
+      <td style={{ lineHeight: "normal" }}>
+        <span style={{ fontSize: "14px" }}>{item.posted}</span>
       </td>
       {/* End td */}
 
-      <td>{item.posterName}</td>
+      <td>
+        <span className="status_tag badge">{item.saleTag}</span>
+      </td>
+      {/* End td */}
+
+      <td style={{ lineHeight: "normal" }}>
+        <span>{item.posterName}</span>
+      </td>
       {/* End td */}
 
       <td>
