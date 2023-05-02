@@ -51,20 +51,23 @@ const TableData = ({ Listings }) => {
     "Posted By",
     "Action",
   ];
+
+ console.log(Listings);
+
   let tbodyContent = Listings?.slice(0, 20)?.map((item) => (
     <tr key={item.id}>
       <td scope="row">
         <div className="feat_property list favorite_page style2">
-          {/* <div className="thumb">
-            <img className="img-whp cover" src={item.img} alt="fp1.jpg" />
-            <div className="thmb_cntnt">
+          <div style={{marginTop: "20px"}} className="thumb">
+            <img className="img-whp cover" src={item.mainImage} alt="fp1.jpg" />
+            {/* <div className="thmb_cntnt">
               <ul className="tag mb0">
                 <li className="list-inline-item">
                   <a href="#">{item.saleTag}</a>
                 </li>
               </ul>
-            </div>
-          </div> */}
+            </div> */}
+          </div>
           <div className="details">
             <div className="tc_content">
               <h4>
@@ -145,6 +148,7 @@ const TableData = ({ Listings }) => {
               border: "none",
               padding: "5px 15px",
               marginRight: "5px",
+              marginBottom: "5px",
               borderRadius: "5px",
               color: "red",
             }}
@@ -190,7 +194,7 @@ const TableData = ({ Listings }) => {
         <thead className="thead-light">
           <tr>
             {theadConent.map((value, i) => (
-              <th scope="col" key={i}>
+              <th style={{lineHeight: "normal"}} scope="col" key={i}>
                 {value}
               </th>
             ))}

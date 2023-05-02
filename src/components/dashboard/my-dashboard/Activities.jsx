@@ -16,7 +16,7 @@ const Activities = () => {
       id: 3,
       icon: "flaticon-plus",
       title: "Creating A Property Listing",
-      tip: "Click the 'Create Listing' tab on the Sidebarmenu to navigate to this page and create a listing",
+      tip: "Click the 'Create Listing' tab on the Sidebarmenu to navigate to this page and create a listing. Or just click on the button at the top right conner of the Top navigation bar.",
     },
     {
       id: 4,

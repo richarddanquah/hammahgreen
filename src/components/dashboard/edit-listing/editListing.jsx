@@ -17,37 +17,37 @@ const EditListing = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // // Get selected file
-    // const file = event.target.mainImg.files[0];
-    // // console.log(file);
+    // Get selected file
+    const file = mainImg;
+    // console.log(file);
 
-    // if (!file) {
-    //   alert("Please select an image file.");
-    //   return;
-    // }
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
 
-    // // create a new FileReader object
-    // const reader = new FileReader();
+    // create a new FileReader object
+    const reader = new FileReader();
 
-    // // read the file as a data URL
-    // reader.readAsDataURL(file);
+    // read the file as a data URL
+    reader.readAsDataURL(file);
 
-    // // when the file is loaded, send it to the server
-    // reader.onload = () => {
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open("POST", "/api/uploadListingImg");
-    //   xhr.setRequestHeader("Content-Type", "application/json");
-    //   xhr.send(
-    //     JSON.stringify({
-    //       filename: file.name,
-    //       data: reader.result,
-    //     })
-    //   );
-    // };
+    // when the file is loaded, send it to the server
+    reader.onload = () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/api/uploadListingImg");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          filename: file.name,
+          data: reader.result,
+        })
+      );
+    };
 
     const data = {
       id: event.target.propertyid.value,
-      mainImg: "",
+      mainImg: `/assets/images/property/${file.name}`,
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,

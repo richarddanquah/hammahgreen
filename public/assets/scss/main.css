@@ -5402,7 +5402,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 
 .feat_property.list .details {
-  width: 70%;
+  width: 50%;
 }
 
 .feat_property.list .details .fp_footer {
@@ -5411,7 +5411,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 }
 
 .feat_property.list .details .tc_content {
-  padding: 25px 20px 10px;
+  padding: 25px 5px 10px 10px;
   position: relative;
 }
 
@@ -15442,6 +15442,7 @@ legend span {
 /*== Color Area ==*/
 .img-whp {
   width: 100% !important;
+  height: 10vh;
 }
 
 .text-thm {

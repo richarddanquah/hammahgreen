@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-// import { uploadFile } from "../../../lib/s3";
+// import { PutObjectCommand } from "@aws-sdk/client-s3";
+// import { s3Client } from "../../lib/s3Client";
 
 const CreateList = () => {
   const [mainImg, setMainImg] = useState(null);
@@ -14,37 +15,37 @@ const CreateList = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // // Get selected file
-    // const file = event.target.mainImg.files[0];
-    // // console.log(file);
+    // Get selected file
+    const file = mainImg;
+    // console.log(file);
 
-    // if (!file) {
-    //   alert("Please select an image file.");
-    //   return;
-    // }
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
 
+    // create a new FileReader object
+    const reader = new FileReader();
 
-    // // create a new FileReader object
-    // const reader = new FileReader();
+    // read the file as a data URL
+    reader.readAsDataURL(file);
 
-    // // read the file as a data URL
-    // reader.readAsDataURL(file);
-
-    // // when the file is loaded, send it to the server
-    // reader.onload = () => {
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open("POST", "/api/uploadListingImg");
-    //   xhr.setRequestHeader("Content-Type", "application/json");
-    //   xhr.send(
-    //     JSON.stringify({
-    //       filename: file.name,
-    //       data: reader.result,
-    //     })
-    //   );
-    // };
+    // when the file is loaded, send it to the server
+    reader.onload = () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/api/uploadListingImg");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          filename: file.name,
+          data: reader.result,
+        })
+      );
+      console.log(reader);
+    };
 
     const data = {
-      mainImg:"",
+      mainImg:`/assets/images/property/${file.name}`,
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,
@@ -99,19 +100,20 @@ const CreateList = () => {
     } else if (returnedError) {
       alert('The "title" of your listing already exists.');
     }
-
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit} enctype="multipart/form-data">
+      <form onSubmit={handleSubmit} encType="multipart/form-data">
         <div className="col-lg-12">
           <div className="wrap-custom-file2">
             <input
               type="file"
-              id="mainImg"
-              accept="image/*"
+              id="main_Img"
+              name="main_Image"
+              accept=".png, .jpg, .jpeg"
               onChange={uploadMainImg}
+              required
             />
             <label
               style={
@@ -121,7 +123,7 @@ const CreateList = () => {
                     }
                   : undefined
               }
-              htmlFor="mainImg"
+              htmlFor="main_Img"
             >
               <span>
                 <i className="flaticon-download"></i> Upload Main Image{" "}

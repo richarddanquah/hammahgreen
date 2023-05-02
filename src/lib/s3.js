@@ -1,11 +1,10 @@
 import AWS from 'aws-sdk';
 
-AWS.config.update({
+const s3 = new AWS.S3({
   accessKeyId: process.env.AWS_ACCESS_KEY_ID,
   secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-});
+})
 
-const s3 = new AWS.S3();
 
 export const uploadFile = async (file) => {
   const params = {
@@ -14,6 +13,7 @@ export const uploadFile = async (file) => {
     Body: file.data,
     ACL: 'public-read'
   };
+  
   const data = await s3.upload(params).promise();
   return data.Location;
 };

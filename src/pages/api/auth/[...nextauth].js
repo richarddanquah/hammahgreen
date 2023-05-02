@@ -3,8 +3,6 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
-import clientPromise from "../../../database/connectDB";
-import { MongoDBAdapter } from "@next-auth/mongodb-adapter";
 
 export const authOptions = {
   providers: [
@@ -36,8 +34,8 @@ export const authOptions = {
         // You can also use the `req` object to obtain additional parameters
         // (i.e., the request IP address)
         const res = await fetch(
-          "https://www.hammahgreen.com/api/checkcredentials",
-            // "http://localhost:3000/api/checkcredentials",
+          // "https://www.hammahgreen.com/api/checkcredentials",
+            "http://localhost:3000/api/checkcredentials",
           {
             method: "POST",
             body: JSON.stringify(credentials),

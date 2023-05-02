@@ -6,7 +6,7 @@ const FeaturedProperties = ({ propertyListings }) => {
   const settings = {
     dots: true,
     arrows: false,
-    slidesToShow: 2,
+    slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: false,
     speed: 1200,
@@ -15,7 +15,7 @@ const FeaturedProperties = ({ propertyListings }) => {
         breakpoint: 1200,
         settings: {
           slidesToShow: 2,
-          slidesToScroll: 4,
+          slidesToScroll: 1,
         },
       },
       {
@@ -35,7 +35,7 @@ const FeaturedProperties = ({ propertyListings }) => {
       <div className="item" key={item.id}>
         <div className="feat_property">
           <div className="thumb">
-            {/* <img className="img-whp" src={item.img} alt="fp1.jpg" /> */}
+            <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
                 <li className="list-inline-item">
@@ -48,8 +48,8 @@ const FeaturedProperties = ({ propertyListings }) => {
               ))} */}
               </ul>
               {/* End .tag */}
-              {/* 
-            <ul className="icon mb0">
+              
+            {/* <ul className="icon mb0">
               <li className="list-inline-item">
                 <a href="#">
                   <span className="flaticon-transfer-1"></span>
@@ -75,7 +75,6 @@ const FeaturedProperties = ({ propertyListings }) => {
 
           <div className="details">
             <div className="tc_content">
-              <h3>$ {item.price}</h3>
               <p className="text-thm">{item.type}</p>
               <h4>
                 {/* <Link href={`/listing-details-v2/${item.id}`}> */}
