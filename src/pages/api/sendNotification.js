@@ -4,8 +4,8 @@ import Notification from "../../models/notificaiton";
 
 export default async function handler(req, res) {
   if (req.method === "POST" && req.url === "/api/sendNotification") {
-    const { receiverid, date, subject, message, sendername } = req.body;
-    console.log(receiverid);
+    const { receiverid, date, subject, message, sendername, image } = req.body;
+    console.log(req.body);
 
     try {
       console.log("CONNECTING TO DATABASE...");
@@ -16,6 +16,7 @@ export default async function handler(req, res) {
       const newNotification = new Notification({
         to: receiverid,
         date: date,
+        image: image,
         subject: subject,
         message: message,
         sendername: sendername,

@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-// import { PutObjectCommand } from "@aws-sdk/client-s3";
-// import { s3Client } from "../../lib/s3Client";
 
 const CreateList = () => {
   const [mainImg, setMainImg] = useState(null);

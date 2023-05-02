@@ -37,12 +37,15 @@ const Index = ({ theUser, userNotifications }) => {
             {/* {noNotifications} */}
             {userNotifications.length === 0 && (
               <div class="card">
-                <div class="card-body">You have no notifications at the moment</div>
+                <div class="card-body">
+                  You have no notifications at the moment
+                </div>
               </div>
             )}
 
             {userNotifications.map((item) => (
-              <div key={item._id} class="card text-bg-light border-dark mb-3">
+              <div key={item._id} class="card shadow-sm text-bg-light border-secondary rounded mb-5">
+              <img  src={item.image} class="img-fluid rounded" alt="Contextual Image" />
                 <div class="card-body">
                   <h4 class="card-title">{item.subject}</h4>
                   <p class="card-text">{item.message}</p>

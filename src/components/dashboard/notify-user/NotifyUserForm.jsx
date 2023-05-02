@@ -1,12 +1,48 @@
+import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
 const Form = () => {
+  const [mainImg, setMainImg] = useState(null);
   const { data: session } = useSession();
   const route = useRouter();
 
+  // upload main Image
+  const uploadMainImg = (e) => {
+    setMainImg(e.target.files[0]);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Get selected file
+    const file = mainImg;
+    // console.log(file);
+
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
+
+    // create a new FileReader object
+    const reader = new FileReader();
+
+    // read the file as a data URL
+    reader.readAsDataURL(file);
+
+    // when the file is loaded, send it to the server
+    reader.onload = () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/api/uploadNotificationImg");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          filename: file.name,
+          data: reader.result,
+        })
+      );
+      console.log(reader);
+    };
 
     const receiverid = e.target.receiverid.value;
     const date = e.target.date.value;
@@ -19,6 +55,7 @@ const Form = () => {
       receiverid,
       date,
       subject,
+      image: `/assets/images/notifications/${file.name}`,
       message,
       sendername,
     };
@@ -117,6 +154,35 @@ const Form = () => {
         </div>
 
         <div className="col-lg-12">
+          <div className="wrap-custom-file2">
+            <input
+              type="file"
+              id="main_Img"
+              name="main_Image"
+              accept=".png, .jpg, .jpeg"
+              onChange={uploadMainImg}
+            />
+            <label
+              style={
+                mainImg
+                  ? {
+                      backgroundImage: `url(${URL.createObjectURL(mainImg)})`,
+                    }
+                  : undefined
+              }
+              htmlFor="main_Img"
+            >
+              <span>
+                <i className="flaticon-download"></i> Upload Main Image{" "}
+              </span>
+            </label>
+          </div>
+          <p>*minimum 752 x 450</p>
+        </div>
+
+        <br />
+
+        <div className="col-lg-12">
           <div className="my_profile_setting_textarea">
             <label htmlFor="NotificationText">Message</label>
             <textarea
@@ -124,6 +190,7 @@ const Form = () => {
               id="NotificationText"
               rows="2"
               name="message"
+              required
             ></textarea>
           </div>
         </div>
