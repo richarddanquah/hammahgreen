@@ -6,7 +6,7 @@ const FeaturedProperties = ({ propertyListings }) => {
   const settings = {
     dots: true,
     arrows: false,
-    slidesToShow: 3,
+    slidesToShow: 2,
     slidesToScroll: 1,
     autoplay: false,
     speed: 1200,
@@ -14,7 +14,7 @@ const FeaturedProperties = ({ propertyListings }) => {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
