@@ -7,7 +7,7 @@ import StatisticsChart from "./StatisticsChart";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({propertyListings}) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -73,7 +73,7 @@ const Index = () => {
               {/* End .row */}
 
               <div className="row">
-                <AllStatistics />
+                <AllStatistics propertyListings={propertyListings} />
               </div>
               {/* End .row Dashboard top statistics */}
 

@@ -15,7 +15,7 @@ const CreateList = () => {
 
     // Get selected file
     const file = mainImg;
-    // console.log(file);
+    console.log(file);
 
     if (!file) {
       alert("Please select an image file.");
@@ -111,7 +111,6 @@ const CreateList = () => {
               name="main_Image"
               accept=".png, .jpg, .jpeg"
               onChange={uploadMainImg}
-              required
             />
             <label
               style={

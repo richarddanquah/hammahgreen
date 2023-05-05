@@ -21,6 +21,7 @@ export default dynamic(() => Promise.resolve(index), { ssr: false });
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
+  
 
   try {
     if (session) {
@@ -33,11 +34,11 @@ export async function getServerSideProps(context) {
       console.log("FETCHING User...");
       const user = await User.find({ email: sessionEmail });
       console.log("FETCHED USER SUCCESSFULLY ✔");
-      console.log(user[0]);
+      // console.log(user[0]);
 
       console.log("FETCHING Listing...");
       const listing = await Listing.find();
-      console.log(listing);
+      // console.log(listing);
 
       return {
         props: {
@@ -54,7 +55,7 @@ export async function getServerSideProps(context) {
 
       console.log("FETCHING Listing...");
       const listing = await Listing.find();
-      console.log(listing);
+      // console.log(listing);
 
       return {
         props: {

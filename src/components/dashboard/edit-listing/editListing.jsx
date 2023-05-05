@@ -3,11 +3,11 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 // import { uploadFile } from "../../../lib/s3";
 
-const EditListing = () => {
+const EditListing = ({ theListing }) => {
   const [mainImg, setMainImg] = useState(null);
   const { data: session } = useSession();
   const router = useRouter();
-  // console.log(router.query);
+  console.log(theListing);
 
   // upload main Image
   const uploadMainImg = (e) => {
@@ -163,6 +163,7 @@ const EditListing = () => {
               className="form-control"
               id="propertyTitle"
               name="title"
+              defaultValue={theListing.title}
               required
             />
           </div>
@@ -177,6 +178,8 @@ const EditListing = () => {
               id="propertyDescription"
               rows="3"
               name="description"
+              defaultValue={theListing.description}
+              required
             ></textarea>
           </div>
         </div>
@@ -193,6 +196,9 @@ const EditListing = () => {
                 name="saletag"
                 required
               >
+                <option selected data-tokens={theListing.saleTag}>
+                  {theListing.saleTag}
+                </option>
                 <option data-tokens="For sale">For sale</option>
                 <option data-tokens="For rent">For rent</option>
                 <option data-tokens="Sold">Sold</option>
@@ -206,10 +212,11 @@ const EditListing = () => {
               <label htmlFor="formGroupExamplePrice">Price</label>
               <input
                 type="number"
-                min="50000"
+                min="10000"
                 className="form-control"
                 id="formGroupExamplePrice"
                 name="price"
+                defaultValue={theListing.price}
                 required
               />
             </div>
@@ -226,6 +233,9 @@ const EditListing = () => {
                 name="type"
                 required
               >
+                <option selected data-tokens={theListing.type}>
+                  {theListing.type}
+                </option>
                 <option data-tokens="House">House</option>
                 <option data-tokens="Land">Land</option>
                 <option data-tokens="Condo">Condo</option>
@@ -246,6 +256,9 @@ const EditListing = () => {
                 name="location"
                 required
               >
+                <option data-tokens={theListing.location}>
+                  {theListing.location}
+                </option>
                 <option data-tokens="Waterviews">Waterviews</option>
                 <option data-tokens="Winneba Estates">Winneba Estates</option>
                 <option data-tokens="The heights">The heights</option>
@@ -254,38 +267,6 @@ const EditListing = () => {
           </div>
           {/* End .col */}
         </div>
-
-        {/* <div className="col-lg-4 col-xl-4">
-        <div className="my_profile_setting_input form-group">
-          <label htmlFor="formGroupExampleArea">Location</label>
-          <input
-            type="text"
-            className="form-control"
-            id="formGroupExampleArea"
-            name="location"
-            required
-          />
-        </div>
-      </div> */}
-        {/* End .col */}
-
-        {/* <div className="col-lg-3 col-xl-3">
-        <div className="my_profile_setting_input ui_kit_select_search form-group">
-          <label>Bedrooms</label>
-          <select
-            className="selectpicker form-select"
-            data-live-search="true"
-            data-width="100%"
-          >
-            <option data-tokens="Status1">Status1</option>
-            <option data-tokens="Status2">Status2</option>
-            <option data-tokens="Status3">Status3</option>
-            <option data-tokens="Status4">Status4</option>
-            <option data-tokens="Status5">Status5</option>
-          </select>
-        </div>
-      </div> */}
-        {/* End .col */}
 
         <div className="row">
           <div className="col-lg-3 col-xl-3">
@@ -298,6 +279,9 @@ const EditListing = () => {
                 name="bedrooms"
                 required
               >
+                <option data-tokens={theListing.bedrooms}>
+                  {theListing.bedrooms}
+                </option>
                 <option data-tokens="n/a">n/a</option>
                 <option data-tokens="1">1</option>
                 <option data-tokens="2">2</option>
@@ -322,6 +306,7 @@ const EditListing = () => {
                 name="baths"
                 required
               >
+                <option data-tokens={theListing.baths}>{theListing.baths}</option>
                 <option data-tokens="n/a">n/a</option>
                 <option data-tokens="1">1</option>
                 <option data-tokens="2">2</option>
@@ -345,6 +330,7 @@ const EditListing = () => {
                 className="form-control"
                 id="formGroupExamplePrice"
                 name="sqft"
+                defaultValue={theListing.sqft}
                 required
               />
             </div>
@@ -361,6 +347,7 @@ const EditListing = () => {
                 name="garages"
                 required
               >
+                <option data-tokens={theListing.garages}>{theListing.garages}</option>
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
               </select>
@@ -415,7 +402,6 @@ const EditListing = () => {
             </div>
           </div>
         </div>
-        
       </form>
     </>
   );

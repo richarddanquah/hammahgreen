@@ -1,10 +1,14 @@
-const AllStatistics = () => {
+const AllStatistics = ({propertyListings}) => {
+  
+  console.log(propertyListings.length);
+  const noOfListings = propertyListings.length;
+
   const allStatistics = [
     {
       id: 1,
       blockStyle: "",
       icon: "flaticon-home",
-      timer: "N/A",
+      timer: noOfListings,
       name: "All Properties",
       alert: "Coming soon"
     },
@@ -37,7 +41,6 @@ const AllStatistics = () => {
         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-3" key={item.id}>
           <div className={`ff_one ${item.blockStyle}`}>
             <div className="detais">
-              <span style={{fontSize:"11px", color:"red"}}>{item.alert}</span>
               <div className="timer">{item.timer}</div>
               <p>{item.name}</p>
             </div>

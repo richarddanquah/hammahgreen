@@ -5,7 +5,7 @@ import EditListing from "./editListing";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({ theListing }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -67,7 +67,7 @@ const Index = () => {
 
                 <div className="col-lg-12">
                   <div className="my_dashboard_review">
-                    <EditListing />
+                    <EditListing theListing={theListing} />
                   </div>
                   {/* <div className="my_dashboard_review mt30">
                     <div className="row">
