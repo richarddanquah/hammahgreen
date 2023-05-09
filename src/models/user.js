@@ -2,28 +2,30 @@ import { Schema, model, models } from "mongoose";
 import { notificationSchema } from "./notificaiton";
 
 const userSchema = new Schema({
+  userImg: String,
   fname: {
     type: String,
-    required: true,
   },
   lname: {
     type: String,
-    required: true,
   },
   email: {
     type: String,
-    required: true,
     unique: true,
   },
   role: {
     type: String,
-    required: true,
   },
   password: {
     type: String,
-    required: true,
   },
   notifications: [notificationSchema],
+  position: String,
+  license: String,
+  mobile: Number,
+  company: String,
+  address: String,
+  about: String,
 });
 
 const User = models.User || model("User", userSchema);

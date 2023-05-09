@@ -26,7 +26,7 @@ export async function getServerSideProps(context) {
 
   console.log("FETCHING Listing...");
   const listing = await Listing.find();
-  console.log(listing.length);
+  // console.log(listing.length);
 
   return {
     props: {

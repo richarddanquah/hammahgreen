@@ -32,7 +32,7 @@ export default async function handler(req, res) {
             const user = {
                 name: `${foundUser[0].fname} ${foundUser[0].lname}`,
                 email: foundUser[0].email,
-                role: foundUser[0].role,
+                image: foundUser[0].userImg,
             }
             console.log(user);
           return res.status(200).send(user);

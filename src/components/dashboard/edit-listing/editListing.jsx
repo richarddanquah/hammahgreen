@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
-// import { uploadFile } from "../../../lib/s3";
 
 const EditListing = ({ theListing }) => {
   const [mainImg, setMainImg] = useState(null);

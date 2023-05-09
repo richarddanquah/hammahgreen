@@ -173,7 +173,7 @@ const Form = () => {
               htmlFor="main_Img"
             >
               <span>
-                <i className="flaticon-download"></i> Upload Main Image{" "}
+                <i className="flaticon-download"></i> Upload Image{" "}
               </span>
             </label>
           </div>

@@ -7,7 +7,7 @@ import SocialMedia from "./SocialMedia";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = () => {
+const Index = ({ theUser }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -61,7 +61,7 @@ const Index = () => {
                 <div className="col-lg-12 mb10">
                   <div className="breadcrumb_content style2">
                     <h2 className="breadcrumb_title">My Profile</h2>
-                    <p>We are glad to see you again!</p>
+                    <p>Update your profile info</p>
                   </div>
                 </div>
                 {/* End .col */}
@@ -73,13 +73,13 @@ const Index = () => {
                         <h4>Profile Information</h4>
                       </div>
                       <div className="col-xl-10">
-                        <ProfileInfo />
+                        <ProfileInfo theUser={theUser} />
                       </div>
                     </div>
                   </div>
                   {/* End prifle info wrapper end */}
 
-                  <div className="my_dashboard_review mt30">
+                  {/* <div className="my_dashboard_review mt30">
                     <div className="row">
                       <div className="col-xl-2">
                         <h4>Social Media</h4>
@@ -88,10 +88,10 @@ const Index = () => {
                         <SocialMedia />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                   {/* End .SocialMedia */}
 
-                  <div className="my_dashboard_review mt30">
+                  {/* <div className="my_dashboard_review mt30">
                     <div className="row">
                       <div className="col-xl-2">
                         <h4>Change password</h4>
@@ -100,7 +100,7 @@ const Index = () => {
                         <ChangePassword />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               {/* End .row */}

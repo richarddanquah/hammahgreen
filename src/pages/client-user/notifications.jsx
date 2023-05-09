@@ -2,11 +2,17 @@ import dynamic from "next/dynamic";
 import Seo from "../../components/common/seo";
 import Notifications from "../../components/client-dashboard/notifications";
 import { getSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import connectDB from "../../lib/connectMongoDB";
 import User from "../../models/user";
 import Notification from "../../models/notificaiton";
 
-const index = ({ theUser, userNotifications }) => {
+const Index = ({ theUser, userNotifications }) => {
+  const route = useRouter()
+
+  if (theUser.role !== "User") {
+    route.push("/my-dashboard")
+  }
   return (
     <>
       <Seo pageTitle="Client Profile" />
@@ -15,7 +21,7 @@ const index = ({ theUser, userNotifications }) => {
   );
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default dynamic(() => Promise.resolve(Index), { ssr: false });
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
