@@ -479,17 +479,19 @@ const HeaderMenuContent = ({ float = "" }) => {
               href="#"
               data-bs-toggle="dropdown"
             >
-              {/* <img
+              <img
                 className="rounded-circle"
-                src={session.user.image}
+                src={
+                  session.user.image
+                    ? session.user.image
+                    : "/assets/images/profileImgs/avatar.png"
+                }
                 alt="e1.png"
                 width={40}
-              /> */}
-              <span className="dn-1199 ms-1">
-                {session.user.name}
-              </span>
+              />
+              <span className="dn-1199 ms-1">{session.user.name}</span>
               &nbsp;
-              <span className="fa fa-angle-down"></span> 
+              <span className="fa fa-angle-down"></span>
             </a>
             <div className="dropdown-menu">
               <MyAccount />

@@ -9,7 +9,7 @@ const AllStatistics = ({propertyListings}) => {
       blockStyle: "",
       icon: "flaticon-home",
       timer: noOfListings,
-      name: "All Properties",
+      name: "All Listings",
       alert: "Coming soon"
     },
     // {

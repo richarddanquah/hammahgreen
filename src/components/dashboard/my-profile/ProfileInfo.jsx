@@ -107,12 +107,16 @@ const ProfileInfo = ({ theUser }) => {
           userId: ID,
         })
       );
+
       xhr.onreadystatechange = async () => {
         if (xhr.readyState === 4) {
-          // callback(xhr.response);
           const result = await xhr.response;
           console.log(result);
-          alert('Image uploaded successfully')
+          if (result === "Body exceeded 1mb limit") {
+            alert("The image exceeds the 1mb limit");
+          } else {
+            alert("Image saved successfully");
+          }
         }
       };
     };
@@ -163,14 +167,17 @@ const ProfileInfo = ({ theUser }) => {
                 htmlFor="userImage"
               >
                 <span>
-                  <i className="flaticon-download"></i> Add Photo{" "}
+                  <i className="flaticon-download-arrow"></i> Add Photo{" "}
                 </span>
               </label>
             </div>
 
             <p>*minimum 260px x 260px</p>
 
-            <button type="submit" className="shadow-sm btn btn-dark btn-lg rounded">
+            <button
+              type="submit"
+              className="shadow-sm btn btn-dark btn-lg rounded"
+            >
               Update Photo &nbsp; <i className="fa fa-save"></i>
             </button>
           </div>

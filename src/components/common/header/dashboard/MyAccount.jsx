@@ -16,12 +16,18 @@ const MyAccount = () => {
   return (
     <>
       <div className="user_set_header">
-        {/* <img
+        <img
           className="rounded-circle"
-          src={session.user.image}
+          src={
+            session.user.image
+              ? session.user.image
+              : "/assets/images/profileImgs/avatar.png"
+          }
           alt="e1.png"
           width={60}
-        /> */}
+        />
+        <br />
+        <br />
         <p>
           {session.user.name}
           <br />
