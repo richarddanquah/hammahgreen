@@ -6,7 +6,6 @@ export default async function handler(req, res) {
     // console.log(req.body);
     const {
       id,
-      mainImg,
       title,
       description,
       saletag,
@@ -31,7 +30,6 @@ export default async function handler(req, res) {
       const updatedListing = await Listing.findByIdAndUpdate(
         { _id: id },
         {
-          mainImage: mainImg,
           title: title,
           description: description,
           price: price,

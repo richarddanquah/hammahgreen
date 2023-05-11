@@ -70,7 +70,7 @@ const Index = ({Users}) => {
                   <div className="my_dashboard_review">
                     <div className="row">
                       <div className="col-lg-12">
-                        <h2 className="mb30">Create User</h2>
+                        <h2 className="mb30">Create A User</h2>
                         <CreateUserForm />
                       </div>
                     </div>

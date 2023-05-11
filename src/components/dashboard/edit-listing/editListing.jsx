@@ -6,7 +6,7 @@ const EditListing = ({ theListing }) => {
   const [mainImg, setMainImg] = useState(null);
   const { data: session } = useSession();
   const router = useRouter();
-  console.log(theListing);
+  // console.log(theListing);
 
   // upload main Image
   const uploadMainImg = (e) => {
@@ -16,37 +16,36 @@ const EditListing = ({ theListing }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // Get selected file
-    const file = mainImg;
-    // console.log(file);
+    // // Get selected file
+    // const file = mainImg;
+    // // console.log(file);
 
-    if (!file) {
-      alert("Please select an image file.");
-      return;
-    }
+    // if (!file) {
+    //   alert("Please select an image file.");
+    //   return;
+    // }
 
-    // create a new FileReader object
-    const reader = new FileReader();
+    // // create a new FileReader object
+    // const reader = new FileReader();
 
-    // read the file as a data URL
-    reader.readAsDataURL(file);
+    // // read the file as a data URL
+    // reader.readAsDataURL(file);
 
-    // when the file is loaded, send it to the server
-    reader.onload = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/api/uploadListingImg");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          filename: file.name,
-          data: reader.result,
-        })
-      );
-    };
+    // // when the file is loaded, send it to the server
+    // reader.onload = () => {
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open("POST", "/api/uploadListingImg");
+    //   xhr.setRequestHeader("Content-Type", "application/json");
+    //   xhr.send(
+    //     JSON.stringify({
+    //       filename: file.name,
+    //       data: reader.result,
+    //     })
+    //   );
+    // };
 
     const data = {
       id: event.target.propertyid.value,
-      mainImg: `/assets/images/property/${file.name}`,
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,
@@ -101,11 +100,60 @@ const EditListing = ({ theListing }) => {
     }
   };
 
+  const handleUpload = async function (e) {
+    e.preventDefault();
+
+    // Get selected file
+    const file = mainImg;
+    // console.log(file);
+
+    if (!file) {
+      alert("Please select an image file.");
+      return;
+    }
+
+    const ID = e.target.propertyid.value;
+    // console.log(ID);
+
+    // create a new FileReader object
+    const reader = new FileReader();
+
+    // read the file as a data URL
+    reader.readAsDataURL(file);
+
+    // when the file is loaded, send it to the server
+    reader.onload = () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "/api/uploadPropertyImg");
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.send(
+        JSON.stringify({
+          filename: file.name,
+          data: reader.result,
+          propertyId: ID,
+        })
+      );
+
+      xhr.onreadystatechange = async () => {
+        if (xhr.readyState === 4) {
+          const result = await xhr.response;
+          console.log(result);
+          if (result === "Body exceeded 1mb limit") {
+            alert("The image exceeds the 1mb limit");
+          } else {
+            alert("Listing image updated successfully");
+            window.location.replace("/my-properties");
+          }
+        }
+      };
+    };
+  };
+
   return (
     <>
-      <form onSubmit={handleSubmit} enctype="multipart/form-data">
+      <form onSubmit={handleUpload} className="mb50 rounded-4 shadow-sm p20 bg-white border">
         <div
-          // style={{ display: "none" }}
+          style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
         >
           <input
@@ -145,14 +193,45 @@ const EditListing = ({ theListing }) => {
               htmlFor="mainImg"
             >
               <span>
-                <i className="flaticon-download"></i> Upload Main Image{" "}
+                <i className="flaticon-download-arrow"></i> Upload Image{" "}
               </span>
             </label>
           </div>
-          <p>*minimum 752 x 450</p>
         </div>
 
-        <br />
+        {mainImg && (
+          <>
+            <div className="text-center mt10">
+              <button type="submit" className="btn btn-success btn-sm w-50 rounded-5">
+                 Update listing image {/* &nbsp; <i className="fa fa-save"></i> */}
+              </button>
+            </div>
+          </>
+        )}
+      </form>
+
+      <form onSubmit={handleSubmit} className="rounded shadow-sm p20 bg-white border">
+        <div
+          style={{ display: "none" }}
+          className="form-group form-check custom-checkbox mb-3"
+        >
+          <input
+            className="form-check-input"
+            type="radio"
+            id="Id"
+            value={router.query.index}
+            required
+            name="propertyid"
+            checked
+            disabled
+          />
+          <label
+            className="form-check-label form-check-label float-start"
+            htmlFor="Id"
+          >
+            Property Listing ID {router.query.index}
+          </label>
+        </div>
 
         <div className="col-lg-12">
           <div className="my_profile_setting_input form-group">
@@ -305,7 +384,9 @@ const EditListing = ({ theListing }) => {
                 name="baths"
                 required
               >
-                <option data-tokens={theListing.baths}>{theListing.baths}</option>
+                <option data-tokens={theListing.baths}>
+                  {theListing.baths}
+                </option>
                 <option data-tokens="n/a">n/a</option>
                 <option data-tokens="1">1</option>
                 <option data-tokens="2">2</option>
@@ -346,7 +427,9 @@ const EditListing = ({ theListing }) => {
                 name="garages"
                 required
               >
-                <option data-tokens={theListing.garages}>{theListing.garages}</option>
+                <option data-tokens={theListing.garages}>
+                  {theListing.garages}
+                </option>
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
               </select>

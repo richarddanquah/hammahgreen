@@ -1,25 +1,25 @@
 const fs = require("fs");
 const path = require("path");
 import connectDB from "../../lib/connectMongoDB";
-import User from "../../models/user";
+import Listing from "../../models/listing";
 
 export default async function handler(req, res) {
-  if (req.method === "POST" && req.url === "/api/uploadProfileImg") {
+  if (req.method === "POST" && req.url === "/api/uploadPropertyImg") {
     console.log(req.body);
 
-    const { filename, data, userId } = req.body;
+    const { filename, data, propertyId } = req.body;
 
     try {
       console.log("CONNECTING TO DATABASE...");
       await connectDB();
       console.log("CONNECTED TO DATABASE ✔");
 
-      console.log("UPDATING USER IMAGE");
-      const updateImg = await User.findByIdAndUpdate(
-        { _id: userId },
-        { userImg: `/assets/images/profileImgs/${filename}` }
+      console.log("UPDATING PROPERTY LISTING IMAGE");
+      const updateImg = await Listing.findByIdAndUpdate(
+        { _id: propertyId },
+        { mainImage: `/assets/images/property/${filename}` }
       );
-      console.log("USER IMAGE UPDATED ✔");
+      console.log("PROPERTY IMAGE UPDATED ✔");
 
       /////////////////////////////////////////////////
 
@@ -28,10 +28,10 @@ export default async function handler(req, res) {
       // Set the file path to the uploads directory
       const filePath = path.join(
         __dirname,
-        "../../../../public/assets/images/profileImgs/",
+        "../../../../public/assets/images/property/",
         filename
       );
-      //   console.log(filePath);
+
       // Save the file to the server
       fs.writeFile(filePath, base64Image, { encoding: "base64" }, (err) => {
         if (err) {

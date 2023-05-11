@@ -102,7 +102,11 @@ const CreateList = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} encType="multipart/form-data">
+      <form 
+      onSubmit={handleSubmit} 
+      encType="multipart/form-data"
+      className="p20 border rounded-2 shadow-sm"
+      >
         <div className="col-lg-12">
           <div className="wrap-custom-file2">
             <input
@@ -127,7 +131,7 @@ const CreateList = () => {
               </span>
             </label>
           </div>
-          <p>*minimum 752 x 450</p>
+          <p style={{fontSize: "11px"}}>*minimum 752 x 450</p>
         </div>
 
         <br />

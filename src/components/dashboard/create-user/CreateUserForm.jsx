@@ -84,7 +84,7 @@ const Form = () => {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="border rounded p20 shadow-sm">
         <div className="row mb20">
           <div className="col-lg-6">
             <div className="form-group input-group">
@@ -147,6 +147,7 @@ const Form = () => {
               >
                 <option data-tokens="User">User</option>
                 <option data-tokens="Admin">Admin</option>
+                {/* <option data-tokens="Agent">Agent</option> */}
               </select>
             </div>
           </div>
@@ -202,7 +203,7 @@ const Form = () => {
         <div className="col-xl-12">
           <div className="my_profile_setting_input">
             {/* <button className="btn btn1 float-start">Back</button> */}
-            <button type="submit" className="btn btn2 float-end">
+            <button type="submit" className="btn btn2 w-100">
               Create
             </button>
 

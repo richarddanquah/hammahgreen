@@ -7,7 +7,7 @@ const AllStatistics = ({propertyListings}) => {
     {
       id: 1,
       blockStyle: "",
-      icon: "flaticon-home",
+      icon: "flaticon-house-2",
       timer: noOfListings,
       name: "All Listings",
       alert: "Coming soon"
@@ -39,7 +39,7 @@ const AllStatistics = ({propertyListings}) => {
     <>
       {allStatistics.map((item) => (
         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-3" key={item.id}>
-          <div className={`ff_one ${item.blockStyle}`}>
+          <div className={`ff_one ${item.blockStyle} rounded-3 shadow-sm border border-success-subtle`}>
             <div className="detais">
               <div className="timer">{item.timer}</div>
               <p>{item.name}</p>

@@ -69,7 +69,6 @@ const ProfileInfo = ({ theUser }) => {
 
     if (returnedData) {
       alert(`Your profile info has been updated successfully.`);
-      // window.location.replace("/my-properties");
     } else if (returnedError) {
       alert("Something went wrong... Please try again");
     }
@@ -115,7 +114,10 @@ const ProfileInfo = ({ theUser }) => {
           if (result === "Body exceeded 1mb limit") {
             alert("The image exceeds the 1mb limit");
           } else {
-            alert("Image saved successfully");
+            alert(
+              "Profile image updated successfully. Signout and sign back in to view changes."
+            );
+            location.reload(true);
           }
         }
       };
@@ -124,7 +126,11 @@ const ProfileInfo = ({ theUser }) => {
 
   return (
     <>
-      <form className="mb50" onSubmit={handleUpload}>
+      <form
+        onSubmit={handleUpload}
+        style={{ display: "inline-block" }}
+        className="mb50 text-center rounded-4 border shadow-sm p20 bg-white"
+      >
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
@@ -147,44 +153,49 @@ const ProfileInfo = ({ theUser }) => {
           </label>
         </div>
 
-        <div className="row">
-          <div className="col-lg-4 text-center">
-            <div className="wrap-custom-file">
-              <input
-                type="file"
-                id="userImage"
-                accept="image/png, image/gif, image/jpeg"
-                onChange={uploadProfile}
-              />
-              <label
-                style={
-                  profile
-                    ? {
-                        backgroundImage: `url(${URL.createObjectURL(profile)})`,
-                      }
-                    : undefined
-                }
-                htmlFor="userImage"
-              >
-                <span>
-                  <i className="flaticon-download-arrow"></i> Add Photo{" "}
-                </span>
-              </label>
-            </div>
+        <div className="wrap-custom-file">
+          <input
+            type="file"
+            id="userImage"
+            accept="image/png, image/gif, image/jpeg"
+            onChange={uploadProfile}
+          />
+          <label
+            style={
+              profile
+                ? {
+                    backgroundImage: `url(${URL.createObjectURL(profile)})`,
+                  }
+                : undefined
+            }
+            htmlFor="userImage"
+          >
+            <span>
+              <i className="flaticon-download-arrow"></i> Add Photo{" "}
+            </span>
+          </label>
+        </div>
 
-            <p>*minimum 260px x 260px</p>
+        {/* <p style={{fontSize: "10px"}}>*minimum 260px x 260px</p> */}
 
+        {profile && (
+          <>
+            <br />
+            <br />
             <button
               type="submit"
-              className="shadow-sm btn btn-dark btn-lg rounded"
+              className="shadow-sm btn btn-success rounded-4"
             >
-              Update Photo &nbsp; <i className="fa fa-save"></i>
+              Update profile photo &nbsp; <i className="fa fa-save"></i>
             </button>
-          </div>
-        </div>
+          </>
+        )}
       </form>
 
-      <form onSubmit={handleSubmit}>
+      <form
+        onSubmit={handleSubmit}
+        className="rounded-3 shadow-sm p20 bg-white border"
+      >
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"

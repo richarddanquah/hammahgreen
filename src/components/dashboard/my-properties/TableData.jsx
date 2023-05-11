@@ -190,7 +190,7 @@ const TableData = ({ Listings }) => {
 
   return (
     <>
-      <table className="table">
+      <table className="table shadow-sm">
         <thead className="thead-light">
           <tr>
             {theadConent.map((value, i) => (
