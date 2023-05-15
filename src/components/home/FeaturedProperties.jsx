@@ -63,7 +63,7 @@ const FeaturedProperties = ({ propertyListings }) => {
             </ul> */}
               {/* End .icon */}
 
-              <Link href={`/listing-details-v1/${item.id}`}>
+              <Link href={`/listing-details-v2/${item._id}`}>
                 <a className="fp_price">
                   ${item.price}
                   {/* <small>/mo</small> */}
@@ -77,9 +77,9 @@ const FeaturedProperties = ({ propertyListings }) => {
             <div className="tc_content">
               <p className="text-thm">{item.type}</p>
               <h4>
-                {/* <Link href={`/listing-details-v2/${item.id}`}> */}
+                <Link href={`/listing-details-v2/${item._id}`} >
                 <a>{item.title}</a>
-                {/* </Link> */}
+                </Link>
               </h4>
               <p>
                 <span className="flaticon-placeholder"></span> &nbsp;
@@ -92,6 +92,9 @@ const FeaturedProperties = ({ propertyListings }) => {
                 </li>
                 <li className="list-inline-item">
                   <a href="#">Bedrooms: {item.baths}</a>
+                </li>
+                <li className="list-inline-item">
+                  <a href="#">Sqft: {item.sqft}</a>
                 </li>
                 {/* {item.itemDetails.map((val, i) => (
                 <li className="list-inline-item" key={i}>

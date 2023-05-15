@@ -1,7 +1,7 @@
 export default function BannerImage({img = ""}) {
     return (
         <>
-            <div class="banner-img"
+            <div className="banner-img"
                 style={{ "backgroundImage": `url(${img})` }}
             ></div>
         </>

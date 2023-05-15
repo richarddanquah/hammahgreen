@@ -21,7 +21,6 @@ export default dynamic(() => Promise.resolve(index), { ssr: false });
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
-  
 
   try {
     if (session) {
@@ -47,7 +46,6 @@ export async function getServerSideProps(context) {
           session,
         },
       };
-      
     } else if (!session) {
       console.log("CONNECTING TO DATABASE...");
       await connectDB();

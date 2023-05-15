@@ -13,7 +13,8 @@ import FeaturedItem from "./FeaturedItem";
 import BannerImage from "../../common/BannerImage";
 import Link from "next/link";
 
-const index = () => {
+const index = ({waterviewsListings, listings}) => {
+  console.log(waterviewsListings);
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -74,7 +75,7 @@ const index = () => {
               {/* End .row */}
 
               <div className="row">
-                <FeaturedItem />
+                <FeaturedItem waterviewsListings={waterviewsListings} />
               </div>
               {/* End .row */}
 
@@ -92,7 +93,7 @@ const index = () => {
 
             <div className="col-lg-4 col-xl-4">
               <div className="sidebar-listing-wrapper">
-                <SidebarListing />
+                <SidebarListing listings={listings} />
               </div>
               {/* End SidebarListing */}
 
@@ -113,7 +114,7 @@ const index = () => {
                 {/* End .offcanvas-heade */}
 
                 <div className="offcanvas-body">
-                  <SidebarListing />
+                  <SidebarListing listings={listings}/>
                 </div>
               </div>
               {/* End mobile sidebar listing  */}

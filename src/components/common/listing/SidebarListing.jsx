@@ -3,7 +3,7 @@ import FeaturedListings from "./FeaturedListings";
 import FeatureProperties from "./FeatureProperties";
 import FilteringItem from "./FilteringItem";
 
-const SidebarListing = () => {
+const SidebarListing = ({listings}) => {
     return (
         <div className="sidebar_listing_grid1">
             <div className="sidebar_listing_list">
@@ -16,7 +16,7 @@ const SidebarListing = () => {
             <div className="terms_condition_widget">
                 <h4 className="title">Featured Properties</h4>
                 <div className="sidebar_feature_property_slider">
-                    <FeatureProperties />
+                    <FeatureProperties listings={listings} />
                 </div>
             </div>
             {/* End .Featured Properties */}

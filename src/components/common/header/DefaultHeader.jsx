@@ -29,13 +29,13 @@ const Header = ({theUser}) => {
           <a className="navbar_brand float-start dn-smd">
             <img
               className="logo1 img-fluid"
-              src="assets/images/hg-logo2.png"
+              src="/assets/images/hg-logo2.png"
               alt="hg-logo.png"
               width={300}
             />
             <img
               className="logo2 img-fluid"
-              src="assets/images/hg-logo2.png"
+              src="/assets/images/hg-logo2.png"
               alt="hg-logo.png"
               width={280}
             />

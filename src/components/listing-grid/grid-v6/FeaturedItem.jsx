@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLength } from "../../../features/properties/propertiesSlice";
 import properties from "../../../data/properties";
 
-const FeaturedItem = () => {
+const FeaturedItem = ({homes}) => {
   const {
     keyword,
     location,
@@ -117,7 +117,7 @@ const FeaturedItem = () => {
   };
 
   // status handler
-  let content = properties
+  let content = homes
     ?.slice(0, 3)
     ?.filter(keywordHandler)
     ?.filter(locationHandler)
@@ -133,17 +133,20 @@ const FeaturedItem = () => {
     ?.sort(statusTypeHandler)
     ?.filter(featuredHandler)
     .map((item) => (
-      <div className="col-md-6 col-lg-4" key={item.id}>
+      <div className="col-md-6 col-lg-4" key={item._id}>
         <div className="feat_property home7 style4">
           <div className="thumb">
-            <img className="img-whp" src={item.img} alt="fp1.jpg" />
+            <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
-                {item.saleTag.map((val, i) => (
+              <li className="list-inline-item">
+                    <a href="#">{item.saleTag}</a>
+                  </li>
+                {/* {item.saleTag.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">{val}</a>
                   </li>
-                ))}
+                ))} */}
               </ul>
               <ul className="icon mb0">
                 <li className="list-inline-item">
@@ -161,7 +164,7 @@ const FeaturedItem = () => {
               <Link href={`/listing-details-v1/${item.id}`}>
                 <a className="fp_price">
                   ${item.price}
-                  <small>/mo</small>
+                  {/* <small>/mo</small> */}
                 </a>
               </Link>
             </div>
@@ -180,13 +183,28 @@ const FeaturedItem = () => {
               </p>
 
               <ul className="prop_details mb0">
-                {item.itemDetails.map((val, i) => (
+              <li className="list-inline-item">
+                    <a href="#">
+                      Baths: {item.baths}
+                    </a>
+                  </li>
+              <li className="list-inline-item">
+                    <a href="#">
+                      Beds: {item.bedrooms}
+                    </a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#">
+                      Sqft: {item.sqft}
+                    </a>
+                  </li>
+                {/* {item.itemDetails.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">
                       {val.name}: {val.number}
                     </a>
                   </li>
-                ))}
+                ))} */}
               </ul>
             </div>
             {/* End .tc_content */}
@@ -194,11 +212,11 @@ const FeaturedItem = () => {
             <div className="fp_footer">
               <ul className="fp_meta float-start mb0">
                 <li className="list-inline-item">
-                  <Link href="/agent-v1">
+                  {/* <Link href="/agent-v1">
                     <a>
                       <img src={item.posterAvatar} alt="pposter1.png" />
                     </a>
-                  </Link>
+                  </Link> */}
                 </li>
                 <li className="list-inline-item">
                   <Link href="/agent-v1">
@@ -206,7 +224,7 @@ const FeaturedItem = () => {
                   </Link>
                 </li>
               </ul>
-              <div className="fp_pdate float-end">{item.postedYear}</div>
+              <div className="fp_pdate float-end">{item.posted}</div>
             </div>
             {/* End .fp_footer */}
           </div>

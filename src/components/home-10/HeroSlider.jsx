@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Slider from "react-slick";
 
-const HeroSlider = () => {
+const HeroSlider = ({propertyListings}) => {
   const settings = {
     dots: false,
     arrow: true,
@@ -51,7 +51,6 @@ const HeroSlider = () => {
       {sliderContent.map((item) => (
         <div
           className={`slide slide-one d-flex align-items-center ${item.bgImage}`}
-          style={{ height: "620px", backgroundImage: "url('assets\images\home\Eloquence-Estate.jpeg')" }}
           key={item.id}
         >
           <div className="container">

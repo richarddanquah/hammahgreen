@@ -10,15 +10,17 @@ import PopupSignInUp from "../../components/common/PopupSignInUp";
 import properties from "../../data/properties";
 import DetailsContent from "../../components/listing-details-v1/DetailsContent";
 import Sidebar from "../../components/listing-details-v1/Sidebar";
+import connectDB from "../../lib/connectMongoDB";
+import Listing from "../../models/listing";
 
-const ListingDynamicDetailsV2 = () => {
+const ListingDynamicDetailsV2 = ({ listings }) => {
   const router = useRouter();
   const [property, setProperty] = useState({});
   const id = router.query.id;
 
   useEffect(() => {
     if (!id) <h1>Loading...</h1>;
-    else setProperty(properties?.find((item) => item.id == id));
+    else setProperty(listings?.find((item) => item._id == id));
 
     return () => {};
   }, [id]);
@@ -38,14 +40,14 @@ const ListingDynamicDetailsV2 = () => {
       <section className="single_page_listing_style p0 mt85 md-mt0">
         <div className="container-fluid p0">
           <Gallery>
-            <div className="row g-0" key={property?.id}>
+            <div className="row g-0" key={property?._id}>
               <div className="col-md-6 col-lg-6 ">
                 <div className="row g-0">
                   <div className="col-lg-12 ">
                     <div className="spls_style_one pr1 1px position-relative">
                       <Item
-                        original={property?.img}
-                        thumbnail={property?.img}
+                        original={property?.mainImage}
+                        thumbnail={property?.mainImage}
                         width={752}
                         height={450}
                       >
@@ -63,8 +65,8 @@ const ListingDynamicDetailsV2 = () => {
                             </div>
                             <img
                               className="img-fluid w100 cover lds-2"
-                              src={property.img}
-                              alt={property.img}
+                              src={property.mainImage}
+                              alt={property.mainImage}
                             />
                           </>
                         )}
@@ -77,7 +79,7 @@ const ListingDynamicDetailsV2 = () => {
 
               <div className="col-md-6 col-lg-6 position-relative">
                 <div className="row g-0 gx-0">
-                  {property?.imgList2?.map((val, i) => (
+                  {/* {property?.imgList2?.map((val, i) => (
                     <div className="col-6 col-lg-6 " key={i}>
                       <div className="spls_style_one">
                         <Item
@@ -98,11 +100,11 @@ const ListingDynamicDetailsV2 = () => {
                         </Item>
                       </div>
                     </div>
-                  ))}
+                  ))} */}
                 </div>
                 {/* End .row */}
 
-                <div className="single_property_social_share">
+                {/* <div className="single_property_social_share">
                   <div className="spss style2 mt10 text-right tal-400">
                     <ul className="mb0">
                       <li className="list-inline-item">
@@ -127,7 +129,7 @@ const ListingDynamicDetailsV2 = () => {
                       </li>
                     </ul>
                   </div>
-                </div>
+                </div> */}
                 {/* End .single_property_social_share */}
               </div>
               {/* End .col */}
@@ -143,26 +145,26 @@ const ListingDynamicDetailsV2 = () => {
             <div className="col-md-12 col-lg-8">
               <div className="listing_single_description2 mt30-767 mb30-767">
                 <div className="single_property_title">
-                  <h2>{property?.title}</h2>
-                  <p>{property?.location}</p>
+                  <h2>{property.title}</h2>
+                  <p>{property.location}</p>
                 </div>
                 <div className="single_property_social_share style2 static-title">
                   <div className="price">
                     <h2>
                       ${property.price}
-                      <small>/mo</small>
+                      {/* <small>/mo</small> */}
                     </h2>
                   </div>
                 </div>
               </div>
               {/* End .listing_single_description2 */}
 
-              <DetailsContent />
+              <DetailsContent property={property} />
             </div>
             {/* End details content .col-lg-8 */}
 
             <div className="col-lg-4 col-xl-4">
-              <Sidebar />
+              <Sidebar listings={listings} />
             </div>
             {/* End sidebar content .col-lg-4 */}
           </div>
@@ -190,3 +192,20 @@ const ListingDynamicDetailsV2 = () => {
 };
 
 export default ListingDynamicDetailsV2;
+
+export async function getServerSideProps(context) {
+  console.log("CONNECTING TO DATABASE...");
+  await connectDB();
+  console.log("CONNECTED TO DATABASE ✔");
+
+  console.log("FETCHING Listing...");
+  const listings = await Listing.find();
+
+  console.log(listings);
+
+  return {
+    props: {
+      listings: JSON.parse(JSON.stringify(listings)),
+    },
+  };
+}

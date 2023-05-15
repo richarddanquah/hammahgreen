@@ -40,7 +40,7 @@ const index = ({ theUser, propertyListings }) => {
       <div className="home10-mainslider">
         <div className="main-banner-wrapper home10">
           <div className="banner-style-one home10-banner-style arrow-style-2">
-            <HeroSlider />
+            <HeroSlider propertyListings={propertyListings} />
           </div>
         </div>
         {/* <!-- /.main-banner-wrapper --> */}

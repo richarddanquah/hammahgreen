@@ -10,7 +10,7 @@ import PopupSignInUp from "../../common/PopupSignInUp";
 import BreadCrumb2 from "./BreadCrumb2";
 import FeaturedItem from "./FeaturedItem";
 
-const index = () => {
+const index = ({ homes, listings }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -51,7 +51,7 @@ const index = () => {
               {/* End .row */}
 
               <div className="row">
-                <FeaturedItem />
+                <FeaturedItem homes={homes} />
               </div>
               {/* End .row */}
 
@@ -63,7 +63,7 @@ const index = () => {
                 </div>
                 End paginaion .col
               </div> */}
-              
+
               {/* End .row */}
             </div>
             {/* End .col */}
@@ -85,7 +85,7 @@ const index = () => {
               {/* End .offcanvas-heade */}
 
               <div className="offcanvas-body">
-                <SidebarListing />
+                <SidebarListing listings={listings} />
               </div>
             </div>
             {/* End mobile sidebar listing  */}

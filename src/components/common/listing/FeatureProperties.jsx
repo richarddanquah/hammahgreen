@@ -1,56 +1,57 @@
 import featureProContent from "../../../data/properties";
 import Slider from "react-slick";
 
-const FeatureProperties = () => {
-    const settings = {
-        dots: true,
-        arrows: false,
-        fade: true,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        autoplay: false,
-        speed: 1000,
-    };
+const FeatureProperties = ({ listings }) => {
+  const settings = {
+    dots: true,
+    arrows: false,
+    fade: true,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: false,
+    speed: 1000,
+  };
 
-    return (
-        <>
-            <Slider {...settings} arrows={false}>
-                {featureProContent.slice(0, 3).map((item) => (
-                    <div className="item" key={item.id}>
-                        <div className="feat_property home7">
-                            <div className="thumb">
-                                <img
-                                    className="img-whp"
-                                    src={item.img}
-                                    alt="properties identity"
-                                />
+  return (
+    <>
+      <Slider {...settings} arrows={false}>
+        {listings.slice(0, 5).map((item) => (
+          <div className="item" key={item._id}>
+            <div className="feat_property home7">
+              <div className="thumb">
+                <img
+                  className="img-whp"
+                  src={item.mainImage}
+                  alt="properties identity"
+                />
 
-                                <div className="thmb_cntnt">
-                                    <ul className="tag mb0">
-                                        {item.saleTag.map((val, i) => (
+                <div className="thmb_cntnt">
+                  <ul className="tag mb0">
+                    <li className="list-inline-item">
+                      <a href="#">{item.saleTag}</a>
+                    </li>
+                    {/* {item.saleTag.map((val, i) => (
                                             <li
                                                 className="list-inline-item"
                                                 key={i}
                                             >
                                                 <a href="#">{val}</a>
                                             </li>
-                                        ))}
-                                    </ul>
-                                    <a className="fp_price" href="#">
-                                        ${item.price}
-                                        {/* <small>/mo</small> */}
-                                    </a>
-                                    <h4 className="posr color-white">
-                                        {item.title}
-                                    </h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                ))}
-            </Slider>
-        </>
-    );
+                                        ))} */}
+                  </ul>
+                  <a className="fp_price" href="#">
+                    ${item.price}
+                    {/* <small>/mo</small> */}
+                  </a>
+                  <h4 className="posr color-white">{item.title}</h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </Slider>
+    </>
+  );
 };
 
 export default FeatureProperties;

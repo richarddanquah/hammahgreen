@@ -1,26 +1,26 @@
-const PropertyDetails = () => {
+const PropertyDetails = ({ property }) => {
   return (
     <>
       <div className="col-md-6 col-lg-6 col-xl-4">
         <ul className="list-inline-item">
           <li>
             <p>
-              Property ID : <span>HZ27</span>
+              Property Name : <span>{property.title}</span>
             </p>
           </li>
           <li>
             <p>
-              Price : <span>$130,000</span>
+              Price : <span>{property.price}</span>
             </p>
           </li>
           <li>
             <p>
-              Property Size : <span>1560 Sq Ft</span>
+              Location : <span>{property.location}</span>
             </p>
           </li>
           <li>
             <p>
-              Year Built : <span>2016-01-09</span>
+              Property Size : <span>{property.sqft} Sq Ft</span>
             </p>
           </li>
         </ul>
@@ -31,24 +31,24 @@ const PropertyDetails = () => {
         <ul className="list-inline-item">
           <li>
             <p>
-              Bedrooms : <span>8</span>
+              Bedrooms : <span>{property.bedrooms}</span>
             </p>
           </li>
           <li>
             <p>
-              Bathrooms : <span>4</span>
+              Bathrooms : <span>{property.baths}</span>
             </p>
           </li>
           <li>
             <p>
-              Garage : <span>2</span>
+              Garage : <span>{property.garages}</span>
             </p>
           </li>
-          <li>
+          {/* <li>
             <p>
               Garage Size : <span>200 SqFt</span>
             </p>
-          </li>
+          </li> */}
         </ul>
       </div>
       {/* End .col */}
@@ -57,12 +57,17 @@ const PropertyDetails = () => {
         <ul className="list-inline-item">
           <li>
             <p>
-              Property Type : <span>Apartment</span>
+              Property Type : <span>{property.type}</span>
             </p>
           </li>
           <li>
             <p>
-              Property Status : <span>For Sale</span>
+              Property Status : <span>{property.saleTag}</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              Listed by : <span>{property.posterName}</span>
             </p>
           </li>
         </ul>

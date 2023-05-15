@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLength } from "../../../features/properties/propertiesSlice";
 import properties from "../../../data/properties";
 
-const FeaturedItem = () => {
+const FeaturedItem = ({ waterviewsListings }) => {
   const {
     keyword,
     location,
@@ -117,7 +117,7 @@ const FeaturedItem = () => {
   };
 
   // status handler
-  let content = properties
+  let content = waterviewsListings
     ?.slice(0, 3)
     ?.filter(keywordHandler)
     ?.filter(locationHandler)
@@ -145,16 +145,21 @@ const FeaturedItem = () => {
           }`}
         >
           <div className="thumb">
-            <img className="img-whp" src={item.img} alt="fp1.jpg" />
+            <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
+                <li className="list-inline-item">
+                  <a href="#">{item.saleTag}</a>
+                </li>
+              </ul>
+              {/* <ul className="tag mb0">
                 {item.saleTag.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">{val}</a>
                   </li>
                 ))}
-              </ul>
-              <ul className="icon mb0">
+              </ul> */}
+              {/* <ul className="icon mb0">
                 <li className="list-inline-item">
                   <a href="#">
                     <span className="flaticon-transfer-1"></span>
@@ -165,14 +170,11 @@ const FeaturedItem = () => {
                     <span className="flaticon-heart"></span>
                   </a>
                 </li>
-              </ul>
-
-              <Link href={`/listing-details-v1/${item.id}`}>
-                <a className="fp_price">
-                  ${item.price}
-                  <small>/mo</small>
-                </a>
-              </Link>
+              </ul> */}
+              <a className="fp_price">
+                ${item.price}
+                {/* <small>/mo</small> */}
+              </a>
             </div>
           </div>
 
@@ -180,7 +182,7 @@ const FeaturedItem = () => {
             <div className="tc_content">
               <p className="text-thm">{item.type}</p>
               <h4>
-                <Link href={`/listing-details-v2/${item.id}`}>
+                <Link href={`/listing-details-v2/${item._id}`}>
                   <a>{item.title}</a>
                 </Link>
               </h4>
@@ -190,33 +192,48 @@ const FeaturedItem = () => {
               </p>
 
               <ul className="prop_details mb0">
-                {item.itemDetails.map((val, i) => (
+                <li className="list-inline-item">
+                  <a href="#">
+                    Beds: {item.bedrooms}
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a href="#">
+                    Baths: {item.baths}
+                  </a>
+                </li>
+                <li className="list-inline-item">
+                  <a href="#">
+                    Sqft: {item.sqft}
+                  </a>
+                </li>
+                {/* {item.itemDetails.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">
                       {val.name}: {val.number}
                     </a>
                   </li>
-                ))}
+                ))} */}
               </ul>
             </div>
             {/* End .tc_content */}
 
             <div className="fp_footer">
               <ul className="fp_meta float-start mb0">
-                <li className="list-inline-item">
+                {/* <li className="list-inline-item">
                   <Link href="/agent-v2">
                     <a>
                       <img src={item.posterAvatar} alt="pposter1.png" />
                     </a>
                   </Link>
-                </li>
+                </li> */}
                 <li className="list-inline-item">
                   <Link href="/agent-v2">
                     <a>{item.posterName}</a>
                   </Link>
                 </li>
               </ul>
-              <div className="fp_pdate float-end">{item.postedYear}</div>
+              <div className="fp_pdate float-end">{item.posted}</div>
             </div>
             {/* End .fp_footer */}
           </div>
