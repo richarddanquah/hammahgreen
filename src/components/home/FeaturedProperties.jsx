@@ -32,14 +32,14 @@ const FeaturedProperties = ({ propertyListings }) => {
     ?.slice(0, 4)
     ?.reverse()
     ?.map((item) => (
-      <div className="item" key={item.id}>
+      <div className="item" key={item._id}>
         <div className="feat_property">
           <div className="thumb">
             <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
                 <li className="list-inline-item">
-                  <a href="#">{item.saleTag}</a>
+                  <a>{item.saleTag}</a>
                 </li>
                 {/* {item.saleTag.map((val, i) => (
                 <li className="list-inline-item" key={i}>
@@ -48,8 +48,8 @@ const FeaturedProperties = ({ propertyListings }) => {
               ))} */}
               </ul>
               {/* End .tag */}
-              
-            {/* <ul className="icon mb0">
+
+              {/* <ul className="icon mb0">
               <li className="list-inline-item">
                 <a href="#">
                   <span className="flaticon-transfer-1"></span>
@@ -63,12 +63,10 @@ const FeaturedProperties = ({ propertyListings }) => {
             </ul> */}
               {/* End .icon */}
 
-              <Link href={`/listing-details-v2/${item._id}`}>
-                <a className="fp_price">
-                  ${item.price}
-                  {/* <small>/mo</small> */}
-                </a>
-              </Link>
+              <a className="fp_price">
+                ${item.price}
+                {/* <small>/mo</small> */}
+              </a>
             </div>
           </div>
           {/* End .thumb */}
@@ -77,8 +75,8 @@ const FeaturedProperties = ({ propertyListings }) => {
             <div className="tc_content">
               <p className="text-thm">{item.type}</p>
               <h4>
-                <Link href={`/listing-details-v2/${item._id}`} >
-                <a>{item.title}</a>
+                <Link href={`/listing-details-v2/${item._id}`}>
+                  <a>{item.title}</a>
                 </Link>
               </h4>
               <p>
@@ -88,13 +86,13 @@ const FeaturedProperties = ({ propertyListings }) => {
 
               <ul className="prop_details mb0">
                 <li className="list-inline-item">
-                  <a href="#">Bedrooms: {item.bedrooms}</a>
+                  <a>Bedrooms: {item.bedrooms}</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">Bedrooms: {item.baths}</a>
+                  <a>Bedrooms: {item.baths}</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">Sqft: {item.sqft}</a>
+                  <a>Sqft: {item.sqft}</a>
                 </li>
                 {/* {item.itemDetails.map((val, i) => (
                 <li className="list-inline-item" key={i}>
@@ -117,9 +115,7 @@ const FeaturedProperties = ({ propertyListings }) => {
                 </Link> */}
                 </li>
                 <li className="list-inline-item">
-                  <Link href="/agent-v2">
-                    <a>{item.posterName}</a>
-                  </Link>
+                  <a>{item.posterName}</a>
                 </li>
               </ul>
               <div className="fp_pdate float-end">

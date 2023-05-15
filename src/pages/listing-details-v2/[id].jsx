@@ -12,6 +12,7 @@ import DetailsContent from "../../components/listing-details-v1/DetailsContent";
 import Sidebar from "../../components/listing-details-v1/Sidebar";
 import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
+import Image from "next/image";
 
 const ListingDynamicDetailsV2 = ({ listings }) => {
   const router = useRouter();
@@ -68,6 +69,14 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
                               src={property.mainImage}
                               alt={property.mainImage}
                             />
+                            {/* <Image
+                              className="img-fluid w100 cover lds-2"
+                              src={property.mainImage}
+                              alt={property.mainImage}
+                              // layout="fill"
+                              width={700}
+                              height={450}
+                            /> */}
                           </>
                         )}
                       </Item>
@@ -193,7 +202,7 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
 
 export default ListingDynamicDetailsV2;
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   console.log("CONNECTING TO DATABASE...");
   await connectDB();
   console.log("CONNECTED TO DATABASE ✔");
@@ -201,7 +210,7 @@ export async function getServerSideProps(context) {
   console.log("FETCHING Listing...");
   const listings = await Listing.find();
 
-  console.log(listings);
+  // console.log(listings);
 
   return {
     props: {

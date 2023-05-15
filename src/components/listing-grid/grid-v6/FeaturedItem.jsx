@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addLength } from "../../../features/properties/propertiesSlice";
 import properties from "../../../data/properties";
 
-const FeaturedItem = ({homes}) => {
+const FeaturedItem = ({ homes }) => {
   const {
     keyword,
     location,
@@ -139,16 +139,16 @@ const FeaturedItem = ({homes}) => {
             <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
-              <li className="list-inline-item">
-                    <a href="#">{item.saleTag}</a>
-                  </li>
+                <li className="list-inline-item">
+                  <a>{item.saleTag}</a>
+                </li>
                 {/* {item.saleTag.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">{val}</a>
                   </li>
                 ))} */}
               </ul>
-              <ul className="icon mb0">
+              {/* <ul className="icon mb0">
                 <li className="list-inline-item">
                   <a href="#">
                     <span className="flaticon-transfer-1"></span>
@@ -159,21 +159,19 @@ const FeaturedItem = ({homes}) => {
                     <span className="flaticon-heart"></span>
                   </a>
                 </li>
-              </ul>
+              </ul> */}
 
-              <Link href={`/listing-details-v1/${item.id}`}>
-                <a className="fp_price">
-                  ${item.price}
-                  {/* <small>/mo</small> */}
-                </a>
-              </Link>
+              <a className="fp_price">
+                ${item.price}
+                {/* <small>/mo</small> */}
+              </a>
             </div>
           </div>
           <div className="details">
             <div className="tc_content">
               <p className="text-thm">{item.type}</p>
               <h4>
-                <Link href={`/listing-details-v1/${item.id}`}>
+                <Link href={`/listing-details-v2/${item._id}`}>
                   <a>{item.title}</a>
                 </Link>
               </h4>
@@ -183,21 +181,15 @@ const FeaturedItem = ({homes}) => {
               </p>
 
               <ul className="prop_details mb0">
-              <li className="list-inline-item">
-                    <a href="#">
-                      Baths: {item.baths}
-                    </a>
-                  </li>
-              <li className="list-inline-item">
-                    <a href="#">
-                      Beds: {item.bedrooms}
-                    </a>
-                  </li>
-                  <li className="list-inline-item">
-                    <a href="#">
-                      Sqft: {item.sqft}
-                    </a>
-                  </li>
+                <li className="list-inline-item">
+                  <a>Baths: {item.baths}</a>
+                </li>
+                <li className="list-inline-item">
+                  <a>Beds: {item.bedrooms}</a>
+                </li>
+                <li className="list-inline-item">
+                  <a>Sqft: {item.sqft}</a>
+                </li>
                 {/* {item.itemDetails.map((val, i) => (
                   <li className="list-inline-item" key={i}>
                     <a href="#">
@@ -219,9 +211,7 @@ const FeaturedItem = ({homes}) => {
                   </Link> */}
                 </li>
                 <li className="list-inline-item">
-                  <Link href="/agent-v1">
                     <a>{item.posterName}</a>
-                  </Link>
                 </li>
               </ul>
               <div className="fp_pdate float-end">{item.posted}</div>

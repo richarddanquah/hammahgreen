@@ -137,7 +137,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
         className={`${
           isGridOrList ? "col-12 feature-list" : "col-md-6 col-lg-6"
         } `}
-        key={item.id}
+        key={item._id}
       >
         <div
           className={`feat_property home7 style4 ${
@@ -149,7 +149,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
             <div className="thmb_cntnt">
               <ul className="tag mb0">
                 <li className="list-inline-item">
-                  <a href="#">{item.saleTag}</a>
+                  <a>{item.saleTag}</a>
                 </li>
               </ul>
               {/* <ul className="tag mb0">
@@ -193,19 +193,13 @@ const FeaturedItem = ({ waterviewsListings }) => {
 
               <ul className="prop_details mb0">
                 <li className="list-inline-item">
-                  <a href="#">
-                    Beds: {item.bedrooms}
-                  </a>
+                  <a>Beds: {item.bedrooms}</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">
-                    Baths: {item.baths}
-                  </a>
+                  <a>Baths: {item.baths}</a>
                 </li>
                 <li className="list-inline-item">
-                  <a href="#">
-                    Sqft: {item.sqft}
-                  </a>
+                  <a>Sqft: {item.sqft}</a>
                 </li>
                 {/* {item.itemDetails.map((val, i) => (
                   <li className="list-inline-item" key={i}>
@@ -228,9 +222,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
                   </Link>
                 </li> */}
                 <li className="list-inline-item">
-                  <Link href="/agent-v2">
-                    <a>{item.posterName}</a>
-                  </Link>
+                  <a>{item.posterName}</a>
                 </li>
               </ul>
               <div className="fp_pdate float-end">{item.posted}</div>

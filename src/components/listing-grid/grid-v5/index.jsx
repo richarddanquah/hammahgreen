@@ -13,8 +13,8 @@ import FeaturedItem from "./FeaturedItem";
 import BannerImage from "../../common/BannerImage";
 import Link from "next/link";
 
-const index = ({waterviewsListings, listings}) => {
-  console.log(waterviewsListings);
+const Index = ({waterviewsListings, listings}) => {
+  // console.log(waterviewsListings);
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -144,4 +144,4 @@ const index = ({waterviewsListings, listings}) => {
   );
 };
 
-export default index;
+export default Index;
