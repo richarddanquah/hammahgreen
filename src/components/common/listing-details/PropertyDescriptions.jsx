@@ -7,7 +7,7 @@ const PropertyDescriptions = ({property}) => {
   return (
     <>
       <p className="mb25">
-        {property.description}
+        {property?.description}
       </p>
       {/* <p className={click ? "gpara second_para white_goverlay mt10 mb10" : ""}>
         Fully furnished. Elegantly appointed condominium unit situated on

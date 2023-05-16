@@ -22,9 +22,10 @@ export async function getServerSideProps(context) {
 
   console.log("FETCHING Listing...");
   const waterviewsListings = await Listing.find({ location: "Waterviews" });
-  // console.log(waterviewsListings);
+  console.log(waterviewsListings);
   console.log("FETCHING Listings");
   const listings = await Listing.find();
+  console.log(listings);
 
   return {
     props: {

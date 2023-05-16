@@ -2,6 +2,9 @@ import featureProContent from "../../../data/properties";
 import Slider from "react-slick";
 
 const FeatureProperties = ({ listings }) => {
+
+console.log(listings);
+
   const settings = {
     dots: true,
     arrows: false,
@@ -15,7 +18,7 @@ const FeatureProperties = ({ listings }) => {
   return (
     <>
       <Slider {...settings} arrows={false}>
-        {listings.slice(0, 5).map((item) => (
+        {listings?.slice(0, 5).map((item) => (
           <div className="item" key={item._id}>
             <div className="feat_property home7">
               <div className="thumb">
@@ -31,13 +34,10 @@ const FeatureProperties = ({ listings }) => {
                       <a href="#">{item.saleTag}</a>
                     </li>
                     {/* {item.saleTag.map((val, i) => (
-                                            <li
-                                                className="list-inline-item"
-                                                key={i}
-                                            >
-                                                <a href="#">{val}</a>
-                                            </li>
-                                        ))} */}
+                      <li className="list-inline-item" key={i}>
+                        <a href="#">{val}</a>
+                      </li>
+                    ))} */}
                   </ul>
                   <a className="fp_price" href="#">
                     ${item.price}
