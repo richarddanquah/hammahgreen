@@ -10,21 +10,32 @@ const Activities = () => {
       id: 2,
       icon: "flaticon-user-1",
       title: "Viewing Users",
-      tip: "Click the 'Create User' tab on the Sidebarmenu to navigate to this page and scroll down to view users. You can delete a user and notify client users there.",
+      tip: "Click the 'Create User' tab on the Sidebarmenu to navigate to this page and scroll down to view users. You can delete a user and notify client users on there.",
     },
     {
       id: 3,
       icon: "flaticon-plus",
       title: "Creating A Property Listing",
-      tip: "Click the 'Create Listing' tab on the Sidebarmenu to navigate to this page and create a listing. Or just click on the button at the top right conner of the Top navigation bar.",
+      tip: "Click the 'Create Listing' tab on the Sidebarmenu to navigate to this page and create a listing. Or just click on the button at the far right of the Top navigation bar.",
     },
     {
       id: 4,
       icon: "flaticon-edit",
       title: "Editing A Property Listing",
-      tip: "Click the 'Properties' tab on the Sidebarmenu, then click 'All Property Listings' to navigate to that page. ",
+      tip: "Click the 'Properties' tab on the Sidebarmenu, then click 'All Property Listings' to navigate to that page. Then click on the edit action of the property you want to edit.",
     },
-
+    {
+      id: 5,
+      icon: "flaticon-edit",
+      title: "Editing A Property Listing Image",
+      tip: "To edit a Listing Image click 'Upload Image', select an image file, click the green button that says 'Update listing image' and finally wait for a response.",
+    },
+    {
+      id: 6,
+      icon: "flaticon-edit",
+      title: "Editing A Property Listing's Details",
+      tip: "To edit a Listing's details make the neccessary changes in the field(s) of choice and then click 'Update'",
+    },
   ];
 
   return (

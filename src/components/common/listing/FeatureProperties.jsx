@@ -1,9 +1,9 @@
 import featureProContent from "../../../data/properties";
 import Slider from "react-slick";
+import Link from "next/link";
 
 const FeatureProperties = ({ listings }) => {
-
-console.log(listings);
+  console.log(listings);
 
   const settings = {
     dots: true,
@@ -31,7 +31,7 @@ console.log(listings);
                 <div className="thmb_cntnt">
                   <ul className="tag mb0">
                     <li className="list-inline-item">
-                      <a href="#">{item.saleTag}</a>
+                      <a>{item.saleTag}</a>
                     </li>
                     {/* {item.saleTag.map((val, i) => (
                       <li className="list-inline-item" key={i}>
@@ -39,11 +39,16 @@ console.log(listings);
                       </li>
                     ))} */}
                   </ul>
-                  <a className="fp_price" href="#">
+                  <a className="fp_price">
                     ${item.price}
                     {/* <small>/mo</small> */}
                   </a>
-                  <h4 className="posr color-white">{item.title}</h4>
+                  <h4 className="posr">
+                    <Link href="/#feature-property">
+                     <a className="text-white">{item.title}</a>
+                     
+                    </Link>
+                  </h4>
                 </div>
               </div>
             </div>

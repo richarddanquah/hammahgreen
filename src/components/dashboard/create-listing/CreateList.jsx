@@ -43,7 +43,7 @@ const CreateList = () => {
     };
 
     const data = {
-      mainImg:`/assets/images/property/${file.name}`,
+      mainImg: `/assets/images/property/${file.name}`,
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,
@@ -53,6 +53,9 @@ const CreateList = () => {
       bedrooms: event.target.bedrooms.value,
       baths: event.target.baths.value,
       sqft: event.target.sqft.value,
+      amenities: event.target.amenities.value,
+      built: event.target.built.value,
+      featured: event.target.featured.value,
       garages: event.target.garages.value,
       postername: event.target.postername.value,
       posted: event.target.posted.value,
@@ -102,10 +105,10 @@ const CreateList = () => {
 
   return (
     <>
-      <form 
-      onSubmit={handleSubmit} 
-      encType="multipart/form-data"
-      className="p20 border rounded-2 shadow-sm"
+      <form
+        onSubmit={handleSubmit}
+        encType="multipart/form-data"
+        className="p20 border rounded-2 shadow-sm"
       >
         <div className="col-lg-12">
           <div className="wrap-custom-file2">
@@ -131,7 +134,7 @@ const CreateList = () => {
               </span>
             </label>
           </div>
-          <p style={{fontSize: "11px"}}>*minimum 752 x 450</p>
+          <p style={{ fontSize: "11px" }}>*minimum 752 x 450</p>
         </div>
 
         <br />
@@ -340,6 +343,68 @@ const CreateList = () => {
                 data-live-search="true"
                 data-width="100%"
                 name="garages"
+                required
+              >
+                <option data-tokens="Yes">Yes</option>
+                <option data-tokens="No">No</option>
+              </select>
+            </div>
+          </div>
+        </div>
+          {/* End .col */}
+
+        <div className="row">
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <label>Amenities</label>
+              <select
+                className="selectpicker form-select"
+                data-live-search="true"
+                data-width="100%"
+                name="amenities"
+                required
+              >
+                <option data-tokens="Air-conditioning">Air-conditioning</option>
+                <option data-tokens="Barbeque">Barbeque</option>
+                <option data-tokens="Gym">Gym</option>
+                <option data-tokens="Tv-cable">Tv-cable</option>
+                <option data-tokens="Lawn">Lawn</option>
+                <option data-tokens="Swimming-pool">Swimming-pool</option>
+                <option data-tokens="n/a">n/a</option>
+              </select>
+            </div>
+          </div>
+          {/* End .col */}
+
+
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="formGroupExamplePrice">Built</label>
+              <input
+                type="number"
+                name="built"
+                min="2018"
+                className="form-control"
+                id="formGroupExamplePrice"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <i
+                style={{fontSize: "13px"}}
+                className="fa fa-info-circle"
+                title="Select 'Yes' to show as a Featured Property listing"
+              ></i>
+              &nbsp;
+              <label>Featured</label>
+              <select
+                className="selectpicker form-select"
+                data-live-search="true"
+                data-width="100%"
+                name="featured"
                 required
               >
                 <option data-tokens="Yes">Yes</option>

@@ -15441,8 +15441,12 @@ legend span {
 
 /*== Color Area ==*/
 .img-whp {
+  /* background-image: url("../images/background/winneba-city.png"); */
+  /* background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; */
   width: 100% !important;
-  height: 10vh;
+  height: 40vh;
 }
 
 .text-thm {

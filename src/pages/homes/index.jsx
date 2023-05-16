@@ -25,7 +25,7 @@ export async function getServerSideProps(context) {
   const homes = await Listing.find({ type: "House" });
   // console.log(homes);
   console.log("FETCHING Listings");
-  const listings = await Listing.find({});
+  const listings = await Listing.find({featured: "Yes"});
   console.log(listings);
 
   return {

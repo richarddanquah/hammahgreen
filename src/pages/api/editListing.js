@@ -15,6 +15,9 @@ export default async function handler(req, res) {
       bedrooms,
       baths,
       sqft,
+      amenities,
+      built,
+      featured,
       garages,
       postername,
       posted,
@@ -40,6 +43,9 @@ export default async function handler(req, res) {
           bedrooms: bedrooms,
           baths: baths,
           sqft: sqft,
+          amenities: amenities,
+          built: built,
+          featured: featured,
           posterName: postername,
           posted: posted,
         }
@@ -47,6 +53,7 @@ export default async function handler(req, res) {
       console.log(updatedListing);
       console.log("LISTING DOCUMENT UPDATED SUCCESSFULLY ✔");
       return res.status(200).send({ updatedListing });
+    
     } catch (error) {
       console.log(error);
       return res.status(500).send({ error });

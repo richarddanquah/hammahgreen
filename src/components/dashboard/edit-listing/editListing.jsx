@@ -55,6 +55,9 @@ const EditListing = ({ theListing }) => {
       bedrooms: event.target.bedrooms.value,
       baths: event.target.baths.value,
       sqft: event.target.sqft.value,
+      amenities: event.target.amenities.value,
+      built: event.target.built.value,
+      featured: event.target.featured.value,
       garages: event.target.garages.value,
       postername: event.target.postername.value,
       posted: event.target.posted.value,
@@ -430,6 +433,71 @@ const EditListing = ({ theListing }) => {
                 <option data-tokens={theListing.garages}>
                   {theListing.garages}
                 </option>
+                <option data-tokens="Yes">Yes</option>
+                <option data-tokens="No">No</option>
+              </select>
+            </div>
+          </div>
+          {/* End .col */}
+        </div>
+
+        <div className="row">
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <label>Amenities</label>
+              <select
+                className="selectpicker form-select"
+                data-live-search="true"
+                data-width="100%"
+                name="amenities"
+                required
+              >
+                <option data-tokens={theListing.amenities}>{theListing.amenities}</option>
+                <option data-tokens="Air-conditioning">Air-conditioning</option>
+                <option data-tokens="Barbeque">Barbeque</option>
+                <option data-tokens="Gym">Gym</option>
+                <option data-tokens="Tv-cable">Tv-cable</option>
+                <option data-tokens="Lawn">Lawn</option>
+                <option data-tokens="Swimming-pool">Swimming-pool</option>
+                <option data-tokens="n/a">n/a</option>
+              </select>
+            </div>
+          </div>
+          {/* End .col */}
+
+
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="formGroupExamplePrice">Built</label>
+              <input
+                type="number"
+                name="built"
+                min="2018"
+                defaultValue={theListing.built}
+                className="form-control"
+                id="formGroupExamplePrice"
+                required
+              />
+            </div>
+          </div>
+
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <i
+                style={{fontSize: "13px"}}
+                className="fa fa-info-circle"
+                title="Select 'Yes' to show as a Featured Property listing"
+              ></i>
+              &nbsp;
+              <label>Featured</label>
+              <select
+                className="selectpicker form-select"
+                data-live-search="true"
+                data-width="100%"
+                name="featured"
+                required
+              >
+                <option data-tokens={theListing.featured}>{theListing.featured}</option>
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
               </select>

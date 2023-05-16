@@ -49,16 +49,16 @@ const TableData = ({ Listings }) => {
     "Date published",
     "Sale Tag",
     "Posted By",
-    "Action",
+    "Actions",
   ];
 
- console.log(Listings);
+  console.log(Listings);
 
-  let tbodyContent = Listings?.slice(0, 20)?.map((item) => (
+  let tbodyContent = Listings?.slice(0, 20).reverse().map((item) => (
     <tr key={item.id}>
       <td scope="row">
         <div className="feat_property list favorite_page style2">
-          <div style={{marginTop: "20px"}} className="thumb">
+          <div style={{ marginTop: "20px" }} className="thumb">
             <img className="img-whp cover" src={item.mainImage} alt="fp1.jpg" />
             {/* <div className="thmb_cntnt">
               <ul className="tag mb0">
@@ -87,13 +87,21 @@ const TableData = ({ Listings }) => {
             </div>
           </div>
         </div>
+        <p
+          className="pr30"
+          style={{
+            textAlign: "justify",
+            fontSize: "13px",
+            color: "#000",
+            lineHeight: "normal",
+          }}
+        >
+          {item.description.slice(0, 300) + "..."}
+        </p>
       </td>
       {/* End td */}
 
       <td style={{ lineHeight: "normal" }}>
-        <p style={{ color: "#000" }}>
-          <b>{item.description}</b>
-        </p>
         <span style={{ fontSize: "12px" }}>
           <b>Bedrooms</b> • {item.bedrooms}
         </span>
@@ -110,6 +118,17 @@ const TableData = ({ Listings }) => {
           <b>Sqft</b> • {item.sqft}
         </span>
         <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Amenities</b> • {item.amenities}
+        </span>
+        <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Built</b> • {item.built}
+        </span>
+        <br />
+        <span style={{ fontSize: "12px" }}>
+          <b>Featured</b> • {item.featured}
+        </span>
       </td>
 
       <td style={{ lineHeight: "normal" }}>
@@ -194,7 +213,7 @@ const TableData = ({ Listings }) => {
         <thead className="thead-light">
           <tr>
             {theadConent.map((value, i) => (
-              <th style={{lineHeight: "normal"}} scope="col" key={i}>
+              <th style={{ lineHeight: "normal" }} scope="col" key={i}>
                 {value}
               </th>
             ))}

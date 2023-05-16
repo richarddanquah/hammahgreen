@@ -16,6 +16,9 @@ const listingSchema = new Schema({
   bedrooms: String,
   baths: String,
   sqft: String,
+  amenities: String, //new
+  built: String, //new
+  featured: String, //new
   posterName: String,
   posted: String,
 });

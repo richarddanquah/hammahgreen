@@ -35,9 +35,9 @@ export async function getServerSideProps(context) {
       console.log("FETCHED USER SUCCESSFULLY ✔");
       // console.log(user[0]);
 
-      console.log("FETCHING Listing...");
-      const listing = await Listing.find();
-      // console.log(listing);
+      console.log("FETCHING Featured Listings...");
+      const listing = await Listing.find({featured: "Yes"});
+      console.log(listing);
 
       return {
         props: {
@@ -51,8 +51,8 @@ export async function getServerSideProps(context) {
       await connectDB();
       console.log("CONNECTED TO DATABASE ✔");
 
-      console.log("FETCHING Listing...");
-      const listing = await Listing.find();
+      console.log("FETCHING Featured Listings...");
+      const listing = await Listing.find({featured: "Yes"});
       // console.log(listing);
 
       return {

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Slider from "react-slick";
 import properties from "../../data/properties";
+import Image from "next/image";
 
 const FeaturedProperties = ({ propertyListings }) => {
   const settings = {
@@ -29,13 +30,15 @@ const FeaturedProperties = ({ propertyListings }) => {
   };
 
   let content = propertyListings
-    ?.slice(0, 4)
+    ?.slice(0, 5)
     ?.reverse()
     ?.map((item) => (
       <div className="item" key={item._id}>
         <div className="feat_property">
           <div className="thumb">
-            <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
+          {/* <div style={{"backgroundImage": url({{item.mainImage}}) }} className="img-whp">
+          </div> */}
+            <img className="img-whp" src={item.mainImage} alt="fpimg.jpg" />
             <div className="thmb_cntnt">
               <ul className="tag mb0">
                 <li className="list-inline-item">
