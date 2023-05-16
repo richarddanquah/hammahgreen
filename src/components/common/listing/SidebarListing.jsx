@@ -13,12 +13,12 @@ const SidebarListing = ({listings}) => {
             </div>
             {/* End .sidebar_listing_list */}
 
-            {/* <div className="terms_condition_widget">
+            <div className="terms_condition_widget">
                 <h4 className="title">Featured Properties</h4>
                 <div className="sidebar_feature_property_slider">
                     <FeatureProperties listings={listings} />
                 </div>
-            </div> */}
+            </div>
             {/* End .Featured Properties */}
 
             {/* <div className="terms_condition_widget">

@@ -66,8 +66,8 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
                             </div>
                             <img
                               className="img-fluid w100 cover lds-2"
-                              src={property.mainImage}
-                              alt={property.mainImage}
+                              src={property?.mainImage}
+                              alt={property?.mainImage}
                             />
                             {/* <Image
                               className="img-fluid w100 cover lds-2"
@@ -154,13 +154,13 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
             <div className="col-md-12 col-lg-8">
               <div className="listing_single_description2 mt30-767 mb30-767">
                 <div className="single_property_title">
-                  <h2>{property.title}</h2>
-                  <p>{property.location}</p>
+                  <h2>{property?.title}</h2>
+                  <p>{property?.location}</p>
                 </div>
                 <div className="single_property_social_share style2 static-title">
                   <div className="price">
                     <h2>
-                      ${property.price}
+                      ${property?.price}
                       {/* <small>/mo</small> */}
                     </h2>
                   </div>
