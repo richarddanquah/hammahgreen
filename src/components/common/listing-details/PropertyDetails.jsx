@@ -44,11 +44,11 @@ const PropertyDetails = ({ property }) => {
               Garage : <span>{property?.garages}</span>
             </p>
           </li>
-          {/* <li>
+          <li>
             <p>
-              Garage Size : <span>200 SqFt</span>
+              Amenities : <span>{property?.amenities}</span>
             </p>
-          </li> */}
+          </li>
         </ul>
       </div>
       {/* End .col */}
@@ -58,6 +58,11 @@ const PropertyDetails = ({ property }) => {
           <li>
             <p>
               Property Type : <span>{property?.type}</span>
+            </p>
+          </li>
+          <li>
+            <p>
+              Built : <span>{property?.built}</span>
             </p>
           </li>
           <li>

@@ -34,7 +34,7 @@ export default async function handler(req, res) {
 
     const base64Image = fileData.split(";base64,").pop();
 
-    // Set the file path to the uploads directory
+     // Specify the desired folder where files will be saved
     const filePath = path.join(
       __dirname,
       "../../../../public/assets/images/property/",

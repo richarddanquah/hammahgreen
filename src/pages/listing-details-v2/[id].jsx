@@ -69,14 +69,6 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
                               src={property?.mainImage}
                               alt={property?.mainImage}
                             />
-                            {/* <Image
-                              className="img-fluid w100 cover lds-2"
-                              src={property.mainImage}
-                              alt={property.mainImage}
-                              // layout="fill"
-                              width={700}
-                              height={450}
-                            /> */}
                           </>
                         )}
                       </Item>
@@ -88,7 +80,7 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
 
               <div className="col-md-6 col-lg-6 position-relative">
                 <div className="row g-0 gx-0">
-                  {/* {property?.imgList2?.map((val, i) => (
+                  {property?.imgList?.map((val, i) => (
                     <div className="col-6 col-lg-6 " key={i}>
                       <div className="spls_style_one">
                         <Item
@@ -109,7 +101,7 @@ const ListingDynamicDetailsV2 = ({ listings }) => {
                         </Item>
                       </div>
                     </div>
-                  ))} */}
+                  ))}
                 </div>
                 {/* End .row */}
 

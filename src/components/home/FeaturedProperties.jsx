@@ -36,7 +36,7 @@ const FeaturedProperties = ({ propertyListings }) => {
       <div className="item" key={item._id}>
         <div className="feat_property">
           <div className="thumb">
-          {/* <div style={{"backgroundImage": url({{item.mainImage}}) }} className="img-whp">
+            {/* <div style={{"backgroundImage": url({{item.mainImage}}) }} className="img-whp">
           </div> */}
             <img className="img-whp" src={item.mainImage} alt="fpimg.jpg" />
             <div className="thmb_cntnt">
@@ -44,6 +44,11 @@ const FeaturedProperties = ({ propertyListings }) => {
                 <li className="list-inline-item">
                   <a>{item.saleTag}</a>
                 </li>
+                {item.featured === "Yes" && (
+                  <li className="list-inline-item">
+                    <a>Featured</a>
+                  </li>
+                )}
                 {/* {item.saleTag.map((val, i) => (
                 <li className="list-inline-item" key={i}>
                   <a href="#">{val}</a>

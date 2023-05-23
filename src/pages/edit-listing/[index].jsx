@@ -7,14 +7,7 @@ import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
 
 
-let listingID;
-
 const Index = ({ theListing }) => {
-  const route = useRouter();
-  listingID = route.query.index;
-
-  console.log(listingID);
-
   return (
     <>
       <Seo pageTitle="Edit Listing" />

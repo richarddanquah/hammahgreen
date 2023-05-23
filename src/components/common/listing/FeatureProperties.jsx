@@ -33,6 +33,11 @@ const FeatureProperties = ({ listings }) => {
                     <li className="list-inline-item">
                       <a>{item.saleTag}</a>
                     </li>
+                    {item.featured === "Yes" && (
+                      <li className="list-inline-item">
+                      <a>Featured</a>
+                    </li>
+                    )}
                     {/* {item.saleTag.map((val, i) => (
                       <li className="list-inline-item" key={i}>
                         <a href="#">{val}</a>

@@ -15,35 +15,6 @@ const EditListing = ({ theListing }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-
-    // // Get selected file
-    // const file = mainImg;
-    // // console.log(file);
-
-    // if (!file) {
-    //   alert("Please select an image file.");
-    //   return;
-    // }
-
-    // // create a new FileReader object
-    // const reader = new FileReader();
-
-    // // read the file as a data URL
-    // reader.readAsDataURL(file);
-
-    // // when the file is loaded, send it to the server
-    // reader.onload = () => {
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open("POST", "/api/uploadListingImg");
-    //   xhr.setRequestHeader("Content-Type", "application/json");
-    //   xhr.send(
-    //     JSON.stringify({
-    //       filename: file.name,
-    //       data: reader.result,
-    //     })
-    //   );
-    // };
-
     const data = {
       id: event.target.propertyid.value,
       title: event.target.title.value,

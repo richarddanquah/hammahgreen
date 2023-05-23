@@ -21,6 +21,7 @@ const listingSchema = new Schema({
   featured: String, //new
   posterName: String,
   posted: String,
+  imgList: Array,
 });
 
 const Listing = models.Listing || model("Listing", listingSchema);

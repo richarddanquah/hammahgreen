@@ -487,8 +487,9 @@ const HeaderMenuContent = ({ float = "" }) => {
                     : "/assets/images/profileImgs/avatar.png"
                 }
                 alt="e1.png"
-                width={40}
+                width={35}
               />
+              &nbsp;
               <span className="dn-1199 ms-1">{session.user.name}</span>
               &nbsp;
               <span className="fa fa-angle-down"></span>

@@ -13933,7 +13933,7 @@ legend span {
 }
 
 .portfolio_upload .icon {
-  color: var(--color-primary);
+  color: #A78C33;
   font-size: 48px;
   margin-top: 50px;
   -webkit-transform: rotate(180deg);
@@ -13943,7 +13943,7 @@ legend span {
 }
 
 .portfolio_upload p {
-  font-size: 22px;
+  font-size: 15px;
   font-family: "Nunito";
   color: rgb(72, 72, 72);
   font-weight: bold;

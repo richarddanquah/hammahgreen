@@ -2,6 +2,7 @@ import Header from "../../common/header/dashboard/Header";
 import SidebarMenu from "../../common/header/dashboard/SidebarMenu";
 import MobileMenu from "../../common/header/MobileMenu";
 import EditListing from "./editListing";
+import PropertyMediaUploader from "../create-listing/PropertyMediaUploader";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
@@ -85,12 +86,12 @@ const Index = ({ theListing }) => {
                     <DetailedInfo />
                   </div> */}
 
-                  {/* <div className="my_dashboard_review mt30">
+                  <div className="my_dashboard_review mt30">
                     <div className="col-lg-12">
                       <h3 className="mb30">Property media</h3>
                     </div>
-                    <PropertyMediaUploader />
-                  </div> */}
+                    <PropertyMediaUploader/>
+                  </div>
 
                   {/* <div className="my_dashboard_review mt30">
                     <div className="col-lg-12">
