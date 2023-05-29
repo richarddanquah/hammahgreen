@@ -97,7 +97,8 @@ const CreateList = () => {
       alert(
         `${returnedData.title} listing created successfully. Go My Properties to see all listings`
       );
-      window.location.reload();
+      window.location.replace("/my-properties");
+      // window.location.reload();
     } else if (returnedError) {
       alert('The "title" of your listing already exists.');
     }
@@ -116,7 +117,7 @@ const CreateList = () => {
               type="file"
               id="main_Img"
               name="main_Image"
-              accept=".png, .jpg, .jpeg"
+              accept="image/*"
               onChange={uploadMainImg}
             />
             <label
