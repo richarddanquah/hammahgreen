@@ -233,7 +233,7 @@ const CreateList = () => {
               >
                 <option data-tokens="Waterviews">Waterviews</option>
                 <option data-tokens="Winneba Estates">Winneba Estates</option>
-                <option data-tokens="The heights">The heights</option>
+                <option data-tokens="The Heights">The Heights</option>
               </select>
             </div>
           </div>
