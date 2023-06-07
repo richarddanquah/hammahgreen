@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
+import axios from "axios";
 
 const CreateList = () => {
   const [mainImg, setMainImg] = useState(null);
@@ -8,6 +9,7 @@ const CreateList = () => {
   // upload main Image
   const uploadMainImg = (e) => {
     setMainImg(e.target.files[0]);
+    console.log(e.target.files[0]);
   };
 
   const handleSubmit = async (event) => {
@@ -22,27 +24,44 @@ const CreateList = () => {
       return;
     }
 
-    // create a new FileReader object
-    const reader = new FileReader();
+    // Make a POST request to API route
+    const { data } = await axios.post("/api/uploadListingImg", {
+      name: file.name,
+      type: file.type,
+    });
 
-    // read the file as a data URL
-    reader.readAsDataURL(file);
+    // Fetch out URL
+    const url = data.url;
 
-    // when the file is loaded, send it to the server
-    reader.onload = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/api/uploadListingImg");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          filename: file.name,
-          data: reader.result,
-        })
-      );
-      console.log(reader);
-    };
+    await axios.put(url, file, {
+      headers: {
+        "Content-Type": file.type,
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
+    ////////////////////////////////////
 
-    const data = {
+    // // create a new FileReader object
+    // const reader = new FileReader();
+
+    // // read the file as a data URL
+    // reader.readAsDataURL(file);
+
+    // // when the file is loaded, send it to the server
+    // reader.onload = () => {
+    //   const xhr = new XMLHttpRequest();
+    //   xhr.open("POST", "/api/uploadListingImg");
+    //   xhr.setRequestHeader("Content-Type", "application/json");
+    //   xhr.send(
+    //     JSON.stringify({
+    //       filename: file.name,
+    //       data: reader.result,
+    //     })
+    //   );
+    //   // console.log(reader);
+    // };
+
+    const allData = {
       mainImg: `/assets/images/property/${file.name}`,
       title: event.target.title.value,
       description: event.target.description.value,
@@ -61,47 +80,47 @@ const CreateList = () => {
       posted: event.target.posted.value,
     };
 
-    console.log(data);
+    console.log(allData);
 
-    // Send the data to the server in JSON format.
-    const JSONdata = JSON.stringify(data);
+    // // Send the data to the server in JSON format.
+    // const JSONdata = JSON.stringify(allData);
 
-    // API endpoint where we send form data.
-    const endpoint = "/api/addListing";
+    // // API endpoint where we send form data.
+    // const endpoint = "/api/addListing";
 
-    // Form the request for sending data to the server.
-    const options = {
-      // The method is POST because we are sending data.
-      method: "POST",
-      // Tell the server we're sending JSON.
-      headers: {
-        "Content-Type": "application/json",
-      },
-      // Body of the request is the JSON data we created above.
-      body: JSONdata,
-    };
+    // // Form the request for sending data to the server.
+    // const options = {
+    //   // The method is POST because we are sending data.
+    //   method: "POST",
+    //   // Tell the server we're sending JSON.
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   // Body of the request is the JSON data we created above.
+    //   body: JSONdata,
+    // };
 
-    // Send the form data to our forms API and get a response.
-    const response = await fetch(endpoint, options);
+    // // Send the form data to our forms API and get a response.
+    // const response = await fetch(endpoint, options);
 
-    // Get the response data from server as JSON.
-    // If server returns the name submitted, that means the form works.
-    const result = await response.json();
+    // // Get the response data from server as JSON.
+    // // If server returns the name submitted, that means the form works.
+    // const result = await response.json();
 
-    const returnedData = result.listingCreated;
-    const returnedError = result.error;
-    console.log(returnedError);
-    console.log(returnedData);
+    // const returnedData = result.listingCreated;
+    // const returnedError = result.error;
+    // console.log(returnedError);
+    // console.log(returnedData);
 
-    if (returnedData) {
-      alert(
-        `${returnedData.title} listing created successfully. Go My Properties to see all listings`
-      );
-      window.location.replace("/my-properties");
-      // window.location.reload();
-    } else if (returnedError) {
-      alert('The "title" of your listing already exists.');
-    }
+    // if (returnedData) {
+    //   alert(
+    //     `${returnedData.title} listing created successfully. Go My Properties to see all listings`
+    //   );
+    //   window.location.replace("/my-properties");
+    //   // window.location.reload();
+    // } else if (returnedError) {
+    //   alert('The "title" of your listing already exists.');
+    // }
   };
 
   return (
@@ -352,7 +371,7 @@ const CreateList = () => {
             </div>
           </div>
         </div>
-          {/* End .col */}
+        {/* End .col */}
 
         <div className="row">
           <div className="col-lg-3 col-xl-3">
@@ -377,7 +396,6 @@ const CreateList = () => {
           </div>
           {/* End .col */}
 
-
           <div className="col-lg-3 col-xl-3">
             <div className="my_profile_setting_input form-group">
               <label htmlFor="formGroupExamplePrice">Built</label>
@@ -395,7 +413,7 @@ const CreateList = () => {
           <div className="col-lg-3 col-xl-3">
             <div className="my_profile_setting_input ui_kit_select_search form-group">
               <i
-                style={{fontSize: "13px"}}
+                style={{ fontSize: "13px" }}
                 className="fa fa-info-circle"
                 title="Select 'Yes' to show as a Featured Property listing"
               ></i>
