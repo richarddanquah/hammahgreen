@@ -19850,3 +19850,7 @@ button.gm-ui-hover-effect:focus {
 .pro-sidebar .pro-menu a.ui-active {
   color: #A78C33 !important;
 }
+
+.toast-container {
+  z-index: 100;
+}

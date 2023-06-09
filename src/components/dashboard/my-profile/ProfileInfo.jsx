@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { uploadToS3 } from "../../../lib/s3Utils";
+import { v1 } from "uuid";
 
 const ProfileInfo = ({ theUser }) => {
   const [profile, setProfile] = useState(null);
+  const UUIDv1 = v1();
 
   // upload profile
   const uploadProfile = (e) => {
     setProfile(e.target.files[0]);
-    // console.log(e.target.files[0]);
+    console.log(e.target.files[0]);
   };
 
   const handleSubmit = async function (e) {
@@ -69,6 +72,7 @@ const ProfileInfo = ({ theUser }) => {
 
     if (returnedData) {
       alert(`Your profile info has been updated successfully.`);
+      window.location.reload();
     } else if (returnedError) {
       alert("Something went wrong... Please try again");
     }
@@ -88,40 +92,45 @@ const ProfileInfo = ({ theUser }) => {
 
     const ID = e.target.userId.value;
 
-    // create a new FileReader object
-    const reader = new FileReader();
+    const url = await uploadToS3(UUIDv1 + file.name, file);
 
-    // read the file as a data URL
-    reader.readAsDataURL(file);
-
-    // when the file is loaded, send it to the server
-    reader.onload = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/api/uploadProfileImg");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          filename: file.name,
-          data: reader.result,
-          userId: ID,
-        })
-      );
-
-      xhr.onreadystatechange = async () => {
-        if (xhr.readyState === 4) {
-          const result = await xhr.response;
-          console.log(result);
-          if (result === "Body exceeded 1mb limit") {
-            alert("The image exceeds the 1mb limit");
-          } else {
-            alert(
-              "Profile image updated successfully. Signout and sign back in to view changes."
-            );
-            location.reload(true);
-          }
-        }
-      };
+    const uploadData = {
+      userId: ID,
+      userImgUrl: url,
     };
+
+    console.log(uploadData);
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(uploadData);
+
+    // API endpoint where we send form data.
+    const endpoint = "/api/uploadProfileImg";
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: "POST",
+      // Tell the server we're sending JSON.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
+
+    // Send the form data to our forms API and get a response.
+    const response = await fetch(endpoint, options);
+
+    console.log(response);
+
+    if (response.status === 200) {
+      alert("Your profile photo has been successfully updated, and will be visible the next time you signin.");
+      window.location.reload();
+    } else {
+      alert("Something went wrong. Try again.");
+    }
+
   };
 
   return (
@@ -184,7 +193,7 @@ const ProfileInfo = ({ theUser }) => {
             <br />
             <button
               type="submit"
-              className="shadow-sm btn btn-success rounded-4"
+              className="shadow-sm btn btn-success"
             >
               Update profile photo &nbsp; <i className="fa fa-save"></i>
             </button>

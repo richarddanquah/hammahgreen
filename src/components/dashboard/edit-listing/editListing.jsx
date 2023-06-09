@@ -1,11 +1,21 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { uploadToS3 } from "../../../lib/s3Utils";
+import Link from "next/link";
+import { v1 } from "uuid";
 
 const EditListing = ({ theListing }) => {
   const [mainImg, setMainImg] = useState(null);
+  const [updatingText, setUpdatingText] = useState("");
+  const [updatingImg, setUpdatingImg] = useState("");
+  // const [forImgUpdateError, setForImgUpdateError] = useState();
+  const [successToast, setSuccessToast] = useState("none");
+  const [errorToast, setErrorToast] = useState("none");
   const { data: session } = useSession();
   const router = useRouter();
+  const UUIDv1 = v1();
+
   // console.log(theListing);
 
   // upload main Image
@@ -15,6 +25,7 @@ const EditListing = ({ theListing }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setUpdatingText("true");
     const data = {
       id: event.target.propertyid.value,
       title: event.target.title.value,
@@ -34,7 +45,7 @@ const EditListing = ({ theListing }) => {
       posted: event.target.posted.value,
     };
 
-    console.log(data);
+    // console.log(data);
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data);
@@ -67,16 +78,20 @@ const EditListing = ({ theListing }) => {
     console.log(returnedData);
 
     if (returnedData) {
-      alert(`${returnedData.title} listing updated successfully.`);
-      window.location.replace("/my-properties");
+      setSuccessToast("block");
+      setUpdatingText("");
+      // alert(`${returnedData.title} listing updated successfully.`);
+      // window.location.replace("/my-properties");
     } else if (returnedError) {
-      alert('The "title" of your listing already exists.');
+      setErrorToast("block");
+      setUpdatingText("");
+      // alert('The "title" of your listing already exists.');
     }
   };
 
   const handleUpload = async function (e) {
     e.preventDefault();
-
+    setUpdatingImg("true");
     // Get selected file
     const file = mainImg;
     // console.log(file);
@@ -89,43 +104,55 @@ const EditListing = ({ theListing }) => {
     const ID = e.target.propertyid.value;
     // console.log(ID);
 
-    // create a new FileReader object
-    const reader = new FileReader();
+    const url = await uploadToS3(UUIDv1 + file.name, file);
 
-    // read the file as a data URL
-    reader.readAsDataURL(file);
-
-    // when the file is loaded, send it to the server
-    reader.onload = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/api/uploadPropertyImg");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          filename: file.name,
-          data: reader.result,
-          propertyId: ID,
-        })
-      );
-
-      xhr.onreadystatechange = async () => {
-        if (xhr.readyState === 4) {
-          const result = await xhr.response;
-          console.log(result);
-          if (result === "Body exceeded 1mb limit") {
-            alert("The image exceeds the 1mb limit");
-          } else {
-            alert("Listing image updated successfully");
-            window.location.replace("/my-properties");
-          }
-        }
-      };
+    const uploadData = {
+      propertyId: ID,
+      imgUrl: url,
     };
+
+    console.log(uploadData);
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(uploadData);
+
+    // API endpoint where we send form data.
+    const endpoint = "/api/editListingImg";
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: "POST",
+      // Tell the server we're sending JSON.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
+
+    // Send the form data to our forms API and get a response.
+    const response = await fetch(endpoint, options);
+
+    console.log(response);
+
+    if (response.status === 200) {
+      setUpdatingImg("");
+      setUpdatingImg("success");
+      window.location.replace("/my-properties");
+      // alert(`Listing Image updated successfully`);
+    } else {
+      setUpdatingImg("error");
+      // alert("Something went wrong. Try again.");
+    }
   };
 
   return (
     <>
-      <form onSubmit={handleUpload} className="mb50 rounded-4 shadow-sm p20 bg-white border">
+      <form
+        onSubmit={handleUpload}
+        className="mb50 rounded-4 shadow-sm p20 bg-white border"
+      >
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
@@ -176,15 +203,38 @@ const EditListing = ({ theListing }) => {
         {mainImg && (
           <>
             <div className="text-center mt10">
-              <button type="submit" className="btn btn-success btn-sm w-50 rounded-5">
-                 Update listing image {/* &nbsp; <i className="fa fa-save"></i> */}
-              </button>
+              {updatingImg === "" && (
+                <button
+                  type="submit"
+                  className="btn btn-success btn-sm w-50 rounded-5"
+                >
+                  Update listing image
+                </button>
+              )}
+
+              {updatingImg === "true" && (
+                <button
+                  type="button"
+                  className="btn btn-success btn-sm w-50 rounded-5"
+                  disabled
+                >
+                  <span
+                    className="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp; Updating...
+                </button>
+              )}
             </div>
           </>
         )}
       </form>
 
-      <form onSubmit={handleSubmit} className="rounded shadow-sm p20 bg-white border">
+      <form
+        onSubmit={handleSubmit}
+        className="rounded shadow-sm p20 bg-white border"
+      >
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
@@ -423,7 +473,9 @@ const EditListing = ({ theListing }) => {
                 name="amenities"
                 required
               >
-                <option data-tokens={theListing.amenities}>{theListing.amenities}</option>
+                <option data-tokens={theListing.amenities}>
+                  {theListing.amenities}
+                </option>
                 <option data-tokens="Air-conditioning">Air-conditioning</option>
                 <option data-tokens="Barbeque">Barbeque</option>
                 <option data-tokens="Gym">Gym</option>
@@ -435,7 +487,6 @@ const EditListing = ({ theListing }) => {
             </div>
           </div>
           {/* End .col */}
-
 
           <div className="col-lg-3 col-xl-3">
             <div className="my_profile_setting_input form-group">
@@ -455,7 +506,7 @@ const EditListing = ({ theListing }) => {
           <div className="col-lg-3 col-xl-3">
             <div className="my_profile_setting_input ui_kit_select_search form-group">
               <i
-                style={{fontSize: "13px"}}
+                style={{ fontSize: "13px" }}
                 className="fa fa-info-circle"
                 title="Select 'Yes' to show as a Featured Property listing"
               ></i>
@@ -468,7 +519,9 @@ const EditListing = ({ theListing }) => {
                 name="featured"
                 required
               >
-                <option data-tokens={theListing.featured}>{theListing.featured}</option>
+                <option data-tokens={theListing.featured}>
+                  {theListing.featured}
+                </option>
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
               </select>
@@ -517,13 +570,128 @@ const EditListing = ({ theListing }) => {
               <button type="reset" className="btn btn1 float-start">
                 Clear
               </button>
-              <button type="submit" className="btn btn2 float-end">
-                Update
-              </button>
+
+              {updatingText === "" && (
+                <button type="submit" className="btn btn2 float-end">
+                  <span className="flaticon-edit"></span>
+                  &nbsp; Update
+                </button>
+              )}
+
+              {updatingText === "true" && (
+                <button type="submit" className="btn btn2 float-end" disabled>
+                  <span
+                    className="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp; Updating
+                </button>
+              )}
             </div>
           </div>
         </div>
       </form>
+
+      {/* Success Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: successToast }}>
+          <div class="toast-body rounded-2">
+            <span className="flaticon-tick mr10 text-success"></span>
+            Listing updated successfully
+            <div class="mt-2">
+              <Link href="/my-properties">
+                <button type="button" class="btn btn-secondary-emphasis btn-sm rounded-5">
+                  View all listings
+                </button>
+              </Link>
+              &nbsp;
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setSuccessToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Success Toast*/}
+
+      {/* Error Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: errorToast }}>
+          <div class="toast-body rounded-2">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            Something went wrong. Try again.
+            <div class="mt-2">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setErrorToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Error Toast*/}
+
+      {/* Successfully Image update Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: updatingImg === "success" ? "block" : "none" }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="flaticon-tick mr10 text-success mr20"></span>
+            <span className="text-success">
+              Listing image updated successfully.
+            </span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setUpdatingImg("close");
+            }}
+          ></button>  
+        </div>
+      </div>
+      {/* Successfully Image update Toast */}
+
+      {/* Error on Image update Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: updatingImg === "error" ? "block" : "none" }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            <span>
+              Something went wrong
+            </span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setUpdatingImg("close");
+            }}
+          ></button>  
+        </div>
+      </div>
+      {/* Error on Image update Toast */}
     </>
   );
 };

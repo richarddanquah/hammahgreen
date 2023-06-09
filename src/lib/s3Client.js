@@ -14,14 +14,15 @@ Inputs (replace in code):
 // snippet-start:[GettingStarted.JavaScript.createclientv3]
 import { S3Client } from "@aws-sdk/client-s3";
 // Set the AWS Region.
-const REGION = "eu-north-1"; //e.g. "eu-north-1"
+const REGION = process.env.NEXT_PUBLIC_BUCKET_REGION; //e.g. "eu-north-1"
 // Create an Amazon S3 service client object.
 const s3Client = new S3Client({
   region: REGION,
   credentials: {
-    accessKeyId: process.env.AWS_S3_ACCESS_KEY_ID, //"AKIAVRCH66MGLA67ZZH3",
-    secretAccessKey: process.env.AWS_S3_SECRET_ACCESS_KEY, //"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",
+    accessKeyId: process.env.NEXT_PUBLIC_ACCESS_KEY_ID,
+    secretAccessKey: process.env.NEXT_PUBLIC_SECRET_ACCESS_KEY,
   },
 });
+
 export { s3Client };
 // snippet-end:[GettingStarted.JavaScript.createclientv3]

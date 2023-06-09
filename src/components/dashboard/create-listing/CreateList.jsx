@@ -1,10 +1,16 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import axios from "axios";
+import { v1 } from "uuid";
+import { uploadToS3 } from "../../../lib/s3Utils";
+import Link from "next/link";
 
 const CreateList = () => {
   const [mainImg, setMainImg] = useState(null);
+  const [uploading, setUploading] = useState("");
+  const [successToast, setSuccessToast] = useState("none");
+  const [errorToast, setErrorToast] = useState("none");
   const { data: session } = useSession();
+  const UUIDv1 = v1();
 
   // upload main Image
   const uploadMainImg = (e) => {
@@ -14,55 +20,23 @@ const CreateList = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setUploading("true");
+    
 
     // Get selected file
     const file = mainImg;
-    console.log(file);
+    console.log(UUIDv1 + file.name);
 
     if (!file) {
       alert("Please select an image file.");
       return;
     }
 
-    // Make a POST request to API route
-    const { data } = await axios.post("/api/uploadListingImg", {
-      name: file.name,
-      type: file.type,
-    });
-
-    // Fetch out URL
-    const url = data.url;
-
-    await axios.put(url, file, {
-      headers: {
-        "Content-Type": file.type,
-        "Access-Control-Allow-Origin": "*",
-      },
-    });
-    ////////////////////////////////////
-
-    // // create a new FileReader object
-    // const reader = new FileReader();
-
-    // // read the file as a data URL
-    // reader.readAsDataURL(file);
-
-    // // when the file is loaded, send it to the server
-    // reader.onload = () => {
-    //   const xhr = new XMLHttpRequest();
-    //   xhr.open("POST", "/api/uploadListingImg");
-    //   xhr.setRequestHeader("Content-Type", "application/json");
-    //   xhr.send(
-    //     JSON.stringify({
-    //       filename: file.name,
-    //       data: reader.result,
-    //     })
-    //   );
-    //   // console.log(reader);
-    // };
+    const url = await uploadToS3(UUIDv1 + file.name, file);
+    // console.log(url);
 
     const allData = {
-      mainImg: `/assets/images/property/${file.name}`,
+      mainImg: url,
       title: event.target.title.value,
       description: event.target.description.value,
       saletag: event.target.saletag.value,
@@ -82,45 +56,47 @@ const CreateList = () => {
 
     console.log(allData);
 
-    // // Send the data to the server in JSON format.
-    // const JSONdata = JSON.stringify(allData);
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(allData);
 
-    // // API endpoint where we send form data.
-    // const endpoint = "/api/addListing";
+    // API endpoint where we send form data.
+    const endpoint = "/api/addListing";
 
-    // // Form the request for sending data to the server.
-    // const options = {
-    //   // The method is POST because we are sending data.
-    //   method: "POST",
-    //   // Tell the server we're sending JSON.
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   // Body of the request is the JSON data we created above.
-    //   body: JSONdata,
-    // };
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: "POST",
+      // Tell the server we're sending JSON.
+      headers: {
+        "Content-Type": "application/json",
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    };
 
-    // // Send the form data to our forms API and get a response.
-    // const response = await fetch(endpoint, options);
+    // Send the form data to our forms API and get a response.
+    const response = await fetch(endpoint, options);
 
-    // // Get the response data from server as JSON.
-    // // If server returns the name submitted, that means the form works.
-    // const result = await response.json();
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json();
 
-    // const returnedData = result.listingCreated;
-    // const returnedError = result.error;
-    // console.log(returnedError);
-    // console.log(returnedData);
+    const returnedData = result.listingCreated;
+    const returnedError = result.error;
+    console.log(returnedError);
+    console.log(returnedData);
 
-    // if (returnedData) {
-    //   alert(
-    //     `${returnedData.title} listing created successfully. Go My Properties to see all listings`
-    //   );
-    //   window.location.replace("/my-properties");
-    //   // window.location.reload();
-    // } else if (returnedError) {
-    //   alert('The "title" of your listing already exists.');
-    // }
+    if (returnedData) {
+      setSuccessToast("block");
+      setUploading("");
+      event.target.reset();
+      // window.location.replace("/my-properties");
+      // window.location.reload();
+    } else if (returnedError) {
+      setErrorToast("block");
+      setUploading("");
+      // alert('The "title" of your listing already exists.');
+    }
   };
 
   return (
@@ -468,17 +444,84 @@ const CreateList = () => {
           {/* End .col */}
         </div>
 
-        <div className="col-xl-12">
-          <div className="my_profile_setting_input">
-            <button type="reset" className="btn btn1 float-start">
-              Clear
-            </button>
-            <button type="submit" className="btn btn2 float-end">
-              Create
-            </button>
+        <div className="row">
+          <div className="col-xl-12">
+            <div className="my_profile_setting_input">
+              <button type="reset" className="btn btn1 float-start">
+                Clear
+              </button>
+
+              {uploading === "" && (
+                <button type="submit" className="btn btn2 float-end ">
+                  <span className="flaticon-plus"></span>
+                  &nbsp; Create
+                </button>
+              )}
+
+              {uploading === "true" && (
+                <button type="button" className="btn btn2 float-end" disabled>
+                  <span
+                    className="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp; Creating...
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </form>
+
+      {/* Success Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: successToast }}>
+          <div class="toast-body rounded-2">
+            <span className="flaticon-tick mr10 text-success"></span>
+            Listing created successfully
+            <div class="mt-2">
+              <Link href="/my-properties">
+                <button type="button" class="btn btn-secondary-emphasis btn-sm rounded-5">
+                  View all Listings
+                </button>
+              </Link>
+              &nbsp;
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setSuccessToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Success Toast*/}
+
+      {/* Error Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: errorToast }}>
+          <div class="toast-body rounded-2">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            Something went wrong. Try again.
+            <div class="mt-2">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setErrorToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Error Toast*/}
     </>
   );
 };

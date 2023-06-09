@@ -1,23 +1,23 @@
 import connectDB from "../../lib/connectMongoDB";
-import User from "../../models/user";
+import Listing from "../../models/listing";
 
 export default async function handler(req, res) {
-  if (req.method === "POST" && req.url === "/api/uploadProfileImg") {
-    console.log(req.body);
+  if (req.method === "POST" && req.url === "/api/editListingImg") {
+    // console.log(req.body);
 
-    const { userId, userImgUrl } = req.body;
+    const { propertyId, imgUrl } = req.body;
 
     try {
       console.log("CONNECTING TO DATABASE...");
       await connectDB();
       console.log("CONNECTED TO DATABASE ✔");
 
-      console.log("UPDATING USER IMAGE");
-      const updateImg = await User.findByIdAndUpdate(
-        { _id: userId },
-        { userImg: userImgUrl }
+      console.log("UPDATING PROPERTY LISTING IMAGE");
+      const updateImg = await Listing.findByIdAndUpdate(
+        { _id: propertyId },
+        { mainImage: imgUrl }
       );
-      console.log("USER IMAGE UPDATED ✔");
+      console.log("PROPERTY IMAGE UPDATED ✔");
 
       return res.status(200).send({ updateImg });
     } catch (error) {

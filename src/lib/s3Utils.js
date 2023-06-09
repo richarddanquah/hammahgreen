@@ -3,23 +3,32 @@ import { s3Client } from "./s3Client";
 
 export async function uploadToS3(fileName, file) {
   const params = {
-    Bucket: process.env.AWS_S3_BUCKET_NAME, // The name of the bucket.
+    Bucket: process.env.NEXT_PUBLIC_BUCKET_NAME, // The name of the bucket.
     Key: fileName, // The name of the object. For example, 'sample_upload.txt'.
     Body: file, // The content of the object. For example, 'Hello world!".
   };
 
-  const results = await s3Client.send(new PutObjectCommand(params));
-  console.log(
-    "Successfully created " +
-      params.Key +
-      " and uploaded it to " +
-      params.Bucket +
-      "/" +
-      params.Key
-  );
-  console.log(results.$metadata);
+  try {
+    const results = await s3Client.send(new PutObjectCommand(params));
+    // console.log(results);
 
-  return results;
+    console.log(
+      "Successfully created " +
+        params.Key +
+        " and uploaded it to " +
+        params.Bucket +
+        "/" +
+        params.Key
+    );
+
+    const objectUrl = `https://${
+      params.Bucket
+    }.s3.amazonaws.com/${encodeURIComponent(params.Key)}`;
+
+    return objectUrl;
+  } catch (error) {
+    console.log("Error", error);
+  }
 }
 
 // const selectedFile = (e) => {

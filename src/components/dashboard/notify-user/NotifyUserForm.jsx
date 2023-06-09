@@ -1,15 +1,19 @@
 import { useState } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
+import { uploadToS3 } from "../../../lib/s3Utils";
+import { v1 } from "uuid";
 
 const Form = () => {
   const [mainImg, setMainImg] = useState(null);
   const { data: session } = useSession();
   const route = useRouter();
+  const UUIDv1 = v1();
 
   // upload main Image
   const uploadMainImg = (e) => {
     setMainImg(e.target.files[0]);
+    console.log(e.target.files[0]);
   };
 
   const handleSubmit = async (e) => {
@@ -24,25 +28,7 @@ const Form = () => {
       return;
     }
 
-    // create a new FileReader object
-    const reader = new FileReader();
-
-    // read the file as a data URL
-    reader.readAsDataURL(file);
-
-    // when the file is loaded, send it to the server
-    reader.onload = () => {
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "/api/uploadNotificationImg");
-      xhr.setRequestHeader("Content-Type", "application/json");
-      xhr.send(
-        JSON.stringify({
-          filename: file.name,
-          data: reader.result,
-        })
-      );
-      console.log(reader);
-    };
+    const url = await uploadToS3(UUIDv1 + file.name, file);
 
     const receiverid = e.target.receiverid.value;
     const date = e.target.date.value;
@@ -55,7 +41,7 @@ const Form = () => {
       receiverid,
       date,
       subject,
-      image: `/assets/images/notifications/${file.name}`,
+      imageUrl: url,
       message,
       sendername,
     };
