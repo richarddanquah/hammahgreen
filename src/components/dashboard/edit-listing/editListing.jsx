@@ -6,15 +6,18 @@ import Link from "next/link";
 import { v1 } from "uuid";
 
 const EditListing = ({ theListing }) => {
-  const [mainImg, setMainImg] = useState(null);
-  const [updatingText, setUpdatingText] = useState("");
-  const [updatingImg, setUpdatingImg] = useState("");
-  // const [forImgUpdateError, setForImgUpdateError] = useState();
-  const [successToast, setSuccessToast] = useState("none");
-  const [errorToast, setErrorToast] = useState("none");
   const { data: session } = useSession();
   const router = useRouter();
   const UUIDv1 = v1();
+  const [mainImg, setMainImg] = useState(null);
+
+  const [updatingText, setUpdatingText] = useState("");
+  const [successToast, setSuccessToast] = useState("none");
+  const [errorToast, setErrorToast] = useState("none");
+
+  const [updatingImg, setUpdatingImg] = useState("");
+  const [imgUpdatedToast, setImgUpdatedToast] = useState("none");
+  const [failedImgUpdatedToast, setfailedImgUpdatedToast] = useState("none");
 
   // console.log(theListing);
 
@@ -138,11 +141,12 @@ const EditListing = ({ theListing }) => {
 
     if (response.status === 200) {
       setUpdatingImg("");
-      setUpdatingImg("success");
+      setImgUpdatedToast("block");
       window.location.replace("/my-properties");
       // alert(`Listing Image updated successfully`);
     } else {
-      setUpdatingImg("error");
+      setUpdatingImg("");
+      setfailedImgUpdatedToast("block");
       // alert("Something went wrong. Try again.");
     }
   };
@@ -567,25 +571,25 @@ const EditListing = ({ theListing }) => {
         <div className="row">
           <div className="col-xl-12">
             <div className="my_profile_setting_input">
-              <button type="reset" className="btn btn1 float-start">
+              {/* <button type="reset" className="btn btn1 float-start">
                 Clear
-              </button>
+              </button> */}
 
               {updatingText === "" && (
-                <button type="submit" className="btn btn2 float-end">
+                <button type="submit" className="btn btn2 float-end rounded-5">
                   <span className="flaticon-edit"></span>
                   &nbsp; Update
                 </button>
               )}
 
               {updatingText === "true" && (
-                <button type="submit" className="btn btn2 float-end" disabled>
+                <button type="submit" className="btn btn2 float-end rounded-5" disabled>
                   <span
                     className="spinner-border spinner-border-sm text-light"
                     role="status"
                     aria-hidden="true"
                   ></span>
-                  &nbsp; Updating
+                  &nbsp; Updating...
                 </button>
               )}
             </div>
@@ -601,7 +605,10 @@ const EditListing = ({ theListing }) => {
             Listing updated successfully
             <div class="mt-2">
               <Link href="/my-properties">
-                <button type="button" class="btn btn-secondary-emphasis btn-sm rounded-5">
+                <button
+                  type="button"
+                  class="btn btn-secondary-emphasis btn-sm rounded-5"
+                >
                   View all listings
                 </button>
               </Link>
@@ -647,7 +654,7 @@ const EditListing = ({ theListing }) => {
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
         role="alert"
-        style={{ display: updatingImg === "success" ? "block" : "none" }}
+        style={{ display: imgUpdatedToast }}
         // style={{ display: "block" }}
       >
         <div class="d-flex">
@@ -661,9 +668,9 @@ const EditListing = ({ theListing }) => {
             type="button"
             class="btn-close btn-close text-success me-2 m-auto"
             onClick={() => {
-              setUpdatingImg("close");
+              setImgUpdatedToast("none");
             }}
-          ></button>  
+          ></button>
         </div>
       </div>
       {/* Successfully Image update Toast */}
@@ -672,23 +679,21 @@ const EditListing = ({ theListing }) => {
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
         role="alert"
-        style={{ display: updatingImg === "error" ? "block" : "none" }}
+        style={{ display: failedImgUpdatedToast }}
         // style={{ display: "block" }}
       >
         <div class="d-flex">
           <div class="toast-body">
             <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
-            <span>
-              Something went wrong
-            </span>
+            <span>Something went wrong.</span>
           </div>
           <button
             type="button"
             class="btn-close btn-close text-success me-2 m-auto"
             onClick={() => {
-              setUpdatingImg("close");
+              setfailedImgUpdatedToast("none")
             }}
-          ></button>  
+          ></button>
         </div>
       </div>
       {/* Error on Image update Toast */}

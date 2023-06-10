@@ -13,10 +13,6 @@ const Index = () => {
   const { data: session, status } = useSession();
   const route = useRouter();
 
-  if (status === "authenticated") {
-    route.push("/");
-  }
-
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -36,58 +32,9 @@ const Index = () => {
         <div className="container">
           <div className="row  ">
             <div className="col-sm-12 col-lg-6 offset-lg-3 text-center">
-              {status === "loading" && (
-                <>
-                  <div className="pt100 pb100">
-                    <h4>Checking authentication...</h4>
-                  </div>
-                </>
-              )}
-              {status === "authenticated" && (
-                <>
-                  <div className="pt100 pb100">
-                    {/* <img
-                      className="rounded-circle"
-                      src={session.user.image}
-                      alt="Profile Image"
-                      width={60}
-                      height={60}
-                    />
-                    <br />
-                    <br /> */}
-                    <h4>You are signed in as {session.user.email}</h4>
-                    <Link href="/my-dashboard">
-                      <button type="button" className="btn btn-green btn-thm">
-                        Go to dashboard
-                      </button>
-                    </Link>
-                    &nbsp; &nbsp;
-                    <button
-                      onClick={async () => {
-                        signOut({
-                          redirect: false,
-                        });
-                      }}
-                      type="button"
-                      className="btn btn-white btn-thm"
-                    >
-                      <span className="flaticon-logout"></span>
-                      &nbsp; Sign out
-                    </button>
-                  </div>
-                </>
-              )}
-              {status === "unauthenticated" && (
                 <div className="login_form  inner_page">
-                  {/* {Users.map((user) => (
-                    <div key={user._id}>
-                      <p>{user.fname}</p>
-                      <p>{user.email}</p>
-                    </div>
-                  ))} */}
                   <Form />
                 </div>
-              )}
             </div>
           </div>
         </div>

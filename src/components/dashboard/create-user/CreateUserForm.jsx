@@ -4,10 +4,16 @@ import { signIn, signOut, useSession } from "next-auth/react";
 
 const Form = () => {
   const { data: session, status } = useSession();
+  const [passwordMismatch, setPasswordMismatch] = useState("none");
+  const [creatingUser, setCreatingUser] = useState("");
+  const [createdUserToast, setCreatedUserToast] = useState("none");
+  const [failedToCreateUserToast, setFailedToCreateUserToast] =
+    useState("none");
 
   const handleSubmit = async function (e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
+    setCreatingUser("true");
 
     const firstname = e.target.fname.value;
     const lastname = e.target.lname.value;
@@ -65,20 +71,20 @@ const Form = () => {
       const error = result.error;
 
       if (userCreated) {
-        alert(
-          `User ${userCreated.fname} ${userCreated.lname} successfully registered.`
-        );
+        setCreatingUser("");
+        setCreatedUserToast("block");
         window.location.reload();
+        console.log(userCreated);
       } else if (error) {
-        // const emerror = document.querySelector("#emailerror");
-        // emerror.innerHTML =
-        //   "! " + "That email already exists. Try a different email.";
-        alert("Something went wrong. Try again.");
+        setFailedToCreateUserToast("block");
+        setCreatingUser("");
         console.log(error);
       }
     } else {
-      const error = document.querySelector("#passworderror");
-      error.innerHTML = "! " + "Those passwords do not match." + " Try again.";
+      setCreatingUser("");
+      setPasswordMismatch("block");
+      // const error = document.querySelector("#passworderror");
+      // error.innerHTML = "! " + "Those passwords do not match." + " Try again.";
     }
   };
 
@@ -194,28 +200,92 @@ const Form = () => {
           <br />
           <span
             className="float-start"
-            style={{ fontSize: "13px", color: "red" }}
+            style={{ fontSize: "13px", color: "red", display: passwordMismatch }}
             id="passworderror"
-          ></span>
+          >
+            <span className="fa fa-exclamation mr10 text-danger"></span>
+            Those passwords do not match. Try again.
+          </span>
+          <br />
         </div>
         {/* End .form-group */}
 
-        <div className="col-xl-12">
-          <div className="my_profile_setting_input">
-            {/* <button className="btn btn1 float-start">Back</button> */}
-            <button type="submit" className="btn btn2 w-100">
-              Create
-            </button>
+        <div className="row">
+          <div className="col-xl-12">
+            <div className="my_profile_setting_input">
+              {/* <button className="btn btn1 float-start">Back</button> */}
+              <button type="reset" className="btn btn3 rounded-5">
+                Clear
+              </button>
 
-            {/* <button type="reset" className="btn btn3 float-end">
-              Clear
-            </button> */}
+              {creatingUser === "" && (
+                <button type="submit" className="btn btn2 rounded-5 float-end">
+                  <span className="flaticon-user"></span>
+                  &nbsp; Create
+                </button>
+              )}
+
+              {creatingUser === "true" && (
+                <button type="submit" className="btn btn2 rounded-5 float-end" disabled>
+                  <div
+                    class="spinner-grow spinner-grow-sm text-light"
+                    role="status"
+                  >
+                    <span class="visually-hidden">Creating...</span>
+                  </div>
+                  &nbsp; Creating user...
+                </button>
+              )}
+            </div>
           </div>
         </div>
-        {/* login button */}
       </form>
 
-      {/* Sign in with google fb */}
+      {/* Successfully created user toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: createdUserToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="flaticon-tick mr10 text-success mr20"></span>
+            <span className="text-success">User created successfully.</span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setCreatedUserToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Successfully created user toast */}
+      
+      {/* Failed to create user toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: failedToCreateUserToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="fa fa-exclamation-circle mr10 text-danger mr20"></span>
+            <span className="text-danger">User creation failed. Duplicate email</span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setFailedToCreateUserToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Failed to create user toast */}
     </>
   );
 };

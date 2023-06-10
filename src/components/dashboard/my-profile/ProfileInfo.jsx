@@ -1,10 +1,18 @@
 import { useState } from "react";
 import { uploadToS3 } from "../../../lib/s3Utils";
 import { v1 } from "uuid";
+import Link from "next/link";
 
 const ProfileInfo = ({ theUser }) => {
   const [profile, setProfile] = useState(null);
   const UUIDv1 = v1();
+  const [updatingText, setUpdatingText] = useState("");
+  const [successToast, setSuccessToast] = useState("none");
+  const [errorToast, setErrorToast] = useState("none");
+
+  const [updatingImg, setUpdatingImg] = useState("");
+  const [imgUpdatedToast, setImgUpdatedToast] = useState("none");
+  const [failedImgUpdatedToast, setfailedImgUpdatedToast] = useState("none");
 
   // upload profile
   const uploadProfile = (e) => {
@@ -15,6 +23,7 @@ const ProfileInfo = ({ theUser }) => {
   const handleSubmit = async function (e) {
     // Prevent the browser from reloading the page
     e.preventDefault();
+    setUpdatingText("true");
 
     const userId = e.target.userId.value;
     const firstname = e.target.fname.value;
@@ -71,15 +80,19 @@ const ProfileInfo = ({ theUser }) => {
     const returnedError = result.error;
 
     if (returnedData) {
-      alert(`Your profile info has been updated successfully.`);
+      setSuccessToast("block");
+      setUpdatingText("");
       window.location.reload();
     } else if (returnedError) {
-      alert("Something went wrong... Please try again");
+      setErrorToast("block");
+      setUpdatingText("");
+      window.location.reload();
     }
   };
 
   const handleUpload = async function (e) {
     e.preventDefault();
+    setUpdatingImg("true");
 
     // Get selected file
     const file = profile;
@@ -125,12 +138,13 @@ const ProfileInfo = ({ theUser }) => {
     console.log(response);
 
     if (response.status === 200) {
-      alert("Your profile photo has been successfully updated, and will be visible the next time you signin.");
-      window.location.reload();
+      setUpdatingImg("");
+      setImgUpdatedToast("block");
+      // window.location.reload();
     } else {
-      alert("Something went wrong. Try again.");
+      setUpdatingImg("");
+      setfailedImgUpdatedToast("block");
     }
-
   };
 
   return (
@@ -191,12 +205,31 @@ const ProfileInfo = ({ theUser }) => {
           <>
             <br />
             <br />
-            <button
-              type="submit"
-              className="shadow-sm btn btn-success"
-            >
-              Update profile photo &nbsp; <i className="fa fa-save"></i>
-            </button>
+
+            {updatingImg === "" && (
+              <button
+                type="submit"
+                className="shadow-sm btn w-100 rounded-5 border border-secondary-emphasis"
+              >
+                <span className="flaticon-edit"></span>
+                &nbsp; Update profile photo
+              </button>
+            )}
+
+            {updatingImg === "true" && (
+              <button
+                type="submit"
+                className="shadow-sm btn w-100 rounded-5 border border-secondary-emphasis"
+                disabled
+              >
+                <span
+                  className="spinner-border spinner-border-sm text-success"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                &nbsp; Updating...
+              </button>
+            )}
           </>
         )}
       </form>
@@ -417,15 +450,129 @@ const ProfileInfo = ({ theUser }) => {
 
           <div className="col-xl-12">
             <div className="my_profile_setting_input">
-              {/* <button className="btn btn1">View Public Profile</button> */}
-              <button type="submit" className="btn btn2">
-                Update Profile
-              </button>
+              {updatingText === "" && (
+                <button type="submit" className="btn btn2 rounded-5">
+                  <span className="flaticon-edit"></span>
+                  &nbsp; Update
+                </button>
+              )}
+
+              {updatingText === "true" && (
+                <button type="submit" className="btn btn2 rounded-5" disabled>
+                  <span
+                    className="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp; Updating...
+                </button>
+              )}
             </div>
           </div>
           {/* End .col */}
         </div>
       </form>
+
+      {/* Success Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: successToast }}>
+          <div class="toast-body rounded-2">
+            <span className="flaticon-tick mr10 text-success"></span>
+            Profile info updated successfully
+            <div class="mt-2">
+              <Link href="/my-dashboard">
+                <button
+                  type="button"
+                  class="btn btn-secondary-emphasis btn-sm rounded-5"
+                >
+                  Go to Dashboard
+                </button>
+              </Link>
+              &nbsp;
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setSuccessToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Success Toast*/}
+
+      {/* Error Toast*/}
+      <div class="toast-container position-fixed bottom-0 end-0 pb10 pr10">
+        <div id="liveToast" class="toast" style={{ display: errorToast }}>
+          <div class="toast-body rounded-2">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            Something went wrong. Try again.
+            <div class="mt-2">
+              <button
+                type="button"
+                class="btn btn-danger btn-sm rounded-5"
+                onClick={() => {
+                  setErrorToast("none");
+                }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      {/* End of Error Toast*/}
+
+      {/* Successfully Image update Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: imgUpdatedToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="flaticon-tick mr10 text-success mr20"></span>
+            <span className="text-success">
+              Profile photo updated successfully.
+            </span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setImgUpdatedToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Successfully Image update Toast */}
+
+      {/* Error on Image update Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: failedImgUpdatedToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            <span>Something went wrong.</span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setfailedImgUpdatedToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Error on Image update Toast */}
     </>
   );
 };

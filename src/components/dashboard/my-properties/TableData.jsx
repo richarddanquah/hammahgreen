@@ -278,7 +278,7 @@ const TableData = ({ Listings }) => {
         <tbody>{tbodyContent}</tbody>
       </table>
 
-      {/* Deleting Toast */}
+      {/* Deleting Process Toast */}
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
         role="alert"
@@ -295,7 +295,7 @@ const TableData = ({ Listings }) => {
           ></button> */}
         </div>
       </div>
-      {/* Deleting Toast */}
+      {/* Deleting Process Toast */}
 
       {/* Deleted Successfully Toast */}
       <div

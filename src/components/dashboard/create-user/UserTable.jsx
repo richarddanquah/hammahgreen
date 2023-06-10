@@ -2,8 +2,10 @@ import Link from "next/link";
 import { useState } from "react";
 
 const TableData = ({ Users }) => {
+  const [deleting, setDeleting] = useState("");
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setDeleting("true");
     const id = e.target.id.value;
     console.log(id);
 
@@ -35,10 +37,13 @@ const TableData = ({ Users }) => {
     const result = await response.json();
 
     const deletedUser = result.deletedUser;
-
+    console.log(deletedUser);
+    
     if (deletedUser) {
-      alert(`User ${deletedUser.email} was successfully deleted.`);
+      setDeleting("false");
       window.location.reload();
+    } else {
+      setDeleting("error");
     }
 
     console.log(result);
@@ -148,6 +153,67 @@ const TableData = ({ Users }) => {
 
         <tbody>{tbodyContent}</tbody>
       </table>
+
+      {/* Deleting Process Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        // style={{ display: deleting === "true" ? "block" : "none" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="spinner-border spinner-border-sm text-danger mr20"></span>
+            <span className="text-danger">Deleting user...</span>
+          </div>
+          {/* <button
+            type="button"
+            class="btn-close btn-close me-2 m-auto"
+          ></button> */}
+        </div>
+      </div>
+      {/* Deleting Process Toast */}
+
+      {/* Deleted Successfully Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: deleting === "false" ? "block" : "none" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="flaticon-tick mr10 text-success mr20"></span>
+            <span className="text-success">Deleted user successfully.</span>
+          </div>
+          {/* <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+          ></button> */}
+        </div>
+      </div>
+      {/* Deleted Successfully Toast */}
+
+      {/* Error Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: deleting === "error" ? "block" : "none" }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="fa fa-exclamation-circle mr10 text-danger mr20"></span>
+            <span>Something went wrong.</span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setDeleting("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Error Toast */}
     </>
   );
 };

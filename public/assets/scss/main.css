@@ -19851,6 +19851,6 @@ button.gm-ui-hover-effect:focus {
   color: #A78C33 !important;
 }
 
-.toast-container {
+.toast, .toast-container {
   z-index: 100;
 }
