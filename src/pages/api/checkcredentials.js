@@ -20,24 +20,27 @@ export default async function handler(req, res) {
 
     if (foundUser[0] === undefined) {
       console.log(foundUser[0]);
-        return res
-          .status(401)
-          .send({ Unauthorized: "That email does not exist. Try again..." });
+      return res
+        .status(401)
+        .send({ Unauthorized: "That email does not exist. Try again..." });
     } else {
       console.log(foundUser[0]);
       console.log("Comparing Passwords...");
-      const comparePasswordResult = await BcryptCompare(password, foundUser[0].password);
+      const comparePasswordResult = await BcryptCompare(
+        password,
+        foundUser[0].password
+      );
       console.log(comparePasswordResult); // returns true or false
       if (comparePasswordResult === true) {
-            const user = {
-                name: `${foundUser[0].fname} ${foundUser[0].lname}`,
-                email: foundUser[0].email,
-                image: foundUser[0].userImg,
-            }
-            console.log(user);
-          return res.status(200).send(user);
+        const user = {
+          name: `${foundUser[0].fname} ${foundUser[0].lname}`,
+          email: foundUser[0].email,
+          image: foundUser[0].userImg,
+        };
+        console.log(user);
+        return res.status(200).send(user);
       } else {
-          return res.status(401).send({ 401: "Unauthorized" });
+        return res.status(401).send({ 401: "Unauthorized" });
       }
     }
   } catch (error) {

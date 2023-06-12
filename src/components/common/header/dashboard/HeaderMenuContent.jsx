@@ -6,6 +6,7 @@ import { signIn, signOut, useSession } from "next-auth/react";
 const HeaderMenuContent = ({ float = "" }) => {
   const route = useRouter();
   const { data: session, status } = useSession();
+  // console.log(session);
 
   const home = [
     {

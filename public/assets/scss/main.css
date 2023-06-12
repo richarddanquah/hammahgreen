@@ -14855,10 +14855,10 @@ legend span {
   display: inline-block;
   font-size: 20px;
   margin-right: 5px;
-  -webkit-transform: rotate(-180deg);
+  /* -webkit-transform: rotate(-180deg);
   -moz-transform: rotate(-180deg);
-  -o-transform: rotate(-180deg);
-  transform: rotate(-180deg);
+  -o-transform: rotate(-180deg); */
+  /* transform: rotate(-180deg); */
 }
 
 .wrap-custom-file label.file-ok {

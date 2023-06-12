@@ -33,7 +33,7 @@ export async function getServerSideProps(context) {
       console.log("FETCHING User...");
       const user = await User.find({ email: sessionEmail });
       console.log("FETCHED USER SUCCESSFULLY ✔");
-      // console.log(user[0]);
+      console.log(user[0]);
 
       console.log("FETCHING Featured Listings...");
       const listing = await Listing.find({featured: "Yes"});

@@ -108,7 +108,8 @@ const EditListing = ({ theListing }) => {
     // console.log(ID);
 
     const url = await uploadToS3(UUIDv1 + file.name, file);
-
+    console.log(url);
+    
     const uploadData = {
       propertyId: ID,
       imgUrl: url,

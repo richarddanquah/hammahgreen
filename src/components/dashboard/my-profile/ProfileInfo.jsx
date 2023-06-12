@@ -2,6 +2,7 @@ import { useState } from "react";
 import { uploadToS3 } from "../../../lib/s3Utils";
 import { v1 } from "uuid";
 import Link from "next/link";
+import { useSession } from "next-auth/react";
 
 const ProfileInfo = ({ theUser }) => {
   const [profile, setProfile] = useState(null);
@@ -13,6 +14,8 @@ const ProfileInfo = ({ theUser }) => {
   const [updatingImg, setUpdatingImg] = useState("");
   const [imgUpdatedToast, setImgUpdatedToast] = useState("none");
   const [failedImgUpdatedToast, setfailedImgUpdatedToast] = useState("none");
+
+  const { data: session, status } = useSession();
 
   // upload profile
   const uploadProfile = (e) => {
@@ -106,7 +109,8 @@ const ProfileInfo = ({ theUser }) => {
     const ID = e.target.userId.value;
 
     const url = await uploadToS3(UUIDv1 + file.name, file);
-
+    console.log(url);
+    
     const uploadData = {
       userId: ID,
       userImgUrl: url,
@@ -140,7 +144,7 @@ const ProfileInfo = ({ theUser }) => {
     if (response.status === 200) {
       setUpdatingImg("");
       setImgUpdatedToast("block");
-      // window.location.reload();
+      window.location.reload();
     } else {
       setUpdatingImg("");
       setfailedImgUpdatedToast("block");
@@ -183,20 +187,39 @@ const ProfileInfo = ({ theUser }) => {
             accept="image/png, image/gif, image/jpeg"
             onChange={uploadProfile}
           />
-          <label
-            style={
-              profile
-                ? {
-                    backgroundImage: `url(${URL.createObjectURL(profile)})`,
-                  }
-                : undefined
-            }
-            htmlFor="userImage"
-          >
-            <span>
-              <i className="flaticon-download-arrow"></i> Add Photo{" "}
-            </span>
-          </label>
+
+          {session && (
+            <>
+              <label
+                style={
+                  profile === null
+                    ? {
+                        backgroundImage: `url(${
+                          session.user.image
+                            ? session.user.image
+                            : "/assets/images/profileImgs/avatar.png"
+                        })`,
+                      }
+                    : profile
+                    ? {
+                        backgroundImage: `url(${URL.createObjectURL(profile)})`,
+                      }
+                    : {
+                        backgroundImage: `url(${
+                          session.user.image
+                            ? session.user.image
+                            : "/assets/images/profileImgs/avatar.png"
+                        })`,
+                      }
+                }
+                htmlFor="userImage"
+              >
+                <span>
+                  <i className="flaticon-edit"></i> Change
+                </span>
+              </label>
+            </>
+          )}
         </div>
 
         {/* <p style={{fontSize: "10px"}}>*minimum 260px x 260px</p> */}
@@ -212,7 +235,7 @@ const ProfileInfo = ({ theUser }) => {
                 className="shadow-sm btn w-100 rounded-5 border border-secondary-emphasis"
               >
                 <span className="flaticon-edit"></span>
-                &nbsp; Update profile photo
+                &nbsp; Save as profile photo
               </button>
             )}
 
@@ -227,7 +250,7 @@ const ProfileInfo = ({ theUser }) => {
                   role="status"
                   aria-hidden="true"
                 ></span>
-                &nbsp; Updating...
+                &nbsp; Saving...
               </button>
             )}
           </>
@@ -530,15 +553,17 @@ const ProfileInfo = ({ theUser }) => {
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
         role="alert"
-        style={{ display: imgUpdatedToast }}
-        // style={{ display: "block" }}
+        // style={{ display: imgUpdatedToast }}
+        style={{ display: "block" }}
       >
         <div class="d-flex">
           <div class="toast-body">
-            <span className="flaticon-tick mr10 text-success mr20"></span>
+            <span className="flaticon-tick text-success mr20"></span>
             <span className="text-success">
-              Profile photo updated successfully.
+              Profile photo updated successfully. <br />
             </span>
+            <span className="fa fa-exclamation-circle text-secondary mr20"></span>
+            <span>PS: Sign out for changes to take effect.</span>
           </div>
           <button
             type="button"

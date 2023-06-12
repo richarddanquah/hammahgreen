@@ -33,7 +33,7 @@ const CreateList = () => {
     }
 
     const url = await uploadToS3(UUIDv1 + file.name, file);
-    // console.log(url);
+    console.log(url);
 
     const allData = {
       mainImg: url,
@@ -447,19 +447,19 @@ const CreateList = () => {
         <div className="row">
           <div className="col-xl-12">
             <div className="my_profile_setting_input">
-              <button type="reset" className="btn btn1 float-start">
+              {/* <button type="reset" className="btn btn1 float-start">
                 Clear
-              </button>
+              </button> */}
 
               {uploading === "" && (
-                <button type="submit" className="btn btn2 float-end ">
+                <button type="submit" className="btn btn2 float-end rounded-5">
                   <span className="flaticon-plus"></span>
                   &nbsp; Create
                 </button>
               )}
 
               {uploading === "true" && (
-                <button type="button" className="btn btn2 float-end" disabled>
+                <button type="button" className="btn btn2 float-end rounded-5" disabled>
                   <span
                     className="spinner-border spinner-border-sm text-light"
                     role="status"
