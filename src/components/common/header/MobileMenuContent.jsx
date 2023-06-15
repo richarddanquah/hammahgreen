@@ -435,13 +435,13 @@ const MobileMenuContent = ({theUser}) => {
           {/* End Home Home */}
 
           <MenuItem>
-            <Link href="/homes">
+            <Link href="/properties">
               <a
                 className={
-                  route.pathname === "/homes" ? "ui-active" : undefined
+                  route.pathname === "/properties" ? "ui-active" : undefined
                 }
               >
-                Homes
+                Properties
               </a>
             </Link>
           </MenuItem>

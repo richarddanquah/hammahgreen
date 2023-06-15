@@ -272,9 +272,9 @@ const HeaderMenuContent = ({ float = "", theUser }) => {
         </ul>
       </li>
       <li className="last">
-        <Link href="/homes">
-          <a className={route.pathname === "/homes" ? "ui-active" : undefined}>
-            Homes
+        <Link href="/properties">
+          <a className={route.pathname === "/properties" ? "ui-active" : undefined}>
+            Properties
           </a>
         </Link>
       </li>

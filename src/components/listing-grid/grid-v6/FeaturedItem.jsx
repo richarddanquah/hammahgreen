@@ -118,7 +118,7 @@ const FeaturedItem = ({ homes }) => {
 
   // status handler
   let content = homes
-    ?.slice(0, 3)
+    // ?.slice(0, 3)
     ?.filter(keywordHandler)
     ?.filter(locationHandler)
     ?.filter(statusHandler)

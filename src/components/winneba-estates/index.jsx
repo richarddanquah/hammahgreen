@@ -39,6 +39,33 @@ const index = () => {
                 <h4 className="large">Why Winneba Estates ?</h4>
 
                 <p>
+                  Waterviews Estates is a new state-of-the-art real estate
+                  community located in Winneba, within a larger project called
+                  Winneba Estates. We are committed to providing custom-made,
+                  beautiful yet affordable living spaces for people in different
+                  income brackets that will suit their lifestyle. We are primed
+                  to help first-time homeowners get their dream homes without
+                  stress. With our professional and experienced team of experts
+                  in land acquisition, architecture, land use and spatial
+                  planning, we offer our customers and the general public
+                  world-class accommodation here in Ghana. We are here to
+                  develop long lasting and prosperous relationships with our
+                  customers.
+                </p>
+
+                <h4 className="large">Our Mission</h4>
+
+                <p>
+                  At Hammah Green our mission with Winneba Estates, and its
+                  premium area Waterview Estates is to build high quality homes
+                  in neighborhoods that feature inclusion and balance. We
+                  believe that with the right planning and resources we can
+                  provide luxurious, sustainable homes that are powered by the
+                  sun with personal gardens, and a respect for balance between
+                  nature and infrastructure
+                </p>
+
+                <p>
                   Winneba is a beautiful, well developed, quiet town that is
                   geographically very well placed between Accra and Cape Coast,
                   and we have sourced one of the most beautiful locations to

@@ -22,7 +22,7 @@ export async function getServerSideProps(context) {
   console.log("CONNECTED TO DATABASE ✔");
 
   console.log("FETCHING Listing For Homes...");
-  const homes = await Listing.find({ type: "House" });
+  const homes = await Listing.find({});
   // console.log(homes);
   console.log("FETCHING Listings");
   const listings = await Listing.find({featured: "Yes"});

@@ -30,7 +30,7 @@ const FeaturedProperties = ({ propertyListings }) => {
   };
 
   let content = propertyListings
-    ?.slice(0, 5)
+    ?.slice(0, 10)
     ?.reverse()
     ?.map((item) => (
       <div className="item" key={item._id}>

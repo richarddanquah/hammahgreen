@@ -5,11 +5,11 @@ import { getSession } from "next-auth/react";
 import connectDB from "../lib/connectMongoDB";
 import User from "../models/user";
 
-const Index = ({ theUser }) => {
+const Index = () => {
   return (
     <>
       <Seo pageTitle="About Us" />
-      <AboutUs theUser={theUser} />
+      <AboutUs />
     </>
   );
 };
