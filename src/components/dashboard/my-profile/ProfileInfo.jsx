@@ -553,8 +553,8 @@ const ProfileInfo = ({ theUser }) => {
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
         role="alert"
-        // style={{ display: imgUpdatedToast }}
-        style={{ display: "block" }}
+        style={{ display: imgUpdatedToast }}
+        // style={{ display: "block" }}
       >
         <div class="d-flex">
           <div class="toast-body">

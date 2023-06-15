@@ -1,6 +1,7 @@
 import { useState } from "react";
 import selectedFiles from "../../../utils/selectedFiles";
 import { useRouter } from "next/router";
+import { uploadToS3 } from "../../../lib/s3Utils";
 
 const PropertyMediaUploader = () => {
   const router = useRouter();
@@ -57,7 +58,6 @@ const PropertyMediaUploader = () => {
     }
 
     if (fileList.length === 4) {
-
       // This code Uploads images to the file system
       fileList.map((file) => {
         const reader = new FileReader();
@@ -82,8 +82,6 @@ const PropertyMediaUploader = () => {
         };
       });
       // This code Uploads images to the file system
-      
-
 
       // This code saves the file paths to MongoDB
       const data = {
@@ -241,7 +239,9 @@ const PropertyMediaUploader = () => {
             </div>
             <p>Click here to select images or drag images here</p>
           </div>
-          <span style={{fontSize: "12px", color: "#A78C33"}}><b>* Select exactly 4 images *</b></span>
+          <span style={{ fontSize: "12px", color: "#A78C33" }}>
+            <b>* Select exactly 4 images *</b>
+          </span>
         </div>
         {/* End .col */}
 
