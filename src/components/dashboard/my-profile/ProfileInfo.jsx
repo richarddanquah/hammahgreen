@@ -85,7 +85,7 @@ const ProfileInfo = ({ theUser }) => {
     if (returnedData) {
       setSuccessToast("block");
       setUpdatingText("");
-      window.location.reload();
+      // window.location.reload();
     } else if (returnedError) {
       setErrorToast("block");
       setUpdatingText("");
