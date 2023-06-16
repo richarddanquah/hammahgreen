@@ -18,7 +18,7 @@ module.exports = [
   {
     id: 3,
     img: "/assets/images/home/accra.png",
-    name: "The Heights",
+    name: "Soro Kro",
     number: "24",
     column: "col-lg-4 col-xl-4",
     link: "/comingsoon",

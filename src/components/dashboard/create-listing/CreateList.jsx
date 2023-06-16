@@ -228,7 +228,7 @@ const CreateList = () => {
               >
                 <option data-tokens="Waterviews">Waterviews</option>
                 <option data-tokens="Winneba Estates">Winneba Estates</option>
-                <option data-tokens="The Heights">The Heights</option>
+                <option data-tokens="Soro Kro">Soro Kro</option>
               </select>
             </div>
           </div>

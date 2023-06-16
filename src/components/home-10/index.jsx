@@ -72,7 +72,7 @@ const index = ({ theUser, propertyListings }) => {
             <div className="col-lg-6 offset-lg-3">
               <div className="main-title text-center">
                 <p>Hammah Green</p>
-                <h2>Find Properties in These Sites</h2>
+                <h2>Find Properties in These Communities</h2>
               </div>
             </div>
           </div>

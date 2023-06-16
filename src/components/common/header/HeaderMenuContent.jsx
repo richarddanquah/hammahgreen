@@ -22,7 +22,7 @@ const HeaderMenuContent = ({ float = "", theUser }) => {
   const sites = [
     { id: 1, name: "Waterviews", routerPath: "/listing-grid-v5" },
     { id: 2, name: "Winneba Estates", routerPath: "/winneba-estates" },
-    { id: 3, name: "The Heights", routerPath: "/comingsoon" },
+    { id: 3, name: "Soro Kro", routerPath: "/comingsoon" },
   ];
 
   const listing = [
