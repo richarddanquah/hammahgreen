@@ -88,7 +88,7 @@ const Index = ({ theListing }) => {
 
                   <div className="my_dashboard_review mt30">
                     <div className="col-lg-12">
-                      <h3 className="mb30">Property media</h3>
+                      <h3 className="mb30">Add more images</h3>
                     </div>
                     <PropertyMediaUploader/>
                   </div>
