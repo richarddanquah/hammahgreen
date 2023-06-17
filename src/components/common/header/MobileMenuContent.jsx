@@ -56,10 +56,10 @@ const home = [
   },
 ];
 
-const sites = [
-  { id: 1, name: "Waterviews", routerPath: "/listing-grid-v5" },
-  { id: 2, name: "Winneba Estates", routerPath: "/winneba-estates" },
-  { id: 3, name: "Soro Kro", routerPath: "/comingsoon" },
+const communities = [
+  { id: 1, name: "Soro Kro", routerPath: "/comingsoon" },
+  { id: 2, name: "Waterviews", routerPath: "/listing-grid-v5" },
+  { id: 3, name: "Winneba Estates", routerPath: "/winneba-estates" },
 ];
 
 const listing = [
@@ -307,7 +307,7 @@ const pages = [
   },
 ];
 
-const MobileMenuContent = ({theUser}) => {
+const MobileMenuContent = ({ theUser }) => {
   const route = useRouter();
   const { data: session, status } = useSession();
 
@@ -409,14 +409,14 @@ const MobileMenuContent = ({theUser}) => {
           )}
 
           <SubMenu
-            title="Sites"
+            title="Communities"
             // className={
-            //   cities.some((page) => page.routerPath === route.pathname)
+            //   communities.some((page) => page.routerPath === route.pathname)
             //     ? "parent-menu-active"
             //     : undefined
             // }
           >
-            {sites.map((val, i) => (
+            {communities.map((val, i) => (
               <MenuItem key={i} active={true}>
                 <Link href={val.routerPath}>
                   <a

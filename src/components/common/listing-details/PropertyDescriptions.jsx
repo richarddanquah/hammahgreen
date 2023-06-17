@@ -1,13 +1,40 @@
 import { useState } from "react";
 
-const PropertyDescriptions = ({property}) => {
+const PropertyDescriptions = ({ property }) => {
   const [click, setClick] = useState(true);
   const handleClick = () => setClick(!click);
 
   return (
     <>
-      <p className="mb25">
-        {property?.description}
+      <div
+        className={click ? "gpara second_para white_goverlay mt10 mb10" : ""}
+      >
+        <p className="mb25">{property?.description}</p>
+      </div>
+
+      <div className="collapse" id="collapseExample">
+        <div className="card card-body">
+          <p className="mt10 mb10">
+          {property?.paragraph1}
+          </p>
+          <p className="mt10 mb10">
+          {property?.paragraph2}
+          </p>
+        </div>
+      </div>
+
+      <p className="overlay_close">
+        <a
+          className="text-thm fz14"
+          data-bs-toggle="collapse"
+          href="#collapseExample"
+          role="button"
+          aria-expanded="false"
+          aria-controls="collapseExample"
+          onClick={handleClick}
+        >
+          Show More <span className="flaticon-download-1 fz12"></span>
+        </a>
       </p>
       {/* <p className={click ? "gpara second_para white_goverlay mt10 mb10" : ""}>
         Fully furnished. Elegantly appointed condominium unit situated on
@@ -42,19 +69,6 @@ const PropertyDescriptions = ({property}) => {
           </p>
         </div>
       </div> */}
-      <p className="overlay_close">
-        <a
-          className="text-thm fz14"
-          data-bs-toggle="collapse"
-          href="#collapseExample"
-          role="button"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-          onClick={handleClick}
-        >
-          Show More <span className="flaticon-download-1 fz12"></span>
-        </a>
-      </p>
     </>
   );
 };

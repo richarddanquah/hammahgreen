@@ -1,9 +1,11 @@
 import featureProContent from "../../../data/properties";
+import { useState } from "react";
 import Slider from "react-slick";
 import Link from "next/link";
 
 const FeatureProperties = ({ listings }) => {
-  console.log(listings);
+  // console.log(listings);
+  const [changeID, setchangeID] = useState(null);
 
   const settings = {
     dots: true,
@@ -35,23 +37,17 @@ const FeatureProperties = ({ listings }) => {
                     </li>
                     {item.featured === "Yes" && (
                       <li className="list-inline-item">
-                      <a>Featured</a>
-                    </li>
-                    )}
-                    {/* {item.saleTag.map((val, i) => (
-                      <li className="list-inline-item" key={i}>
-                        <a href="#">{val}</a>
+                        <a>Featured</a>
                       </li>
-                    ))} */}
+                    )}
                   </ul>
                   <a className="fp_price">
                     ${item.price}
                     {/* <small>/mo</small> */}
                   </a>
                   <h4 className="posr">
-                    <Link href="/#feature-property">
-                     <a className="text-white">{item.title}</a>
-                     
+                    <Link href={`/listing-details-v2/${item._id}`}>
+                      <a className="text-white">{item.title}</a>
                     </Link>
                   </h4>
                 </div>

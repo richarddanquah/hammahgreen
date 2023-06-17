@@ -33,6 +33,8 @@ const EditListing = ({ theListing }) => {
       id: event.target.propertyid.value,
       title: event.target.title.value,
       description: event.target.description.value,
+      paragraph1: event.target.para1.value,
+      paragraph2: event.target.para2.value,
       saletag: event.target.saletag.value,
       price: event.target.price.value,
       type: event.target.type.value,
@@ -43,6 +45,7 @@ const EditListing = ({ theListing }) => {
       amenities: event.target.amenities.value,
       built: event.target.built.value,
       featured: event.target.featured.value,
+      homepageheader: event.target.homepageheader.value,
       garages: event.target.garages.value,
       postername: event.target.postername.value,
       posted: event.target.posted.value,
@@ -109,7 +112,7 @@ const EditListing = ({ theListing }) => {
 
     const url = await uploadToS3(UUIDv1 + file.name, file);
     console.log(url);
-    
+
     const uploadData = {
       propertyId: ID,
       imgUrl: url,
@@ -262,35 +265,68 @@ const EditListing = ({ theListing }) => {
           </label>
         </div>
 
-        <div className="col-lg-12">
-          <div className="my_profile_setting_input form-group">
-            <label htmlFor="propertyTitle">Property Title</label>
-            <input
-              type="text"
-              className="form-control"
-              id="propertyTitle"
-              name="title"
-              defaultValue={theListing.title}
-              required
-            />
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="propertyTitle">Property Title</label>
+              <input
+                type="text"
+                className="form-control"
+                id="propertyTitle"
+                name="title"
+                defaultValue={theListing.title}
+                required
+              />
+            </div>
           </div>
         </div>
-        {/* End .col */}
 
-        <div className="col-lg-12">
-          <div className="my_profile_setting_textarea">
-            <label htmlFor="propertyDescription">Description</label>
-            <textarea
-              className="form-control"
-              id="propertyDescription"
-              rows="3"
-              name="description"
-              defaultValue={theListing.description}
-              required
-            ></textarea>
+        <div className="row">
+          <div className="col-lg-12">
+            <div className="my_profile_setting_textarea">
+              <label htmlFor="propertyDescription">Description</label>
+              <textarea
+                className="form-control"
+                id="propertyDescription"
+                rows="3"
+                name="description"
+                defaultValue={theListing.description}
+                required
+              ></textarea>
+            </div>
           </div>
+          {/* End .col */}
         </div>
-        {/* End .col */}
+
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="my_profile_setting_textarea">
+              <label htmlFor="propertyDescription">Description Paragraph</label>
+              <textarea
+                className="form-control"
+                id="propertyDescription"
+                rows="2"
+                name="para1"
+                defaultValue={theListing.paragraph1}
+              ></textarea>
+            </div>
+          </div>
+          {/* End .col */}
+
+          <div className="col-lg-6">
+            <div className="my_profile_setting_textarea">
+              <label htmlFor="propertyDescription">Description Paragraph</label>
+              <textarea
+                className="form-control"
+                id="propertyDescription"
+                rows="2"
+                name="para2"
+                defaultValue={theListing.paragraph2}
+              ></textarea>
+            </div>
+          </div>
+          {/* End .col */}
+        </div>
 
         <div className="row">
           <div className="col-lg-3 col-xl-3">
@@ -309,6 +345,7 @@ const EditListing = ({ theListing }) => {
                 <option data-tokens="For sale">For sale</option>
                 <option data-tokens="For rent">For rent</option>
                 <option data-tokens="Sold">Sold</option>
+                <option data-tokens="Coming Soon">Coming Soon</option>
               </select>
             </div>
           </div>
@@ -319,7 +356,7 @@ const EditListing = ({ theListing }) => {
               <label htmlFor="formGroupExamplePrice">Price</label>
               <input
                 type="number"
-                min="10000"
+                min="65000"
                 className="form-control"
                 id="formGroupExamplePrice"
                 name="price"
@@ -512,7 +549,7 @@ const EditListing = ({ theListing }) => {
             <div className="my_profile_setting_input ui_kit_select_search form-group">
               <i
                 style={{ fontSize: "13px" }}
-                className="fa fa-info-circle"
+                className="fa fa-info"
                 title="Select 'Yes' to show as a Featured Property listing"
               ></i>
               &nbsp;
@@ -526,6 +563,32 @@ const EditListing = ({ theListing }) => {
               >
                 <option data-tokens={theListing.featured}>
                   {theListing.featured}
+                </option>
+                <option data-tokens="Yes">Yes</option>
+                <option data-tokens="No">No</option>
+              </select>
+            </div>
+          </div>
+          {/* End .col */}
+
+          <div className="col-lg-3 col-xl-3">
+            <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <i
+                style={{ fontSize: "13px" }}
+                className="fa fa-info"
+                title="Select 'Yes' to show in Homepage header"
+              ></i>
+              &nbsp;
+              <label>Add To Header</label>
+              <select
+                className="selectpicker form-select"
+                data-live-search="true"
+                data-width="100%"
+                name="homepageheader"
+                required
+              >
+                <option data-tokens={theListing.featured}>
+                  {theListing.homepageheader}
                 </option>
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
@@ -584,7 +647,11 @@ const EditListing = ({ theListing }) => {
               )}
 
               {updatingText === "true" && (
-                <button type="submit" className="btn btn2 float-end rounded-5" disabled>
+                <button
+                  type="submit"
+                  className="btn btn2 float-end rounded-5"
+                  disabled
+                >
                   <span
                     className="spinner-border spinner-border-sm text-light"
                     role="status"
@@ -692,7 +759,7 @@ const EditListing = ({ theListing }) => {
             type="button"
             class="btn-close btn-close text-success me-2 m-auto"
             onClick={() => {
-              setfailedImgUpdatedToast("none")
+              setfailedImgUpdatedToast("none");
             }}
           ></button>
         </div>

@@ -8,6 +8,8 @@ const listingSchema = new Schema({
     unique: true,
   },
   description: String,
+  paragraph1: String,
+  paragraph2: String,
   price: String,
   type: String,
   location: String,
@@ -19,6 +21,7 @@ const listingSchema = new Schema({
   amenities: String, //new
   built: String, //new
   featured: String, //new
+  homepageheader: String,
   posterName: String,
   posted: String,
   imgList: Array,

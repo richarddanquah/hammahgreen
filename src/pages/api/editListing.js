@@ -8,6 +8,8 @@ export default async function handler(req, res) {
       id,
       title,
       description,
+      paragraph1,
+      paragraph2,
       saletag,
       price,
       type,
@@ -18,6 +20,7 @@ export default async function handler(req, res) {
       amenities,
       built,
       featured,
+      homepageheader,
       garages,
       postername,
       posted,
@@ -35,6 +38,8 @@ export default async function handler(req, res) {
         {
           title: title,
           description: description,
+          paragraph1: paragraph1,
+          paragraph2: paragraph2,
           price: price,
           type: type,
           location: location,
@@ -46,6 +51,7 @@ export default async function handler(req, res) {
           amenities: amenities,
           built: built,
           featured: featured,
+          homepageheader: homepageheader,
           posterName: postername,
           posted: posted,
         }
@@ -53,7 +59,6 @@ export default async function handler(req, res) {
       console.log(updatedListing);
       console.log("LISTING DOCUMENT UPDATED SUCCESSFULLY ✔");
       return res.status(200).send({ updatedListing });
-    
     } catch (error) {
       console.log(error);
       return res.status(500).send({ error });
