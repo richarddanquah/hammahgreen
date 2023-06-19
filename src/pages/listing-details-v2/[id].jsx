@@ -200,7 +200,7 @@ export async function getServerSideProps() {
   console.log("CONNECTED TO DATABASE ✔");
 
   console.log("FETCHING Listing...");
-  const listings = await Listing.find({featured: "Yes"});
+  const featuredListings = await Listing.find({featured: "Yes"});
 
   console.log("FETCHING Listing...");
   const allListings = await Listing.find({});
@@ -209,7 +209,7 @@ export async function getServerSideProps() {
 
   return {
     props: {
-      listings: JSON.parse(JSON.stringify(listings)),
+      listings: JSON.parse(JSON.stringify(featuredListings)),
       allListings: JSON.parse(JSON.stringify(allListings)),
     },
   };

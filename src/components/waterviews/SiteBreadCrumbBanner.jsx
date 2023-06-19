@@ -3,7 +3,7 @@ import BreadCrumb from "../common/BreadCrumb";
 const BreadCrumbBanner = () => {
   return (
     <section className="inner_page_breadcrumb"
-    style={{"backgroundImage" : "url(../../assets/images/site/natural-beach.jpeg)"}}
+    style={{"backgroundImage" : "url(../../assets/images/background/waterviewspagebanner.jpeg)"}}
     >
       <div className="container">
         <div className="row">
