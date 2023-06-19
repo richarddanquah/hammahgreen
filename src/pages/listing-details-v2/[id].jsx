@@ -14,14 +14,14 @@ import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
 import Image from "next/image";
 
-const ListingDynamicDetailsV2 = ({ listings }) => {
+const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
   const router = useRouter();
   const [property, setProperty] = useState({});
   const id = router.query.id;
 
   useEffect(() => {
     if (!id) <h1>Loading...</h1>;
-    else setProperty(listings?.find((item) => item._id == id));
+    else setProperty(allListings?.find((item) => item._id == id));
 
     return () => {};
   }, [id]);
@@ -202,11 +202,15 @@ export async function getServerSideProps() {
   console.log("FETCHING Listing...");
   const listings = await Listing.find({featured: "Yes"});
 
+  console.log("FETCHING Listing...");
+  const allListings = await Listing.find({});
+
   // console.log(listings);
 
   return {
     props: {
       listings: JSON.parse(JSON.stringify(listings)),
+      allListings: JSON.parse(JSON.stringify(allListings)),
     },
   };
 }

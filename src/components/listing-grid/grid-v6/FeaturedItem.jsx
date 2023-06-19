@@ -5,6 +5,7 @@ import { addLength } from "../../../features/properties/propertiesSlice";
 import properties from "../../../data/properties";
 
 const FeaturedItem = ({ homes }) => {
+
   const {
     keyword,
     location,
@@ -18,6 +19,7 @@ const FeaturedItem = ({ homes }) => {
     area,
     amenities,
   } = useSelector((state) => state.properties);
+
   const { statusType, featured, isGridOrList } = useSelector(
     (state) => state.filter
   );
@@ -48,7 +50,7 @@ const FeaturedItem = ({ homes }) => {
   // bathroom handler
   const bathroomHandler = (item) => {
     if (bathrooms !== "") {
-      return item.itemDetails[1].number == bathrooms;
+      return item.baths == bathrooms;
     }
     return true;
   };
@@ -56,7 +58,7 @@ const FeaturedItem = ({ homes }) => {
   // bedroom handler
   const bedroomHandler = (item) => {
     if (bedrooms !== "") {
-      return item.itemDetails[0].number == bedrooms;
+      return item.bedrooms == bedrooms;
     }
     return true;
   };
