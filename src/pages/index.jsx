@@ -7,12 +7,16 @@ import connectDB from "../lib/connectMongoDB";
 import User from "../models/user";
 import Listing from "../models/listing";
 
-const index = ({ theUser, propertyListings }) => {
+const index = ({ theUser, propertyListings, homepageheaderlistings }) => {
   return (
     <>
       <Seo pageTitle="Home" />
       {/* <HomeMain /> */}
-      <Home10 theUser={theUser} propertyListings={propertyListings} />
+      <Home10
+        theUser={theUser}
+        propertyListings={propertyListings}
+        homepageheaderlistings={homepageheaderlistings}
+      />
     </>
   );
 };
@@ -36,13 +40,20 @@ export async function getServerSideProps(context) {
       console.log(user[0]);
 
       console.log("FETCHING Featured Listings...");
-      const listing = await Listing.find({featured: "Yes"});
-      console.log(listing);
+      const listing = await Listing.find({ featured: "Yes" });
+      // console.log(listing);
+
+      console.log("FETCHING Listings for Homepage Header...");
+      const homepageheader = await Listing.find({
+        homepageheader: "Yes",
+      });
+      // console.log(homepageheader);
 
       return {
         props: {
           theUser: JSON.parse(JSON.stringify(user[0])),
           propertyListings: JSON.parse(JSON.stringify(listing)),
+          homepageheaderlistings: JSON.parse(JSON.stringify(homepageheader)),
           session,
         },
       };
@@ -52,12 +63,19 @@ export async function getServerSideProps(context) {
       console.log("CONNECTED TO DATABASE ✔");
 
       console.log("FETCHING Featured Listings...");
-      const listing = await Listing.find({featured: "Yes"});
+      const listing = await Listing.find({ featured: "Yes" });
       // console.log(listing);
+
+      console.log("FETCHING Listings for Homepage Header...");
+      const homepageheader = await Listing.find({
+        homepageheader: "Yes",
+      });
+      // console.log(homepageheader);
 
       return {
         props: {
           propertyListings: JSON.parse(JSON.stringify(listing)),
+          homepageheaderlistings: JSON.parse(JSON.stringify(homepageheader)),
         },
       };
     }

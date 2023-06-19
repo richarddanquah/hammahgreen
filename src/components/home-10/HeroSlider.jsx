@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Slider from "react-slick";
 
-const HeroSlider = ({propertyListings}) => {
+const HeroSlider = ({ homepageheaderlistings }) => {
   const settings = {
     dots: false,
     arrow: true,
@@ -48,7 +48,41 @@ const HeroSlider = ({propertyListings}) => {
 
   return (
     <Slider {...settings} arrows={true}>
-      {sliderContent.map((item) => (
+      {homepageheaderlistings.map((item) => (
+        <div key={item._id}>
+          <div
+            style={{ backgroundImage: `url(${item.mainImage})` }}
+            className={`slide slide-one d-flex align-items-center`}
+          >
+            <div
+              className="container"
+              // style={{ backgroundImage: `url(${item.mainImage})` }}
+            >
+              <div className="home-content position-relative text-center p0">
+                <h2 className="banner_top_title">${item.price}</h2>
+                <h3 className="banner-title">{item.title}</h3>
+                <ul className="prop_details ">
+                  <li className="list-inline-item">
+                    <a href="#">Beds: {item.bedrooms}</a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#">Baths: {item.bedrooms}</a>
+                  </li>
+                  <li className="list-inline-item">
+                    <a href="#">SqFt: {item.sqft}</a>
+                  </li>
+                </ul>
+                <div className="active">
+                  <Link href="/properties">
+                    <a className="banner-btn">Book Now</a>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+      {/* {sliderContent.map((item) => (
         <div
           className={`slide slide-one d-flex align-items-center ${item.bgImage}`}
           key={item.id}
@@ -57,7 +91,6 @@ const HeroSlider = ({propertyListings}) => {
             <div className="home-content position-relative text-center p0">
               <h2 className="banner_top_title">
                 ${item.price}
-                {/* <small>/mo</small> */}
               </h2>
               <h3 className="banner-title">{item.title}</h3>
               <ul className="prop_details ">
@@ -77,7 +110,7 @@ const HeroSlider = ({propertyListings}) => {
             </div>
           </div>
         </div>
-      ))}
+      ))} */}
     </Slider>
   );
 };

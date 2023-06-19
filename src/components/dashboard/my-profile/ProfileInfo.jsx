@@ -232,7 +232,7 @@ const ProfileInfo = ({ theUser }) => {
             {updatingImg === "" && (
               <button
                 type="submit"
-                className="shadow-sm btn w-100 rounded-5 border border-secondary-emphasis"
+                className="shadow-sm btn w-100 rounded-5 border border-secondary"
               >
                 <span className="flaticon-edit"></span>
                 &nbsp; Save as profile photo

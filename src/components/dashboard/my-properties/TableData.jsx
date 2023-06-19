@@ -182,6 +182,10 @@ const TableData = ({ Listings }) => {
             <span style={{ fontSize: "12px" }}>
               <b>Featured</b> • {item.featured}
             </span>
+            <br />
+            <span style={{ fontSize: "12px" }}>
+              <b>Homepage Header</b> • {item.homepageheader}
+            </span>
           </td>
 
           <td style={{ lineHeight: "normal" }}>

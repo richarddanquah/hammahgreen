@@ -214,7 +214,7 @@ const EditListing = ({ theListing }) => {
               {updatingImg === "" && (
                 <button
                   type="submit"
-                  className="btn btn-success btn-sm w-50 rounded-5"
+                  className="btn border border-secondary btn-sm w-50 rounded-5"
                 >
                   Update listing image
                 </button>
@@ -223,11 +223,11 @@ const EditListing = ({ theListing }) => {
               {updatingImg === "true" && (
                 <button
                   type="button"
-                  className="btn btn-success btn-sm w-50 rounded-5"
+                  className="btn btn-sm w-50 border border-secondary-emphasis rounded-5"
                   disabled
                 >
                   <span
-                    className="spinner-border spinner-border-sm text-light"
+                    className="spinner-border spinner-border-sm text-success"
                     role="status"
                     aria-hidden="true"
                   ></span>

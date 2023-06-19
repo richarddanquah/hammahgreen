@@ -14,7 +14,8 @@ import Footer from "../common/footer/Footer";
 import CopyrightFooter from "../common/footer/CopyrightFooter";
 import PopupSignInUp from "../common/PopupSignInUp";
 
-const index = ({ theUser, propertyListings }) => {
+const index = ({ theUser, propertyListings, homepageheaderlistings }) => {
+  // console.log(homepageheaderlistings);
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -40,7 +41,7 @@ const index = ({ theUser, propertyListings }) => {
       <div className="home10-mainslider">
         <div className="main-banner-wrapper home10">
           <div className="banner-style-one home10-banner-style arrow-style-2">
-            <HeroSlider propertyListings={propertyListings} />
+            <HeroSlider homepageheaderlistings={homepageheaderlistings} />
           </div>
         </div>
         {/* <!-- /.main-banner-wrapper --> */}
