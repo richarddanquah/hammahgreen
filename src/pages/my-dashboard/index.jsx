@@ -5,11 +5,15 @@ import { getSession } from "next-auth/react";
 import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
 
-const Index = ({propertyListings}) => {
+const Index = ({ propertyListings, waterviewsListings, sorokroListings }) => {
   return (
     <>
       <Seo pageTitle="Dashboard" />
-      <MyDashboard propertyListings={propertyListings} />
+      <MyDashboard
+        propertyListings={propertyListings}
+        waterviewsListings={waterviewsListings}
+        sorokroListings={sorokroListings}
+      />
     </>
   );
 };
@@ -25,13 +29,23 @@ export async function getServerSideProps(context) {
   console.log("CONNECTED TO DATABASE ✔");
 
   console.log("FETCHING Listing...");
-  const listing = await Listing.find();
+  const listings = await Listing.find();
   // console.log(listing.length);
+
+  console.log("FETCHING Waterviews Listings ...");
+  const wvlistings = await Listing.find({ location: "Waterviews" });
+  console.log(wvlistings);
+
+  console.log("FETCHING Soro Kro Listings ...");
+  const sklistings = await Listing.find({ location: "Soro Kro" });
+  console.log(sklistings);
 
   return {
     props: {
       session,
-      propertyListings: JSON.parse(JSON.stringify(listing)),
+      propertyListings: JSON.parse(JSON.stringify(listings)),
+      waterviewsListings: JSON.parse(JSON.stringify(wvlistings)),
+      sorokroListings: JSON.parse(JSON.stringify(sklistings)),
     },
   };
 }

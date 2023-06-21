@@ -14,7 +14,7 @@ import Footer from "../common/footer/Footer";
 import CopyrightFooter from "../common/footer/CopyrightFooter";
 import PopupSignInUp from "../common/PopupSignInUp";
 
-const index = ({ theUser, propertyListings, homepageheaderlistings }) => {
+const Index = ({ theUser, propertyListings, homepageheaderlistings }) => {
   // console.log(homepageheaderlistings);
   return (
     <>
@@ -187,4 +187,4 @@ const index = ({ theUser, propertyListings, homepageheaderlistings }) => {
   );
 };
 
-export default index;
+export default Index;

@@ -20,6 +20,7 @@ export default async function handler(req, res) {
       featured,
       homepageheader,
       garages,
+      youtubeVideoID,
       postername,
       posted,
     } = req.body;
@@ -52,6 +53,7 @@ export default async function handler(req, res) {
         homepageheader: homepageheader,
         posterName: postername,
         posted: posted,
+        youtubeVideoID: youtubeVideoID,
       });
 
       const listingCreated = await newListing.save();

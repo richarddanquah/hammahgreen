@@ -13,7 +13,7 @@ import PropertyVideo from "../common/listing-details/PropertyVideo";
 import WalkScore from "../common/listing-details/WalkScore";
 import WhatsNearby from "../common/listing-details/WhatsNearby";
 
-const DetailsContent = ({property}) => {
+const DetailsContent = ({ property }) => {
   return (
     <>
       <div className="listing_single_description">
@@ -88,10 +88,11 @@ const DetailsContent = ({property}) => {
       </div> */}
       {/* End .floor_plane */}
 
-      {/* <div className="shop_single_tab_content style2 mt30">
-        <PropertyVideo />
-      </div> */}
-      {/* End property-video  */}
+      {property.youtubeVideoID && (
+        <div className="shop_single_tab_content style2 mt30">
+          <PropertyVideo property={property} />
+        </div>
+      )}
 
       {/* <div className="walkscore_area mt30">
         <WalkScore />

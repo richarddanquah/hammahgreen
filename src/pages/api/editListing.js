@@ -22,6 +22,7 @@ export default async function handler(req, res) {
       featured,
       homepageheader,
       garages,
+      youtubeVideoID,
       postername,
       posted,
     } = req.body;
@@ -52,6 +53,7 @@ export default async function handler(req, res) {
           built: built,
           featured: featured,
           homepageheader: homepageheader,
+          youtubeVideoID: youtubeVideoID,
           posterName: postername,
           posted: posted,
         }

@@ -47,6 +47,7 @@ const EditListing = ({ theListing }) => {
       featured: event.target.featured.value,
       homepageheader: event.target.homepageheader.value,
       garages: event.target.garages.value,
+      youtubeVideoID: event.target.youtubevideoid.value,
       postername: event.target.postername.value,
       posted: event.target.posted.value,
     };
@@ -593,6 +594,27 @@ const EditListing = ({ theListing }) => {
                 <option data-tokens="Yes">Yes</option>
                 <option data-tokens="No">No</option>
               </select>
+            </div>
+          </div>
+          {/* End .col */}
+        </div>
+
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="my_profile_setting_input form-group">
+              <label htmlFor="videoID">Add YouTube VideoID</label>
+              <span style={{ fontSize: "11px", display: "block" }}>
+                Ex: https://www.youtube.com/watch?v=
+                <b className="text-success">2PnbGCbcRYU</b>
+              </span>
+              <input
+                type="text"
+                className="form-control"
+                id="videoID"
+                name="youtubevideoid"
+                placeholder="Example: 2PnbGCbcRYU"
+                defaultValue={theListing.youtubeVideoID}
+              />
             </div>
           </div>
           {/* End .col */}

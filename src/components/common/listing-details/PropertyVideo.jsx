@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ModalVideo from "react-modal-video";
 
-const PropertyVideo = () => {
+const PropertyVideo = ({property}) => {
   const [isOpen, setOpen] = useState(false);
   return (
     <>
@@ -9,7 +9,7 @@ const PropertyVideo = () => {
         channel="youtube"
         autoplay
         isOpen={isOpen}
-        videoId="oqNZOOWF8qM"
+        videoId={property.youtubeVideoID} //"oqNZOOWF8qM"
         onClose={() => setOpen(false)}
       />
       <ul className="nav nav-tabs" id="myTab" role="tablist">
@@ -23,7 +23,7 @@ const PropertyVideo = () => {
             Property video
           </a>
         </li>
-        <li className="nav-item">
+        {/* <li className="nav-item">
           <a
             className="nav-link"
             data-bs-toggle="tab"
@@ -32,7 +32,7 @@ const PropertyVideo = () => {
           >
             Virtual Tour
           </a>
-        </li>
+        </li> */}
       </ul>
       {/* End .nav-tabs */}
 
@@ -45,9 +45,9 @@ const PropertyVideo = () => {
           <div className="property_video">
             <div className="thumb">
               <img
-                className="pro_img img-fluid w100"
-                src="/assets/images/background/7.jpg"
-                alt="7.jpg"
+                className="pro_img img-fluid w100 rounded-4"
+                src={property.mainImage}
+                alt={property.title}
               />
               <div className="overlay_icon">
                 <div

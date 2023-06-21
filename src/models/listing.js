@@ -8,8 +8,8 @@ const listingSchema = new Schema({
     unique: true,
   },
   description: String,
-  paragraph1: String,
-  paragraph2: String,
+  paragraph1: String, //added
+  paragraph2: String, //added
   price: String,
   type: String,
   location: String,
@@ -18,13 +18,14 @@ const listingSchema = new Schema({
   bedrooms: String,
   baths: String,
   sqft: String,
-  amenities: String, //new
-  built: String, //new
-  featured: String, //new
-  homepageheader: String,
+  amenities: String, //added
+  built: String, //added
+  featured: String, //added
+  homepageheader: String, //added
   posterName: String,
   posted: String,
   imgList: Array,
+  youtubeVideoID: String, //added
 });
 
 const Listing = models.Listing || model("Listing", listingSchema);

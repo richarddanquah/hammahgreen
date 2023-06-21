@@ -1,37 +1,31 @@
-const AllStatistics = ({propertyListings}) => {
-  
-  console.log(propertyListings.length);
-  const noOfListings = propertyListings.length;
+const AllStatistics = ({ propertyListings, waterviewsListings, sorokroListings }) => {
+  const allListings = propertyListings;
+  const WaterviewsListings = waterviewsListings;
+  const sorokrolistings = sorokroListings;
+  console.log(sorokroListings);
 
   const allStatistics = [
     {
       id: 1,
       blockStyle: "",
       icon: "flaticon-house-2",
-      timer: noOfListings,
+      timer: allListings.length,
       name: "All Listings",
-      alert: "Coming soon"
+      alert: "Coming soon",
     },
     // {
     //   id: 2,
-    //   blockStyle: "style2",
-    //   icon: "flaticon-view",
-    //   timer: "24",
-    //   name: "Total Views",
+    //   blockStyle: "",
+    //   icon: "flaticon-house-2",
+    //   timer: WaterviewsListings.length,
+    //   name: WaterviewsListings[0].location,
     // },
     // {
     //   id: 3,
-    //   blockStyle: "style3",
-    //   icon: "flaticon-chat",
-    //   timer: "12",
-    //   name: "Total Visitor Reviews",
-    // },
-    // {
-    //   id: 4,
-    //   blockStyle: "style4",
-    //   icon: "flaticon-heart",
-    //   timer: "18",
-    //   name: "Total Favorites",
+    //   blockStyle: "",
+    //   icon: "flaticon-house-2",
+    //   timer: sorokroListings.length,
+    //   name: sorokroListings[0].location,
     // },
   ];
 
@@ -39,7 +33,9 @@ const AllStatistics = ({propertyListings}) => {
     <>
       {allStatistics.map((item) => (
         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-3" key={item.id}>
-          <div className={`ff_one ${item.blockStyle} rounded-3 shadow-sm border border-success-subtle`}>
+          <div
+            className={`ff_one ${item.blockStyle} rounded-5 shadow-sm border border-secondary-emphasis`}
+          >
             <div className="detais">
               <div className="timer">{item.timer}</div>
               <p>{item.name}</p>
