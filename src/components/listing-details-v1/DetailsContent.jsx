@@ -88,7 +88,7 @@ const DetailsContent = ({ property }) => {
       </div> */}
       {/* End .floor_plane */}
 
-      {property.youtubeVideoID && (
+      {property?.youtubeVideoID && (
         <div className="shop_single_tab_content style2 mt30">
           <PropertyVideo property={property} />
         </div>
