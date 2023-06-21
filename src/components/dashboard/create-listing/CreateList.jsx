@@ -472,7 +472,7 @@ const CreateList = () => {
         <div className="row">
           <div className="col-lg-6">
             <div className="my_profile_setting_input form-group">
-              <label htmlFor="videoID">Add YouTube VideoID</label>
+              <label htmlFor="videoID">Add a <i className="fa fa-youtube text-danger"></i>YouTube VideoID</label>
               <span style={{ fontSize: "11px", display: "block" }}>
                 Ex: https://www.youtube.com/watch?v=
                 <b className="text-success">2PnbGCbcRYU</b>
@@ -483,6 +483,7 @@ const CreateList = () => {
                 id="videoID"
                 name="youtubevideoid"
                 placeholder="Example: 2PnbGCbcRYU"
+                maxLength={11}
               />
             </div>
           </div>

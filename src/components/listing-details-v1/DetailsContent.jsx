@@ -16,7 +16,7 @@ import WhatsNearby from "../common/listing-details/WhatsNearby";
 const DetailsContent = ({ property }) => {
   return (
     <>
-      <div className="listing_single_description">
+      <div className="listing_single_description shadow-sm rounded">
         <div className="lsd_list">
           <PropertyItem property={property} />
         </div>
@@ -26,8 +26,8 @@ const DetailsContent = ({ property }) => {
         <PropertyDescriptions property={property} />
       </div>
       {/* End .listing_single_description */}
-
-      <div className="additional_details">
+      <br />
+      <div className="additional_details shadow-sm rounded">
         <div className="row">
           <div className="col-lg-12">
             <h4 className="mb15">Property Details</h4>
@@ -89,7 +89,7 @@ const DetailsContent = ({ property }) => {
       {/* End .floor_plane */}
 
       {property?.youtubeVideoID && (
-        <div className="shop_single_tab_content style2 mt30">
+        <div className="shop_single_tab_content style2 mt30 shadow-sm rounded-4">
           <PropertyVideo property={property} />
         </div>
       )}

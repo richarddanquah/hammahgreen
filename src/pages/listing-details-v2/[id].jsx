@@ -144,7 +144,7 @@ const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
         <div className="container">
           <div className="row">
             <div className="col-md-12 col-lg-8">
-              <div className="listing_single_description2 mt30-767 mb30-767">
+              <div className="listing_single_description2 mt30-767 mb30-767 rounded-4 shadow-sm">
                 <div className="single_property_title">
                   <h2>{property?.title}</h2>
                   <p>{property?.location}</p>
@@ -159,7 +159,7 @@ const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
                 </div>
               </div>
               {/* End .listing_single_description2 */}
-
+                <br />
               <DetailsContent property={property} />
             </div>
             {/* End details content .col-lg-8 */}

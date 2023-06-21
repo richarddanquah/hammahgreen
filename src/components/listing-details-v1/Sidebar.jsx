@@ -19,7 +19,7 @@ const Sidebar = ({listings}) => {
       </div> */}
       {/* End .sidebar_listing_list */}
 
-      <div className="terms_condition_widget">
+      <div className="terms_condition_widget shadow-sm rounded-4">
         <h4 className="title">Featured Properties</h4>
         <div className="sidebar_feature_property_slider">
           <FeatureProperties listings={listings} />

@@ -6518,7 +6518,7 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
   text-align: center;
   top: 40%;
   width: 70px;
-  z-index: 99;
+  z-index: 1;
 }
 
 .property_video .thumb .overlay_icon a:after {
