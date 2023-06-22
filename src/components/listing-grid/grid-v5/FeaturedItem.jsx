@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addLength } from "../../../features/properties/propertiesSlice";
-import properties from "../../../data/properties";
+// import properties from "../../../data/properties";
 
 const FeaturedItem = ({ waterviewsListings }) => {
   const {
@@ -48,7 +48,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
   // bathroom handler
   const bathroomHandler = (item) => {
     if (bathrooms !== "") {
-      return item.itemDetails[1].number == bathrooms;
+      return item.baths == bathrooms;
     }
     return true;
   };
@@ -56,7 +56,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
   // bedroom handler
   const bedroomHandler = (item) => {
     if (bedrooms !== "") {
-      return item.itemDetails[0].number == bedrooms;
+      return item.bedrooms == bedrooms;
     }
     return true;
   };
@@ -118,7 +118,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
 
   // status handler
   let content = waterviewsListings
-    ?.slice(0, 3)
+    // ?.slice(0, 3)
     ?.filter(keywordHandler)
     ?.filter(locationHandler)
     ?.filter(statusHandler)
@@ -142,7 +142,7 @@ const FeaturedItem = ({ waterviewsListings }) => {
         <div
           className={`feat_property home7 style4 ${
             isGridOrList && "d-flex align-items-center"
-          }`}
+          } rounded-4 shadow-sm`}
         >
           <div className="thumb">
             <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />

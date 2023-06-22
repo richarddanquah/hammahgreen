@@ -8778,10 +8778,10 @@ form.home5_advanced_search_form .form-group input.form-control::-ms-input-placeh
 
 .banner-img {
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: center bottom;
   background-size: cover;
-  height: 50vh;
-  border-radius: 40px 40px 15px 15px;
+  height: 40vh;
+  border-radius: 20px 20px;
   transition: all ease .6s;
 }
 

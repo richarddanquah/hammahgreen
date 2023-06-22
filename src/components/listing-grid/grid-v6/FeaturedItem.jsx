@@ -136,7 +136,7 @@ const FeaturedItem = ({ homes }) => {
     ?.filter(featuredHandler)
     .map((item) => (
       <div className="col-md-6 col-lg-4" key={item._id}>
-        <div className="feat_property home7 style4">
+        <div className="feat_property home7 style4 rounded-4 shadow-sm">
           <div className="thumb">
             <img className="img-whp" src={item.mainImage} alt="fp1.jpg" />
             <div className="thmb_cntnt">

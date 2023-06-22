@@ -10,7 +10,7 @@ import PopupSignInUp from "../../common/PopupSignInUp";
 import BreadCrumb2 from "./BreadCrumb2";
 import FeaturedItem from "./FeaturedItem";
 
-const index = ({ homes, listings }) => {
+const Index = ({ homes, listings }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -43,7 +43,7 @@ const index = ({ homes, listings }) => {
 
           <div className="row">
             <div className="col-md-12">
-              <div className="grid_list_search_result ">
+              <div className="grid_list_search_result rounded-4 shadow-sm">
                 <div className="row align-items-center">
                   <FilterTopBar />
                 </div>
@@ -113,4 +113,4 @@ const index = ({ homes, listings }) => {
   );
 };
 
-export default index;
+export default Index;

@@ -71,8 +71,9 @@ const FilterTopBar = () => {
                 value={getFeatured}
               >
                 <option value="">Featured All</option>
-                <option value="sale">Sale</option>
-                <option value="rent">Rent</option>
+                <option value="For sale">Sale</option>
+                <option value="For rent">Rent</option>
+                <option value="Coming Soon">Coming Soon</option>
               </select>
             </li>
           </ul>

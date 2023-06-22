@@ -2,7 +2,7 @@ const Pricing = () => {
   const pricingContent = [
     {
       id: 1,
-      price: "86,000",
+      price: "100,000",
       title: "Yellow package",
       features: [
         "Base green power homes",
@@ -13,7 +13,7 @@ const Pricing = () => {
     },
     {
       id: 2,
-      price: "160,000",
+      price: "200,000",
       title: "Green Package",
       features: [
         "Semi-autonomous green power homes",
@@ -23,7 +23,7 @@ const Pricing = () => {
     },
     {
       id: 3,
-      price: "317,000",
+      price: "300,000",
       title: "Gold package",
       features: [
         "Maximum autonomous, green power homes",
@@ -36,7 +36,7 @@ const Pricing = () => {
     <>
       {pricingContent.map((item) => (
         <div className="col-sm-6 col-md-6 col-lg-4" key={item.id}>
-          <div className="pricing_table">
+          <div className="pricing_table rounded-4 shadow-sm border border-secondary-emphasis">
             <div className="pricing_header">
               <div className="price">GHS {item.price}</div>
               <h4>{item.title}</h4>

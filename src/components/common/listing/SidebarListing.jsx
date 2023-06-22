@@ -6,14 +6,14 @@ import FilteringItem from "./FilteringItem";
 const SidebarListing = ({listings}) => {
     return (
         <div className="sidebar_listing_grid1">
-            <div className="sidebar_listing_list">
+            <div className="sidebar_listing_list rounded-4 shadow-sm">
                 <div className="sidebar_advanced_search_widget">
                     <FilteringItem />
                 </div>
             </div>
             {/* End .sidebar_listing_list */}
 
-            <div className="terms_condition_widget">
+            <div className="terms_condition_widget rounded-4 shadow-sm">
                 <h4 className="title">Featured Properties</h4>
                 <div className="sidebar_feature_property_slider">
                     <FeatureProperties listings={listings} />

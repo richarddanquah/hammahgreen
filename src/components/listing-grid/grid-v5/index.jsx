@@ -13,7 +13,7 @@ import FeaturedItem from "./FeaturedItem";
 import BannerImage from "../../common/BannerImage";
 import Link from "next/link";
 
-const Index = ({waterviewsListings, listings}) => {
+const Index = ({ waterviewsListings, listings }) => {
   // console.log(waterviewsListings);
   return (
     <>
@@ -52,38 +52,36 @@ const Index = ({waterviewsListings, listings}) => {
 
           <div className="row">
             <div className="col-md-12 col-lg-8">
-              <BannerImage img="../../../assets/images/home/winneba-city.jpeg" />
-              <div className="mt10 mb30">
-                <Link href="/city-winneba">
-                  <a className="btn btn-white btn-thm" role="button">About Winneba</a>
-                </Link>
-                &nbsp;
-                <Link href="/about-waterviews">
-                  <a className="btn btn-dark btn-thm" role="button">About Waterviews</a>
-                </Link>
-                &nbsp;
-                {/* <Link href="/winneba-estates">
-                  <a className="btn btn-dark btn-thm" role="button">Winneba Estate</a>
-                </Link> */}
-              </div>
-              <div className="grid_list_search_result ">
+              <div className="grid_list_search_result rounded-4 shadow-sm">
                 <div className="row align-items-center">
                   <FilterTopBar />
                 </div>
               </div>
               {/* End .row */}
-              {/* End .row */}
 
               <div className="row">
+                <BannerImage img="../../../assets/images/home/winneba-city.jpeg" />
+                <div className="mt10 mb30 text-center">
+                  <Link href="/city-winneba">
+                    <a className="btn btn-white btn-thm rounded-4 shadow-sm" role="button">
+                      About Winneba
+                    </a>
+                  </Link>
+                  &nbsp;
+                  <Link href="/about-waterviews">
+                    <a className="btn btn-dark btn-thm rounded-4 shadow-sm" role="button">
+                      About Waterviews
+                    </a>
+                  </Link>
+                  &nbsp;
+                </div>
                 <FeaturedItem waterviewsListings={waterviewsListings} />
               </div>
               {/* End .row */}
 
               <div className="row">
                 <div className="col-lg-12 mt20">
-                  <div className="mbp_pagination">
-                    {/* <Pagination /> */}
-                  </div>
+                  <div className="mbp_pagination">{/* <Pagination /> */}</div>
                 </div>
                 {/* End paginaion .col */}
               </div>
@@ -114,7 +112,7 @@ const Index = ({waterviewsListings, listings}) => {
                 {/* End .offcanvas-heade */}
 
                 <div className="offcanvas-body">
-                  <SidebarListing listings={listings}/>
+                  <SidebarListing listings={listings} />
                 </div>
               </div>
               {/* End mobile sidebar listing  */}
