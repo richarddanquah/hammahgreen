@@ -73,7 +73,7 @@ const HeroSlider = ({ homepageheaderlistings }) => {
                   </li>
                 </ul>
                 <div className="active">
-                  <Link href="/properties">
+                  <Link href={`/listing-details-v2/${item._id}`}>
                     <a className="banner-btn">Book Now</a>
                   </Link>
                 </div>
