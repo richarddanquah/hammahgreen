@@ -46,7 +46,8 @@ const FeatureProperties = ({ listings }) => {
                     {/* <small>/mo</small> */}
                   </a>
                   <h4 className="posr">
-                    <Link href={`/listing-details-v2/${item._id}`}>
+                    {/* <Link href={`/listing-details-v2/${item._id}`}> */}
+                    <Link href="/#feature-property">
                       <a className="text-white">{item.title}</a>
                     </Link>
                   </h4>

@@ -50,7 +50,7 @@ const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
                         original={property?.mainImage}
                         thumbnail={property?.mainImage}
                         width={752}
-                        height={450}
+                        height={470}
                       >
                         {({ ref, open }) => (
                           <>
