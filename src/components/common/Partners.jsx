@@ -8,7 +8,7 @@ const Partners = () => {
             <img
               className="img-fluid"
               src={`assets/images/partners/${val}.png`}
-              alt="1.png"
+              alt="partner logo.png"
             />
           </div>
         </div>

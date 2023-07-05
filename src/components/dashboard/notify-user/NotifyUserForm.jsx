@@ -5,8 +5,11 @@ import { uploadToS3 } from "../../../lib/s3Utils";
 import { v1 } from "uuid";
 
 const Form = () => {
-  const [mainImg, setMainImg] = useState(null);
   const { data: session } = useSession();
+  const [mainImg, setMainImg] = useState(null);
+  const [sendNotification, setSendNotification] = useState("");
+  const [successToast, setSuccessToast] = useState("none");
+  const [errorToast, setErrorToast] = useState("none");
   const route = useRouter();
   const UUIDv1 = v1();
 
@@ -18,7 +21,7 @@ const Form = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    setSendNotification("true");
     // Get selected file
     const file = mainImg;
     // console.log(file);
@@ -75,7 +78,12 @@ const Form = () => {
     console.log(result);
 
     if (result.sentNotification) {
-      alert(`✉ Notification sent to ${result.sentNotification.to} successfully.`)
+      setSuccessToast("block");
+      setSendNotification("");
+      e.target.reset();
+    } else {
+      setErrorToast("block");
+      setSendNotification("");
     }
   };
 
@@ -202,16 +210,78 @@ const Form = () => {
         <div className="row">
           <div className="col-xl-12">
             <div className="my_profile_setting_input">
-              <button type="reset" className="btn btn1 float-start">
+              {/* <button type="reset" className="btn btn1 float-start">
                 Clear
-              </button>
-              <button type="submit" className="btn btn2 float-end">
-                Send <i className="fa fa-send"></i>
-              </button>
+              </button> */}
+              {sendNotification === "" && (
+                <button type="submit" className="btn btn2 float-end rounded-5">
+                  <i className="fa fa-send"></i> Send
+                </button>
+              )}
+
+              {sendNotification === "true" && (
+                <button type="submit" className="btn btn2 float-end rounded-5">
+                  <span
+                    className="spinner-border spinner-border-sm text-light"
+                    role="status"
+                    aria-hidden="true"
+                  ></span>
+                  &nbsp; Sending...
+                </button>
+              )}
             </div>
           </div>
         </div>
       </form>
+      {/* Success Toast*/}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: successToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="flaticon-tick text-success mr20"></span>
+            <span className="text-success">
+              Notification sent <br />
+            </span>
+            {/* <span className="fa fa-exclamation-circle text-secondary mr20"></span>
+            <span>PS: Sign out for changes to take effect.</span> */}
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setSuccessToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* End of Success Toast*/}
+
+      {/* Error on Image update Toast */}
+      <div
+        class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
+        role="alert"
+        style={{ display: errorToast }}
+        // style={{ display: "block" }}
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <span className="fa fa-exclamation-triangle mr10 text-danger"></span>
+            <span>Something went wrong.</span>
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close text-success me-2 m-auto"
+            onClick={() => {
+              setErrorToast("none");
+            }}
+          ></button>
+        </div>
+      </div>
+      {/* Error on Image update Toast */}
     </>
   );
 };

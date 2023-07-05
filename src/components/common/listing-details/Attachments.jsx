@@ -1,7 +1,7 @@
-const Attachments = () => {
+const Attachments = ({ property }) => {
   return (
     <>
-      <div className="icon_box_area style2">
+      {/* <div className="icon_box_area style2">
         <div className="score">
           <span className="flaticon-document text-thm fz30"></span>
         </div>
@@ -11,7 +11,7 @@ const Attachments = () => {
             Document
           </h5>
         </div>
-      </div>
+      </div> */}
       {/* End .icon_box_area */}
 
       <div className="icon_box_area style2">
@@ -20,8 +20,12 @@ const Attachments = () => {
         </div>
         <div className="details">
           <h5>
-            <span className="flaticon-download text-thm pr10"></span> Demo pdf
-            Document
+            <a href={property.attachmenturl} download>
+              <button className="btn btn-dark rounded-5 px-4">
+                <span className="flaticon-download pr10"></span>
+                Download Property Document
+              </button>
+            </a>
           </h5>
         </div>
       </div>

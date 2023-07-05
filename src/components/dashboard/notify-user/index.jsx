@@ -66,7 +66,7 @@ const Index = () => {
                 {/* End .col */}
 
                 <div className="col-lg-12 mb20">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 border border-light-subtle shadow-sm">
                     <NotifyUserForm />
                   </div>
                 </div>

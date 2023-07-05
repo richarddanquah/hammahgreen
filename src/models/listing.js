@@ -26,6 +26,7 @@ const listingSchema = new Schema({
   posted: String,
   imgList: Array,
   youtubeVideoID: String, //added
+  attachmenturl: String, //added
 });
 
 const Listing = models.Listing || model("Listing", listingSchema);

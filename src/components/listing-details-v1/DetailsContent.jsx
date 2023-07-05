@@ -37,6 +37,24 @@ const DetailsContent = ({ property }) => {
       </div>
       {/* End .additional_details */}
 
+      {property?.attachmenturl && (
+        <>
+          <div className="property_attachment_area shadow-sm rounded-5 mt-2">
+            <h4 className="mb30">Property Attachment</h4>
+            <div className="iba_container style2">
+              <Attachments property={property} />
+            </div>
+          </div>
+        </>
+      )}
+      {/* End .property_attachment_area */}
+
+      {property?.youtubeVideoID && (
+        <div className="shop_single_tab_content style2 mt30 shadow-sm rounded-4">
+          <PropertyVideo property={property} />
+        </div>
+      )}
+
       {/* <div className="additional_details">
         <div className="row">
           <div className="col-lg-12">
@@ -46,14 +64,6 @@ const DetailsContent = ({ property }) => {
         </div>
       </div> */}
       {/* End .additional_details */}
-
-      {/* <div className="property_attachment_area">
-        <h4 className="mb30">Property Attachments</h4>
-        <div className="iba_container style2">
-          <Attachments />
-        </div>
-      </div> */}
-      {/* End .property_attachment_area */}
 
       {/* <div className="application_statics mt30">
         <div className="row">
@@ -87,12 +97,6 @@ const DetailsContent = ({ property }) => {
         </div>
       </div> */}
       {/* End .floor_plane */}
-
-      {property?.youtubeVideoID && (
-        <div className="shop_single_tab_content style2 mt30 shadow-sm rounded-4">
-          <PropertyVideo property={property} />
-        </div>
-      )}
 
       {/* <div className="walkscore_area mt30">
         <WalkScore />

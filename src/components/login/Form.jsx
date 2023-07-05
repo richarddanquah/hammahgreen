@@ -32,7 +32,7 @@ const Form = () => {
       <div className="col-lg-12">
         <button
           type="button"
-          className="btn btn1 bgc-git color-white mb10 w-100"
+          className="btn btn1 bgc-git color-white mb10 w-100 rounded-5"
           onClick={() => {
             signIn();
           }}
