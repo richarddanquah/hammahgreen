@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { isSinglePageActive } from "../../../../utils/daynamicNavigation";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const MyAccount = () => {
+const MyAccount = ({ user }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
   const profileMenuItems = [
@@ -28,6 +28,9 @@ const MyAccount = () => {
         />
         <br />
         <br />
+        {/* <span style={{ fontSize: "10px" }} className="dn-1199">
+          {user.role}
+        </span> */}
         <p>
           {session.user.name}
           <br />

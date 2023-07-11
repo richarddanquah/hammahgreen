@@ -1,20 +1,27 @@
 import dynamic from "next/dynamic";
 import Seo from "../../components/common/seo";
 import MyProfile from "../../components/dashboard/my-profile";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
+import ProtectedPage from "../../components/common/ProtectedPage";
 import connectDB from "../../lib/connectMongoDB";
 import User from "../../models/user";
 
-const index = ({ theUser }) => {
+const Index = ({ theUser }) => {
+  const { data: session, status } = useSession();
   return (
     <>
       <Seo pageTitle="My Profile" />
-      <MyProfile theUser={theUser} />
+      {session && (
+        <>
+          <MyProfile theUser={theUser} />
+        </>
+      )}
+      {!session && <ProtectedPage />}
     </>
   );
 };
 
-export default dynamic(() => Promise.resolve(index), { ssr: false });
+export default dynamic(() => Promise.resolve(Index), { ssr: false });
 
 export async function getServerSideProps(context) {
   const session = await getSession(context);
@@ -42,5 +49,9 @@ export async function getServerSideProps(context) {
     } catch (error) {
       console.log(error);
     }
+  } else {
+    return {
+      props: {},
+    };
   }
 }

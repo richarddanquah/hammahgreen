@@ -220,7 +220,11 @@ const Form = () => {
               )}
 
               {sendNotification === "true" && (
-                <button type="submit" className="btn btn2 float-end rounded-5">
+                <button
+                  type="button"
+                  className="btn btn2 float-end rounded-5"
+                  disabled
+                >
                   <span
                     className="spinner-border spinner-border-sm text-light"
                     role="status"

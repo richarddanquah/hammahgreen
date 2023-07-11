@@ -3,12 +3,20 @@ import Seo from "../../components/common/seo";
 import MyProperties from "../../components/dashboard/my-properties";
 import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
+import { useSession } from "next-auth/react";
+import ProtectedPage from "../../components/common/ProtectedPage";
 
-const Index = ({Listings}) => {
+const Index = ({ Listings }) => {
+  const { data: session } = useSession();
   return (
     <>
       <Seo pageTitle="My Properties" />
-      <MyProperties Listings={Listings} />
+      {session && (
+        <>
+          <MyProperties Listings={Listings} />
+        </>
+      )}
+      {!session && <ProtectedPage />}
     </>
   );
 };

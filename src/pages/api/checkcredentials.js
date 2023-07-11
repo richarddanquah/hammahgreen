@@ -8,6 +8,7 @@ export default async function handler(req, res) {
   }
 
   const { email, password } = req.body;
+  console.log(req.body);
 
   try {
     console.log("CONNECTING TO DATABASE...");

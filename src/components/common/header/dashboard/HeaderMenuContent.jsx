@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import MyAccount from "./MyAccount";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const HeaderMenuContent = ({ float = "" }) => {
+const HeaderMenuContent = ({ float = "", user }) => {
   const route = useRouter();
   const { data: session, status } = useSession();
   // console.log(session);
@@ -491,12 +491,13 @@ const HeaderMenuContent = ({ float = "" }) => {
                 width={35}
               />
               &nbsp;
+              {/* <span style={{fontSize: "10px"}} className="dn-1199 ms-1">{user.role}</span> */}
               <span className="dn-1199 ms-1">{session.user.name}</span>
               &nbsp;
               <span className="fa fa-angle-down"></span>
             </a>
             <div className="dropdown-menu">
-              <MyAccount />
+              <MyAccount user={user} />
             </div>
           </div>
         </li>

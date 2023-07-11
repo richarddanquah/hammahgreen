@@ -97,7 +97,7 @@ const FilterSearch = () => {
                     <button
                         onClick={clearHandler}
                         type="button"
-                        className="btn btn-block btn-thm w-100"
+                        className="btn btn-block btn-thm text-dark w-100"
                     >
                         Clear
                     </button>

@@ -24,7 +24,7 @@ const Form = () => {
       <div className="heading text-center">
         <h3>Login</h3>
         <p className="text-center">
-          Dont have an account? Contact an <Link href="">Agent</Link>.
+          Dont have an account? Contact an <Link href="/agents">Agent</Link>.
         </p>
       </div>
       {/* End .heading */}

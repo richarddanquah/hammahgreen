@@ -117,7 +117,7 @@ export default function AttachFile() {
             )}
 
             {uploadFile === "true" && (
-              <button type="submit" className="btn btn-dark rounded-5 px-4">
+              <button type="button" className="btn btn-dark rounded-5 px-4" disabled>
                 Adding... &nbsp;
                 <span
                   className="spinner-border spinner-border-sm text-light"

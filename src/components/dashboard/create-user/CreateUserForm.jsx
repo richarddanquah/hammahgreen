@@ -153,7 +153,7 @@ const Form = () => {
               >
                 <option data-tokens="User">User</option>
                 <option data-tokens="Admin">Admin</option>
-                {/* <option data-tokens="Agent">Agent</option> */}
+                <option data-tokens="Agent">Agent</option>
               </select>
             </div>
           </div>

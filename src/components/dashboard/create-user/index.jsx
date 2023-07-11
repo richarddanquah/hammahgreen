@@ -11,10 +11,10 @@ const Index = ({Users}) => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
-  if (status === "unauthenticated") {
-    // signIn();
-    router.push("/login");
-  }
+  // if (status === "unauthenticated") {
+  //   // signIn();
+  //   router.push("/login");
+  // }
 
   return (
     <>

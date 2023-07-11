@@ -373,6 +373,36 @@ const MobileMenuContent = ({ theUser }) => {
             </SubMenu>
           )}
 
+          {theUser && session && theUser.role === "Agent" && (
+            <SubMenu
+              title={session.user.email}
+              // className={
+              //   cities.some((page) => page.routerPath === route.pathname)
+              //     ? "parent-menu-active"
+              //     : undefined
+              // }
+            >
+              <MenuItem>
+                <Link href="/my-dashboard">
+                  <a>Dashboard</a>
+                </Link>
+              </MenuItem>
+              <MenuItem>
+                <a
+                  onClick={async () => {
+                    const data = await signOut({
+                      redirect: false,
+                      callbackUrl: "/login",
+                    });
+                    route.push(data.url);
+                  }}
+                >
+                  <span className="flaticon-logout"></span> Signout
+                </a>
+              </MenuItem>
+            </SubMenu>
+          )}
+
           {theUser && session && theUser.role === "User" && (
             <SubMenu
               title={session.user.email}

@@ -1,22 +1,28 @@
 import dynamic from "next/dynamic";
 import Seo from "../../components/common/seo";
 import Notifications from "../../components/client-dashboard/notifications";
-import { getSession } from "next-auth/react";
+import { useSession, getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import connectDB from "../../lib/connectMongoDB";
 import User from "../../models/user";
 import Notification from "../../models/notificaiton";
+import ProtectedPage from "../../components/common/ProtectedPage";
 
 const Index = ({ theUser, userNotifications }) => {
-  const route = useRouter()
+  const { data: session } = useSession();
+  const route = useRouter();
 
-  if (theUser.role !== "User") {
-    route.push("/my-dashboard")
-  }
   return (
     <>
       <Seo pageTitle="Client Profile" />
-      <Notifications theUser={theUser} userNotifications={userNotifications} />
+      {session && theUser.role === "User" && (
+        <Notifications
+          theUser={theUser}
+          userNotifications={userNotifications}
+        />
+      )}
+      {session && theUser.role !== "User" && <ProtectedPage />}
+      {!session && <ProtectedPage />}
     </>
   );
 };

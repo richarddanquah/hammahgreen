@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import agents from "../../../data/agents";
 import { addAgentItemLength } from "../../../features/agent/agentSlice";
 
-const Team = () => {
+const Team = ({allAgents}) => {
     const { name, category, city, listen } =
         useSelector((state) => state.agent) || {};
     const dispatch = useDispatch();

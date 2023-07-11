@@ -351,6 +351,45 @@ const HeaderMenuContent = ({ float = "", theUser }) => {
       )}
       {/* End .dropitem */}
 
+      {theUser && session && theUser.role === "Agent" && (
+        <li className="dropitem">
+          <a>
+            <span className="flaticon-user"></span>
+            &nbsp;
+            <span className="title">{session.user.name}</span>
+            <span className="arrow"></span>
+          </a>
+          <ul className="sub-menu">
+            <li>
+              <Link href="/my-dashboard">
+                <a
+                  className={
+                    route.pathname === "/my-dashboard" ? "ui-active" : undefined
+                  }
+                >
+                  My dashboard
+                </a>
+              </Link>
+            </li>
+            <li>
+              <a
+                href="#"
+                onClick={async () => {
+                  const data = await signOut({
+                    redirect: false,
+                    callbackUrl: "/login",
+                  });
+                  route.push(data.url);
+                }}
+              >
+                <span className="flaticon-logout"> Sign out</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+      )}
+      {/* End .dropitem */}
+
       {/* session && theUser.role === "User" && */}
       {theUser && session && theUser.role === "User" && (
         <li className="dropitem">

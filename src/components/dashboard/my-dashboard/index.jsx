@@ -7,19 +7,14 @@ import StatisticsChart from "./StatisticsChart";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = ({ propertyListings, waterviewsListings, sorokroListings }) => {
+const Index = ({user, propertyListings, waterviewsListings, sorokroListings }) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-
-  if (status === "unauthenticated") {
-    // signIn();
-    router.push("/login");
-  }
 
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header user={user} />
 
       {/* <!--  Mobile Menu --> */}
       <MobileMenu />

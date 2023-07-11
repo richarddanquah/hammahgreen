@@ -3,12 +3,22 @@ import Seo from "../../components/common/seo";
 import CreateUser from "../../components/dashboard/create-user";
 import connectDB from "../../lib/connectMongoDB";
 import User from "../../models/user";
+import { useSession } from "next-auth/react";
+import ProtectedPage from "../../components/common/ProtectedPage";
 
-const Index = ({Users}) => {
+const Index = ({ Users }) => {
+  const { data: session, status } = useSession();
   return (
     <>
       <Seo pageTitle="Add User" />
-      <CreateUser Users={Users} />
+      {session && (
+        <>
+          <CreateUser Users={Users} />
+        </>
+      )}
+      {!session && (
+        <ProtectedPage />
+      )}
     </>
   );
 };
