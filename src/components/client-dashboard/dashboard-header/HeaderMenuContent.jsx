@@ -492,7 +492,7 @@ const HeaderMenuContent = ({ float = "" }) => {
               &nbsp;
               <span className="fa fa-angle-down"></span>
             </a>
-            <div className="dropdown-menu">
+            <div className="dropdown-menu shadow-sm border border-light">
               <MyAccount />
             </div>
           </div>
