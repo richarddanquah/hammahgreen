@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import ClientFullNameForm from "./ClientFullNameForm";
 import ClientUserNameForm from "./ClientUserNameForm";
 import ClientPasswordChange from "./ClientPasswordChange";
+import DeleteAccount from "./DeleteAccount";
 
 const Index = ({ theUser }) => {
   const { data: session, status } = useSession();
@@ -34,6 +35,7 @@ const Index = ({ theUser }) => {
             <ClientFullNameForm theUser={theUser} />
             <ClientUserNameForm theUser={theUser} />
             <ClientPasswordChange theUser={theUser} />
+            <DeleteAccount theUser={theUser} />
           </div>
         </div>
       </section>

@@ -465,7 +465,7 @@ const HeaderMenuContent = ({ float = "" }) => {
               route.pathname === "/client-user/notifications" ? "ui-active" : undefined
             }
           >
-            <span className="fa fa-bell"></span>
+            <span className="fa fa-bell text-secondary"></span>
           </a>
         </Link>
       </li>

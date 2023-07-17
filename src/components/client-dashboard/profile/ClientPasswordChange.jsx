@@ -70,7 +70,7 @@ export default function ClientPasswordChange({theUser}) {
   return (
     <>
       <form
-        className="border border-secondary-subtle p-3 rounded-4 shadow-sm"
+        className="border border-secondary-subtle p-3 mb-3 rounded-4 shadow-sm"
         onSubmit={handleSubmit}
       >
         <div className="form-text text-dark mb-4">

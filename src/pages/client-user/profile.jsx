@@ -52,7 +52,7 @@ export async function getServerSideProps(context) {
   } else {
     return {
       props: {
-        null: {},
+        null: JSON.parse(JSON.stringify({})),
       },
     };
   }
