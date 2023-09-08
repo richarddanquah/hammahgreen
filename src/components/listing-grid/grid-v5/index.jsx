@@ -13,15 +13,15 @@ import FeaturedItem from "./FeaturedItem";
 import BannerImage from "../../common/BannerImage";
 import Link from "next/link";
 
-const Index = ({ waterviewsListings, listings }) => {
+const Index = ({ theUser, waterviewsListings, listings }) => {
   // console.log(waterviewsListings);
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
-      <MobileMenu />
+      <MobileMenu theUser={theUser} />
 
       {/* <!-- Modal --> */}
       <PopupSignInUp />

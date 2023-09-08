@@ -7,14 +7,14 @@ import PopupSignInUp from "../common/PopupSignInUp";
 import BreadCrumbBanner from "./BreadCrumbBanner";
 import Pricing from "./Pricing";
 
-const index = () => {
+const Index = ({theUser}) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser}/>
 
       {/* <!--  Mobile Menu --> */}
-      <MobileMenu />
+      <MobileMenu theUser={theUser}/>
 
       {/* <!-- Modal --> */}
       <PopupSignInUp />
@@ -68,4 +68,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

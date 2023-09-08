@@ -10,14 +10,14 @@ import PopupSignInUp from "../../common/PopupSignInUp";
 import BreadCrumb2 from "./BreadCrumb2";
 import FeaturedItem from "./FeaturedItem";
 
-const Index = ({ homes, listings }) => {
+const Index = ({ theUser, homes, listings }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
-      <MobileMenu />
+      <MobileMenu theUser={theUser} />
 
       {/* <!-- Modal --> */}
       <PopupSignInUp />

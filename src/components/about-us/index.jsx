@@ -12,14 +12,14 @@ import BreadCrumbBanner from "./BreadCrumbBanner";
 import Team from "./Team";
 import OurMission from "./OurMission";
 
-const Index = () => {
+const Index = ({theUser}) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
-      <MobileMenu />
+      <MobileMenu theUser={theUser} />
 
       {/* <!-- Modal --> */}
       <PopupSignInUp />
