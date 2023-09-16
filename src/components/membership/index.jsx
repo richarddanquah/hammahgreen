@@ -7,7 +7,7 @@ import PopupSignInUp from "../common/PopupSignInUp";
 import BreadCrumbBanner from "./BreadCrumbBanner";
 import Pricing from "./Pricing";
 
-const Index = ({theUser}) => {
+const Index = ({theUser, greenpackages}) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -36,7 +36,7 @@ const Index = ({theUser}) => {
           {/* End .row */}
 
           <div className="row">
-            <Pricing />
+            <Pricing greenpackages={greenpackages} />
           </div>
           {/* End .row */}
         </div>

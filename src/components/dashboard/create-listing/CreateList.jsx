@@ -107,7 +107,7 @@ const CreateList = () => {
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
-        className="p20 border rounded-2 shadow-sm"
+        className="p20 border-0 rounded-2 shadow-sm bg-white"
       >
         <div className="col-lg-12">
           <div className="wrap-custom-file2">

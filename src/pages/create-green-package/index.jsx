@@ -1,6 +1,6 @@
 import dynamic from "next/dynamic";
 import Seo from "../../components/common/seo";
-import CreateListing from "../../components/dashboard/create-listing";
+import CreateGreenPackage from "../../components/dashboard/create-green-package";
 import { useSession, getSession } from "next-auth/react";
 import ProtectedPage from "../../components/common/ProtectedPage";
 
@@ -8,10 +8,10 @@ const Index = () => {
   const { data: session, status } = useSession();
   return (
     <>
-      <Seo pageTitle="Create Listing" />
+      <Seo pageTitle="Create a Green Package" />
       {session && (
         <>
-          <CreateListing />
+          <CreateGreenPackage />
         </>
       )}
       {!session && <ProtectedPage />}

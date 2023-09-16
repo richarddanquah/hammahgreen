@@ -98,6 +98,20 @@ const SidebarMenu = () => {
                 </a>
               </Link>
             </li>
+            <li
+              className={`treeview ${
+                isSinglePageActive("/create-green-package", route.pathname)
+                  ? "active"
+                  : ""
+              }`}
+            >
+              <Link href="/create-green-package">
+                <a>
+                  <i className="flaticon-box"></i>
+                  <span> Create a Green Package</span>
+                </a>
+              </Link>
+            </li>
             {/* <li
               className={`treeview ${
                 isSinglePageActive("/my-message", route.pathname)
