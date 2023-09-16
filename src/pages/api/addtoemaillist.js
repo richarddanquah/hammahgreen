@@ -51,7 +51,10 @@ export default async function handler(req, res) {
 
     // Create an Audience in your Mailchimp
 
+
+
     // Add a contact to an audience in your Mailchimp
+
     const listId = "42642dc7c7";
     const subscribingUser = {
       firstName: _.upperFirst(fname),
@@ -85,6 +88,8 @@ export default async function handler(req, res) {
 
     // Add a contact to an audience in your Mailchimp
 
+
+
     // Mailchimp API Health Check
 
     // mailchimp.setConfig({
@@ -99,6 +104,7 @@ export default async function handler(req, res) {
     // run();
 
     // Mailchimp API Health Check
+    
   } else {
     res.status(422).send("req_method_not_supported");
   }

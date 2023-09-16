@@ -81,10 +81,10 @@ const SubscribeForm = () => {
           </div>
         </div>
         <div className="d-flex justify-content-between">
-          <div className="col-auto">
+          <div className="col-sm-9">
             <input
               type="email"
-              className="form-control mb-2 p-3 border-0 shadow-sm"
+              className="form-control rounded-5 mb-2 p-3 border-0 shadow-sm"
               placeholder="Your email"
               name="email"
               required
@@ -92,10 +92,10 @@ const SubscribeForm = () => {
             />
           </div>
 
-          <div className="col-auto ms-2">
+          <div className="col-auto ms-1">
             {subscribingUser === "" && (
               <>
-                <button type="submit" className="btn btn-primary shadow-sm">
+                <button type="submit" className="btn btn-success shadow-sm">
                   <i className="fa fa-send"></i>
                 </button>
               </>
@@ -103,7 +103,7 @@ const SubscribeForm = () => {
 
             {subscribingUser === "true" && (
               <>
-                <button type="button" className="btn btn-primary" disabled>
+                <button type="button" className="btn btn-success" disabled>
                   <div
                     class="spinner-grow spinner-grow-sm text-light"
                     role="status"
