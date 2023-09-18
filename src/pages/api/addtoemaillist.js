@@ -6,8 +6,6 @@ export default async function handler(req, res) {
     // console.log(req.body);
 
     const { fname, lname, email } = req.body;
-    // console.log(_.upperFirst(fname));
-    // console.log(_.upperFirst(lname));
 
     mailchimp.setConfig({
       apiKey: process.env.HAMMAH_GREEN_MAILCHIMP_API_KEY,

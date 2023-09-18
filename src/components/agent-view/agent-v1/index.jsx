@@ -10,7 +10,7 @@ import Pagination from "../../common/blog/Pagination";
 import Footer from "../../common/footer/Footer";
 import CopyrightFooter from "../../common/footer/CopyrightFooter";
 
-const index = () => {
+const Index = () => {
     return (
         <>
             {/* <!-- Main Header Nav --> */}
@@ -93,4 +93,4 @@ const index = () => {
     );
 };
 
-export default index;
+export default Index;
