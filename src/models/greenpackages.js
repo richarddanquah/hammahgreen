@@ -1,13 +1,16 @@
 import { Schema, model, models } from "mongoose";
 
 const packageSchema = new Schema({
-  price: String,
-  name: {
+  title: {
     type: String,
-    required: true,
     unique: true,
   },
-  details: String,
+  price: String,
+  features: [],
+  // featureI: String,
+  // featureII: String,
+  // featureIII: String,
+  // featureIV: String,
 });
 
 const Package = models.Package || model("Package", packageSchema);

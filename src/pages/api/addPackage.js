@@ -3,8 +3,9 @@ import Package from "../../models/greenpackages";
 
 export default async function handler(req, res) {
   if (req.method === "POST" && req.url === "/api/addPackage") {
-    const { price, name, details } = req.body;
-    console.log(req.body);
+    const { title, price, features} =
+      req.body;
+    // console.log(req.body);
     try {
       console.log("CONNECTING TO DATABASE...");
       await connectDB();
@@ -12,9 +13,9 @@ export default async function handler(req, res) {
 
       console.log("CREATING DOCUMENT...");
       const createNewPackage = new Package({
+        title: title,
         price: price,
-        name: name,
-        details: details,
+        features: features,
       });
       const createdPackage = await createNewPackage.save();
       console.log("PACKAGE DOCUMENT CREATED SUCCESSFULLY ✔");

@@ -11,9 +11,14 @@ const CreateGreenPackage = () => {
     setAdding("true");
 
     const data = {
-      name: event.target.name.value,
+      title: event.target.title.value,
       price: event.target.price.value,
-      details: event.target.details.value,
+      features: [
+        event.target.feature1.value,
+        event.target.feature2.value,
+        event.target.feature3.value,
+        event.target.feature4.value,
+      ],
     };
 
     // Send the data to the server in JSON format.
@@ -44,7 +49,8 @@ const CreateGreenPackage = () => {
     if (result.createdPackage) {
       setAddedPackageToast("block");
       setAdding("");
-      event.target.reset();
+      // event.target.reset();
+      window.location.reload();
     } else if (result.error) {
       setFailedToast("block");
       setAdding("");
@@ -60,12 +66,12 @@ const CreateGreenPackage = () => {
         <div className="row">
           <div className="col-lg-9">
             <div className="my_profile_setting_input form-group">
-              <label htmlFor="propertyTitle">Package Name</label>
+              <label htmlFor="Title">Package Title</label>
               <input
                 type="text"
                 className="form-control"
-                id="propertyTitle"
-                name="name"
+                id="Title"
+                name="title"
                 required
               />
             </div>
@@ -86,14 +92,48 @@ const CreateGreenPackage = () => {
         </div>
 
         <div className="row">
-          <div className="col-lg-12">
+          <div className="col-lg-6">
             <div className="my_profile_setting_textarea">
-              <label htmlFor="propertyDescription">Details</label>
+              <label htmlFor="propertyDescription">Feature(s)</label>
               <textarea
                 className="form-control"
                 id="propertyDescription"
                 rows="2"
-                name="details"
+                name="feature1"
+              ></textarea>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="my_profile_setting_textarea">
+              <label>Feature(s)</label>
+              <textarea
+                className="form-control"
+                rows="2"
+                name="feature2"
+              ></textarea>
+            </div>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-6">
+            <div className="my_profile_setting_textarea">
+              <label>Feature(s)</label>
+              <textarea
+                className="form-control"
+                rows="2"
+                name="feature3"
+              ></textarea>
+            </div>
+          </div>
+          <div className="col-lg-6">
+            <div className="my_profile_setting_textarea">
+              <label>Feature(s)</label>
+              <textarea
+                className="form-control"
+                id="propertyDescription"
+                rows="2"
+                name="feature4"
               ></textarea>
             </div>
           </div>
@@ -161,9 +201,7 @@ const CreateGreenPackage = () => {
         <div class="d-flex">
           <div class="toast-body">
             <span className="fa fa-times-circle mr10 text-danger mr20"></span>
-            <span className="text-danger">
-              Failed to add package. Duplicate.
-            </span>
+            <span className="text-danger">Failed to add package.</span>
           </div>
           <button
             type="button"

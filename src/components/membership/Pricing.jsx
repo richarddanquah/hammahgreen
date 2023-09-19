@@ -40,17 +40,14 @@ const Pricing = ({ greenpackages }) => {
           <div className="pricing_table rounded-4 shadow-sm border border-secondary-emphasis">
             <div className="pricing_header">
               <div className="price">GHS {item.price}</div>
-              <h4>{item.name}</h4>
+              <h4>{item.title}</h4>
             </div>
             <div className="pricing_content">
-            <p>
-              {item.details}
-            </p>
-              {/* <ul className="mb0">
+              <ul className="mb0">
                 {item.features.map((val, i) => (
                   <li key={i}>{val}</li>
                 ))}
-              </ul> */}
+              </ul>
             </div>
             <div className="pricing_footer">
               <a className="btn pricing_btn btn-block" href="#">

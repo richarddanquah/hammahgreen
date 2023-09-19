@@ -2,8 +2,9 @@ import Header from "../../common/header/dashboard/Header";
 import SidebarMenu from "../../common/header/dashboard/SidebarMenu";
 import MobileMenu from "../../common/header/MobileMenu";
 import CreateGreenPackage from "./CreateGreenPackage";
+import PackagesTable from "./GreenPackagesTable";
 
-const Index = () => {
+const Index = ({greenpackages}) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -59,6 +60,15 @@ const Index = () => {
                   <div className="my_dashboard_review">
                     <div className="row">
                     <CreateGreenPackage />
+                    </div>
+                  </div>
+                </div>
+
+                
+                <div className="col-lg-12 mt20">
+                  <div className="my_dashboard_review">
+                    <div className="row">
+                    <PackagesTable greenpackages={greenpackages} />
                     </div>
                   </div>
                 </div>
