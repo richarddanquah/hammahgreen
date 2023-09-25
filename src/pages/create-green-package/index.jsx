@@ -7,12 +7,16 @@ import connectDB from "../../lib/connectMongoDB";
 import User from "../../models/user";
 import Package from "../../models/greenpackages";
 
-const Index = ({theUser, greenpackages}) => {
+const Index = ({ theUser, greenpackages }) => {
   const { data: session, status } = useSession();
   return (
     <>
       <Seo pageTitle="Create a Green Package" />
-      {session && theUser.role === "Admin" ? <CreateGreenPackage greenpackages={greenpackages} /> : <ProtectedPage />}
+      {session && theUser.role === "Admin" ? (
+        <CreateGreenPackage greenpackages={greenpackages} />
+      ) : (
+        <ProtectedPage />
+      )}
       {/* {session && (
         <>
           <CreateGreenPackage />
@@ -26,35 +30,30 @@ const Index = ({theUser, greenpackages}) => {
 export default dynamic(() => Promise.resolve(Index), { ssr: false });
 
 export async function getServerSideProps(context) {
-  const session = await getSession(context);
+  try {
+    const session = await getSession(context);
+    console.log("CONNECTING TO DATABASE...");
+    await connectDB();
+    console.log("CONNECTED TO DATABASE ✔");
 
- 
+    console.log("FETCHING User...");
+    const user = await User.find({ email: session.user.email });
+    console.log("FETCHED USER SUCCESSFULLY ✔");
+    console.log(user[0]);
 
-  console.log("CONNECTING TO DATABASE...");
-  await connectDB();
-  console.log("CONNECTED TO DATABASE ✔");
+    console.log("FETCHING Packages...");
+    const packages = await Package.find({});
+    console.log("FETCHED PACKAGES SUCCESSFULLY ✔");
+    // console.log(packages);
 
-  console.log("FETCHING User...");
-  const user = await User.find({ email: session.user.email });
-  console.log("FETCHED USER SUCCESSFULLY ✔");
-  // console.log(user[0]);
-
-  console.log("FETCHING Packages...");
-  const packages = await Package.find({});
-  console.log("FETCHED PACKAGES SUCCESSFULLY ✔");
-  // console.log(packages);
-
-  return {
-    props: {
-      theUser: JSON.parse(JSON.stringify(user[0])),
-      greenpackages: JSON.parse(JSON.stringify(packages)),
-      session,
-    },
-  };
-
-  // return {
-  //   props: {
-  //     session,
-  //   },
-  // };
+    return {
+      props: {
+        theUser: JSON.parse(JSON.stringify(user[0])),
+        greenpackages: JSON.parse(JSON.stringify(packages)),
+        session,
+      },
+    };
+  } catch (error) {
+    console.log(error);
+  }
 }

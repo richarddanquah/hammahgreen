@@ -18,7 +18,7 @@ const Index = ({
   return (
     <>
       <Seo pageTitle="Admin Dashboard" />
-      {session && (
+      {session && user.role === "Admin" || user.role === "Agent" ? (
         <>
           <MyDashboard
             user={user}
@@ -27,8 +27,7 @@ const Index = ({
             sorokroListings={sorokroListings}
           />
         </>
-      )}
-      {!session && <ProtectedPage />}
+      ) : <ProtectedPage />}
     </>
   );
 };
