@@ -64,14 +64,15 @@ const Index = ({greenpackages}) => {
                   </div>
                 </div>
 
-                
-                <div className="col-lg-12 mt20">
+                {greenpackages && (<>
+                  <div className="col-lg-12 mt20">
                   <div className="my_dashboard_review">
                     <div className="row">
                     <PackagesTable greenpackages={greenpackages} />
                     </div>
                   </div>
                 </div>
+                </>)}
 
                 <div className="row mt50">
                   <div className="col-lg-12">
