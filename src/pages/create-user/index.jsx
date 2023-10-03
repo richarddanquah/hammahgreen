@@ -12,7 +12,7 @@ const Index = ({ theUser, Users }) => {
     <>
       <Seo pageTitle="Add User" />
       {(session && theUser.role === "Admin") || theUser.role === "Agent" ? (
-        <CreateUser Users={Users} />
+        <CreateUser theUser={theUser} Users={Users} />
       ) : (
         <ProtectedPage />
       )}
@@ -34,8 +34,12 @@ export async function getServerSideProps(context) {
     console.log("FETCHED USER SUCCESSFULLY ✔");
     console.log(user[0]);
 
+    // console.log("FETCHING DOCUMENTS...");
+    // const Users = await User.find({});
+    // console.log("FETCHED DOCUMENTS SUCCESSFULLY ✔");
+
     console.log("FETCHING DOCUMENTS...");
-    const Users = await User.find({});
+    const Users = await User.find({ createdby: session.user.email });
     console.log("FETCHED DOCUMENTS SUCCESSFULLY ✔");
     // console.log(Users);
 

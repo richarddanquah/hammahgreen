@@ -7,15 +7,9 @@ import UserTable from "./UserTable";
 import { signIn, signOut, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 
-const Index = ({Users}) => {
+const Index = ({theUser, Users}) => {
   const { data: session, status } = useSession();
   const router = useRouter();
-
-  // if (status === "unauthenticated") {
-  //   // signIn();
-  //   router.push("/login");
-  // }
-
   return (
     <>
       {/* <!-- Main Header Nav --> */}
@@ -71,7 +65,7 @@ const Index = ({Users}) => {
                     <div className="row">
                       <div className="col-lg-12">
                         <h2 className="mb30">Create A User</h2>
-                        <CreateUserForm />
+                        <CreateUserForm theUser={theUser} />
                       </div>
                     </div>
                   </div>

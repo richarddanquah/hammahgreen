@@ -38,7 +38,7 @@ const TableData = ({ Users }) => {
 
     const deletedUser = result.deletedUser;
     console.log(deletedUser);
-    
+
     if (deletedUser) {
       setDeleting("false");
       window.location.reload();
@@ -56,12 +56,19 @@ const TableData = ({ Users }) => {
         <div className="feat_property list favorite_page style2">
           <div className="details">
             <div className="tc_content">
-              <p style={{ fontSize: "10px" }}>{item._id}</p>
+              <p style={{ fontSize: "10px", color: "#adadad" }}>{item._id}</p>
               <span className="flaticon-user"></span>
-              <h4>{item.email}</h4>
+              <h4 className="m-0">{item.email}</h4>
               <p>
                 {item.fname} {item.lname}
               </p>
+              {item.createdby && (
+                <>
+                  <p
+                  style={{fontSize: "10px", color: "#adadad"}}
+                  >Created By {item.createdby}</p>
+                </>
+              )}
             </div>
           </div>
         </div>

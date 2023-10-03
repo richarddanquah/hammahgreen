@@ -2,7 +2,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 
-const Form = () => {
+const Form = ({ theUser }) => {
   const { data: session, status } = useSession();
   const [passwordMismatch, setPasswordMismatch] = useState("none");
   const [creatingUser, setCreatingUser] = useState("");
@@ -21,6 +21,7 @@ const Form = () => {
     const role = e.target.role.value;
     const password = e.target.password.value;
     const repassword = e.target.repeatpassword.value;
+    const createdby = e.target.createdby.value;
 
     const fnFirstLetter = firstname.slice(0, 1).toUpperCase();
     const fnLowercaseLetters = firstname.slice(1).toLowerCase();
@@ -40,6 +41,7 @@ const Form = () => {
         email: email,
         role: role,
         password: password,
+        createdby,
       };
 
       // Send the data to the server in JSON format.
@@ -123,6 +125,22 @@ const Form = () => {
           </div>
         </div>
 
+        <div className="row mb20 d-none">
+          <div className="col-lg-6">
+            <div className="form-group input-group">
+              <input
+                type="text"
+                className="form-control"
+                name="createdby"
+                defaultValue={session ? session.user.email : undefined}
+                required
+                minlength="3"
+                maxlength="30"
+              />
+            </div>
+          </div>
+        </div>
+
         <div className="row mb10">
           <div className="col-lg-8">
             <div className="form-group input-group">
@@ -152,8 +170,12 @@ const Form = () => {
                 required
               >
                 <option data-tokens="User">User</option>
-                <option data-tokens="Admin">Admin</option>
-                <option data-tokens="Agent">Agent</option>
+                {theUser.role === "Admin" && (
+                  <>
+                    <option data-tokens="Admin">Admin</option>
+                    <option data-tokens="Agent">Agent</option>
+                  </>
+                )}
               </select>
             </div>
           </div>
@@ -200,7 +222,11 @@ const Form = () => {
           <br />
           <span
             className="float-start"
-            style={{ fontSize: "13px", color: "red", display: passwordMismatch }}
+            style={{
+              fontSize: "13px",
+              color: "red",
+              display: passwordMismatch,
+            }}
             id="passworderror"
           >
             <span className="fa fa-exclamation mr10 text-danger"></span>
@@ -226,7 +252,11 @@ const Form = () => {
               )}
 
               {creatingUser === "true" && (
-                <button type="submit" className="btn btn2 rounded-5 float-end" disabled>
+                <button
+                  type="submit"
+                  className="btn btn2 rounded-5 float-end"
+                  disabled
+                >
                   <div
                     class="spinner-grow spinner-grow-sm text-light"
                     role="status"
@@ -263,7 +293,7 @@ const Form = () => {
         </div>
       </div>
       {/* Successfully created user toast */}
-      
+
       {/* Failed to create user toast */}
       <div
         class="toast position-fixed bottom-0 end-0 mb10 mr20 text-bg-secondary-emphasis border-0"
@@ -274,7 +304,9 @@ const Form = () => {
         <div class="d-flex">
           <div class="toast-body">
             <span className="fa fa-exclamation-circle mr10 text-danger mr20"></span>
-            <span className="text-danger">User creation failed. Duplicate email</span>
+            <span className="text-danger">
+              User creation failed. Duplicate email
+            </span>
           </div>
           <button
             type="button"

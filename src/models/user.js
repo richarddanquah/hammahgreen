@@ -1,5 +1,5 @@
 import { Schema, model, models } from "mongoose";
-import { notificationSchema } from "./notificaiton";
+// import { notificationSchema } from "./notificaiton";
 
 const userSchema = new Schema({
   userImg: String,
@@ -19,7 +19,8 @@ const userSchema = new Schema({
   password: {
     type: String,
   },
-  notifications: [notificationSchema],
+  createdby: String,
+  // notifications: [notificationSchema],
   position: String,
   license: String,
   mobile: Number,

@@ -28,7 +28,7 @@ export async function getServerSideProps(context) {
 
   console.log("FETCHING All Agents...");
   const agents = await User.find({ role: "Agent" });
-  // console.log(agents);
+  console.log(agents);
 
   return {
     props: {
