@@ -413,6 +413,11 @@ const MobileMenuContent = ({ theUser }) => {
               // }
             >
               <MenuItem>
+                <Link href="/client-user">
+                  <a>Dashboard</a>
+                </Link>
+              </MenuItem>
+              <MenuItem>
                 <Link href="/client-user/profile">
                   <a>My Profile</a>
                 </Link>

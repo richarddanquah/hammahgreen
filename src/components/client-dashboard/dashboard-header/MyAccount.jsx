@@ -8,6 +8,7 @@ const MyAccount = () => {
   console.log(session);
   const router = useRouter();
   const profileMenuItems = [
+    { id: 0, name: "Dashboard", ruterPath: "/client-user" },
     { id: 1, name: "My Profile", ruterPath: "/client-user/profile" },
     { id: 2, name: "Notifications", ruterPath: "/client-user/notifications" },
   ];

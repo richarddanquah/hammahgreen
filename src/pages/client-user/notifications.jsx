@@ -15,14 +15,14 @@ const Index = ({ theUser, userNotifications }) => {
   return (
     <>
       <Seo pageTitle="Client Profile" />
-      {session && theUser.role === "User" && (
+      {session && theUser.role === "User" ? (
         <Notifications
           theUser={theUser}
           userNotifications={userNotifications}
         />
+      ) : (
+        <ProtectedPage />
       )}
-      {session && theUser.role !== "User" && <ProtectedPage />}
-      {!session && <ProtectedPage />}
     </>
   );
 };
