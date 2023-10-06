@@ -4,7 +4,7 @@ import BcryptCompare from "../../lib/bcryptcompare";
 import Bcrypt from "../../lib/bcrypt";
 
 export default async function handler(req, res) {
-  if (req.method === "POST" && req.url === "/api/updateclientpassword") {
+  if (req.method === "POST" && req.url === "/api/updateuserpassword") {
     // console.log(req.body);
     const { clientId, currentpassword } = req.body;
     let { confirmnewpassword } = req.body;

@@ -67,7 +67,7 @@ const Index = ({ theUser }) => {
                 {/* End .col */}
 
                 <div className="col-lg-12">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review border-0 rounded-5 shadow-sm">
                     <div className="row">
                       <div className="col-xl-2">
                         <h4>Profile Information</h4>
@@ -91,16 +91,16 @@ const Index = ({ theUser }) => {
                   </div> */}
                   {/* End .SocialMedia */}
 
-                  {/* <div className="my_dashboard_review mt30">
+                  <div className="my_dashboard_review mt30 border-0 rounded-5 shadow-sm">
                     <div className="row">
                       <div className="col-xl-2">
                         <h4>Change password</h4>
                       </div>
                       <div className="col-xl-10">
-                        <ChangePassword />
+                        <ChangePassword theUser={theUser} />
                       </div>
                     </div>
-                  </div> */}
+                  </div>
                 </div>
               </div>
               {/* End .row */}

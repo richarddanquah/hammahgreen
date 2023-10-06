@@ -13,6 +13,6 @@ const packageSchema = new Schema({
   // featureIV: String,
 });
 
-const Package = models.Package || model("Package", packageSchema);
+const Package = models.Greenpackage || model("Greenpackage", packageSchema);
 
 export default Package;

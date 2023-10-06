@@ -11,7 +11,7 @@ const Index = ({ theUser }) => {
   return (
     <>
       {/* <!-- Main Header Nav --> */}
-      <Header />
+      <Header theUser={theUser} />
 
       {/* <!--  Mobile Menu --> */}
       <MobileMenu theUser={theUser} />

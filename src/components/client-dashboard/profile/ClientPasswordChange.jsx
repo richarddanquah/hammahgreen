@@ -1,13 +1,21 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
+import { signOut } from "next-auth/react";
 
-export default function ClientPasswordChange({theUser}) {
+export default function ClientPasswordChange({ theUser }) {
+  const route = useRouter();
+
   const [changePass, setChangePass] = useState("");
   const [updateSuccessToast, setUpdateSuccessToast] = useState("none");
   const [passwordErrorToast, setPasswordErrorToast] = useState({
-    class: "",
+    errclass: "",
     toast: "none",
   });
-  const [currentpassworderror, setCurrentpassworderror] = useState(null);
+
+  const [currentpassworderror, setCurrentpassworderror] = useState({
+    errclass: "",
+    text: "hidden",
+  });
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,7 +38,7 @@ export default function ClientPasswordChange({theUser}) {
       const JSONdata = JSON.stringify(data);
 
       // API endpoint where we send form data.
-      const endpoint = "/api/updateclientpassword";
+      const endpoint = "/api/updateuserpassword";
 
       // Form the request for sending data to the server.
       const options = {
@@ -52,16 +60,24 @@ export default function ClientPasswordChange({theUser}) {
 
       if (result.currentpassworderror) {
         setChangePass("");
-        setCurrentpassworderror("is-invalid");
+        setCurrentpassworderror({
+          errclass: "is-invalid",
+          text: "visible",
+        });
       } else if (result.updatedpsw) {
         setChangePass("");
         setUpdateSuccessToast("block");
-        e.target.reset();
+        // e.target.reset();
+        const data = await signOut({
+          redirect: false,
+          callbackUrl: "/login",
+        });
+        route.push(data.url);
       }
     } else {
       setChangePass("");
       setPasswordErrorToast({
-        class: "is-invalid",
+        errclass: "is-invalid",
         toast: "block",
       });
     }
@@ -76,7 +92,7 @@ export default function ClientPasswordChange({theUser}) {
         <div className="form-text text-dark mb-4">
           <h4>Change your password</h4>
           <span className="d-block">
-            First verify it's you. Enter your current password, then enter you
+            First verify it's you. Enter your current password, then enter your
             new password and confirm it.
           </span>
           <span className="d-block">
@@ -100,44 +116,59 @@ export default function ClientPasswordChange({theUser}) {
             <input
               type="password"
               id="floatingInput"
-              className={`form-control ${currentpassworderror} rounded-5`}
+              className={`form-control ${currentpassworderror.errclass} rounded-5`}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               placeholder="Current password"
               name="currentpassword"
               required
               onClick={() => {
-                setCurrentpassworderror(null);
+                setCurrentpassworderror({
+                  errclass: "",
+                  text: "hidden",
+                });
               }}
             />
-            {/* <label
-                    className="ms-3 text-danger"
-                    style={{ fontSize: "12px" }}
-                  >
-                    <span
-                      style={{ fontSize: "12px"}}
-                      className="fa fa-exclamation me-1"
-                    ></span>
-                    Incorrect Password
-                  </label> */}
+            <span
+              style={{
+                fontSize: "13px",
+                visibility: currentpassworderror.text,
+              }}
+              className="ms-3 text-danger fw-bold"
+            >
+              <span className="fa fa-exclamation-circle mt-2 me-2"></span>
+              Incorrect password
+            </span>
           </div>
           <div className="col-sm-12 col-md-6 col-lg-4">
             <input
               type="password"
-              className={`form-control form-control-sm rounded-5 ${passwordErrorToast.class}`}
+              className={`form-control form-control-sm rounded-5 ${passwordErrorToast.errclass}`}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               placeholder="New password"
               name="newpassword"
               required
+              onClick={() => {
+                setPasswordErrorToast({
+                  errclass: "",
+                  toast: "none",
+                });
+              }}
             />
           </div>
           <div className="col-sm-12 col-md-6 col-lg-4">
             <input
               type="password"
-              className={`form-control form-control-sm rounded-5 ${passwordErrorToast.class}`}
+              className={`form-control form-control-sm rounded-5 ${passwordErrorToast.errclass}`}
               pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
               placeholder="Confirm password"
               name="confirmnewpassword"
               required
+              onClick={() => {
+                setPasswordErrorToast({
+                  errclass: "",
+                  toast: "none",
+                });
+              }}
             />
           </div>
         </div>
@@ -177,7 +208,7 @@ export default function ClientPasswordChange({theUser}) {
               style={{ fontSize: "12px" }}
               className="fa fa-check-circle me-2"
             ></span>
-            Change successfully
+            Change successful
           </div>
           <button
             type="button"
@@ -213,7 +244,10 @@ export default function ClientPasswordChange({theUser}) {
             data-bs-dismiss="toast"
             aria-label="Close"
             onClick={() => {
-              setPasswordErrorToast("none");
+              setPasswordErrorToast({
+                errclass: "",
+                toast: "none",
+              });
             }}
           ></button>
         </div>
