@@ -61,7 +61,7 @@ const CreateGreenPackage = () => {
       <form
         onSubmit={handleSubmit}
         encType="multipart/form-data"
-        className="p20 border-0 rounded-2 shadow-sm bg-white"
+        className="p20 border-0 bg-white"
       >
         <div className="row">
           <div className="col-lg-9">

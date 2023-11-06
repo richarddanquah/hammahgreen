@@ -273,7 +273,11 @@ const HeaderMenuContent = ({ float = "", theUser }) => {
       </li>
       <li className="last">
         <Link href="/properties">
-          <a className={route.pathname === "/properties" ? "ui-active" : undefined}>
+          <a
+            className={
+              route.pathname === "/properties" ? "ui-active" : undefined
+            }
+          >
             Properties
           </a>
         </Link>
@@ -400,6 +404,17 @@ const HeaderMenuContent = ({ float = "", theUser }) => {
             <span className="arrow"></span>
           </a>
           <ul className="sub-menu">
+            <li>
+              <Link href="/client-user">
+                <a
+                  className={
+                    route.pathname === "/client-user" ? "ui-active" : undefined
+                  }
+                >
+                  Dashboard
+                </a>
+              </Link>
+            </li>
             <li>
               <Link href="/client-user/profile">
                 <a

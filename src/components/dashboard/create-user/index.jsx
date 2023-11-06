@@ -61,7 +61,7 @@ const Index = ({theUser, Users}) => {
                 {/* End .col */}
 
                 <div className="col-lg-12 mb20">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 shadow-sm">
                     <div className="row">
                       <div className="col-lg-12">
                         <h2 className="mb30">Create A User</h2>
@@ -73,7 +73,7 @@ const Index = ({theUser, Users}) => {
                 {/* End .col */}
 
                 <div className="col-lg-12">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 shadow-sm">
                     <div className="table-responsive mt0">
                       <h2 className="mb30">User List</h2>
                       <UserTable Users={Users} />

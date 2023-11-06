@@ -267,7 +267,7 @@ const TableData = ({ Listings }) => {
 
   return (
     <>
-      <table className="table shadow-sm">
+      <table className="table">
         <thead className="thead-light">
           <tr>
             {theadConent.map((value, i) => (

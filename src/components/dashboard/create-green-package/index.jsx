@@ -57,7 +57,7 @@ const Index = ({greenpackages}) => {
                 {/* End .col */}
 
                 <div className="col-lg-12">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 shadow-sm">
                     <div className="row">
                     <CreateGreenPackage />
                     </div>
@@ -66,7 +66,7 @@ const Index = ({greenpackages}) => {
 
                 {greenpackages && (<>
                   <div className="col-lg-12 mt20">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 shadow-sm">
                     <div className="row">
                     <PackagesTable greenpackages={greenpackages} />
                     </div>

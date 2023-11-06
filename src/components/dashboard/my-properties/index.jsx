@@ -88,7 +88,7 @@ const Index = ({ Listings }) => {
                 {/* End .col */}
 
                 <div className="col-lg-12">
-                  <div className="my_dashboard_review mb40">
+                  <div className="my_dashboard_review mb40 rounded-5 shadow-sm">
                     <div className="property_table">
                       <div className="table-responsive mt0">
                         <TableData Listings={Listings} />

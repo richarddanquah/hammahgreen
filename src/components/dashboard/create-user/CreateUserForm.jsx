@@ -92,7 +92,7 @@ const Form = ({ theUser }) => {
 
   return (
     <>
-      <form onSubmit={handleSubmit} className="border rounded p20 shadow-sm">
+      <form onSubmit={handleSubmit} className="border-0 p20">
         <div className="row mb20">
           <div className="col-lg-6">
             <div className="form-group input-group">
