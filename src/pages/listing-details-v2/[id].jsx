@@ -45,7 +45,7 @@ const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
               <div className="col-md-6 col-lg-6 ">
                 <div className="row g-0">
                   <div className="col-lg-12 ">
-                    <div className="spls_style_one pr1 1px position-relative">
+                    <div className="spls_style_one 1px position-relative">
                       <Item
                         original={property?.mainImage}
                         thumbnail={property?.mainImage}

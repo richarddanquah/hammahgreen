@@ -21,6 +21,16 @@ const EditListing = ({ theListing }) => {
 
   // console.log(theListing);
 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleSelectChange = (event) => {
+    const options = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOptions(options);
+  };
+
   // upload main Image
   const uploadMainImg = (e) => {
     setMainImg(e.target.files[0]);
@@ -29,6 +39,13 @@ const EditListing = ({ theListing }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setUpdatingText("true");
+
+    const amenitiesList = selectedOptions;
+
+    if (amenitiesList.length === 0) {
+      alert("Add some amenities");
+    }
+
     const data = {
       id: event.target.propertyid.value,
       title: event.target.title.value,
@@ -42,7 +59,7 @@ const EditListing = ({ theListing }) => {
       bedrooms: event.target.bedrooms.value,
       baths: event.target.baths.value,
       sqft: event.target.sqft.value,
-      amenities: event.target.amenities.value,
+      amenities: amenitiesList,
       built: event.target.built.value,
       featured: event.target.featured.value,
       homepageheader: event.target.homepageheader.value,
@@ -158,10 +175,7 @@ const EditListing = ({ theListing }) => {
 
   return (
     <>
-      <form
-        onSubmit={handleUpload}
-        className="mb50 rounded-4 shadow-sm p20 bg-white border"
-      >
+      <form onSubmit={handleUpload} className="mb50 p10 bg-white">
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
@@ -240,10 +254,7 @@ const EditListing = ({ theListing }) => {
         )}
       </form>
 
-      <form
-        onSubmit={handleSubmit}
-        className="rounded shadow-sm p20 bg-white border"
-      >
+      <form onSubmit={handleSubmit} className="rounded p10">
         <div
           style={{ display: "none" }}
           className="form-group form-check custom-checkbox mb-3"
@@ -508,17 +519,22 @@ const EditListing = ({ theListing }) => {
         <div className="row">
           <div className="col-lg-3 col-xl-3">
             <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <i
+                style={{ fontSize: "13px" }}
+                className="fa fa-info"
+                title="Hold down Ctrl (or Command on Mac) to select multiple options"
+              ></i>
               <label>Amenities</label>
               <select
+                multiple
                 className="selectpicker form-select"
                 data-live-search="true"
                 data-width="100%"
                 name="amenities"
                 required
+                value={selectedOptions}
+                onChange={handleSelectChange}
               >
-                <option data-tokens={theListing.amenities}>
-                  {theListing.amenities}
-                </option>
                 <option data-tokens="Air-conditioning">Air-conditioning</option>
                 <option data-tokens="Barbeque">Barbeque</option>
                 <option data-tokens="Gym">Gym</option>
@@ -527,6 +543,22 @@ const EditListing = ({ theListing }) => {
                 <option data-tokens="Swimming-pool">Swimming-pool</option>
                 <option data-tokens="n/a">n/a</option>
               </select>
+              <span style={{ fontSize: "10px" }} className="d-block text-dark">
+                ({theListing.amenities.join(", ")})
+              </span>
+
+              {selectedOptions &&
+                selectedOptions.map((item) => (
+                  <>
+                    <span
+                      style={{ fontSize: "10px" }}
+                      className="badge bg-success me-1 rounded-5"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  </>
+                ))}
             </div>
           </div>
           {/* End .col */}
@@ -603,7 +635,8 @@ const EditListing = ({ theListing }) => {
           <div className="col-lg-6">
             <div className="my_profile_setting_input form-group">
               <label htmlFor="videoID">
-                Add a <i className="fa fa-youtube text-danger"></i>YouTube VideoID
+                Add a <i className="fa fa-youtube text-danger"></i>YouTube
+                VideoID
               </label>
               <span style={{ fontSize: "11px", display: "block" }}>
                 Ex: https://www.youtube.com/watch?v=

@@ -71,7 +71,7 @@ const Index = ({ theListing }) => {
                 {/* End .col */}
 
                 <div className="col-lg-12">
-                  <div className="my_dashboard_review">
+                  <div className="my_dashboard_review rounded-5 shadow-sm">
                     <EditListing theListing={theListing} />
                   </div>
                   {/* <div className="my_dashboard_review mt30">
@@ -90,7 +90,7 @@ const Index = ({ theListing }) => {
                     <DetailedInfo />
                   </div> */}
 
-                  <div className="my_dashboard_review mt30 rounded-4 shadow-sm">
+                  <div className="my_dashboard_review mt30 rounded-5 shadow-sm">
                     <div className="col-lg-12">
                       <h3 className="mb30">Add more images</h3>
                     </div>

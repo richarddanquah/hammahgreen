@@ -12,6 +12,16 @@ const CreateList = () => {
   const { data: session } = useSession();
   const UUIDv1 = v1();
 
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const handleSelectChange = (event) => {
+    const options = Array.from(
+      event.target.selectedOptions,
+      (option) => option.value
+    );
+    setSelectedOptions(options);
+  };
+
   // upload main Image
   const uploadMainImg = (e) => {
     setMainImg(e.target.files[0]);
@@ -24,11 +34,17 @@ const CreateList = () => {
 
     // Get selected file
     const file = mainImg;
-    console.log(UUIDv1 + file.name);
+    const amenitiesList = selectedOptions;
+    // console.log(UUIDv1 + file.name);
 
     if (!file) {
       alert("Please select an image file.");
-      return;
+      setUploading("");
+    }
+
+    if (amenitiesList.length === 0) {
+      alert("Add some amenities");
+      setUploading("");
     }
 
     const url = await uploadToS3(UUIDv1 + file.name, file);
@@ -47,7 +63,7 @@ const CreateList = () => {
       bedrooms: event.target.bedrooms.value,
       baths: event.target.baths.value,
       sqft: event.target.sqft.value,
-      amenities: event.target.amenities.value,
+      amenities: amenitiesList,
       built: event.target.built.value,
       featured: event.target.featured.value,
       homepageheader: event.target.homepageheader.value,
@@ -58,6 +74,7 @@ const CreateList = () => {
     };
 
     console.log(allData);
+    setUploading("");
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(allData);
@@ -117,6 +134,7 @@ const CreateList = () => {
               name="main_Image"
               accept="image/*"
               onChange={uploadMainImg}
+              // required
             />
             <label
               style={
@@ -386,15 +404,24 @@ const CreateList = () => {
         {/* End .col */}
 
         <div className="row">
-          <div className="col-lg-3 col-xl-3">
+          <div className="col-lg-4 col-xl-4">
             <div className="my_profile_setting_input ui_kit_select_search form-group">
+              <i
+                style={{ fontSize: "13px" }}
+                className="fa fa-info"
+                title="Hold down Ctrl (or Command on Mac) to select multiple options"
+              ></i>
+              &nbsp;
               <label>Amenities</label>
               <select
+                multiple
                 className="selectpicker form-select"
                 data-live-search="true"
                 data-width="100%"
                 name="amenities"
-                required
+                // required
+                value={selectedOptions}
+                onChange={handleSelectChange}
               >
                 <option data-tokens="Air-conditioning">Air-conditioning</option>
                 <option data-tokens="Barbeque">Barbeque</option>
@@ -404,11 +431,23 @@ const CreateList = () => {
                 <option data-tokens="Swimming-pool">Swimming-pool</option>
                 <option data-tokens="n/a">n/a</option>
               </select>
+              {selectedOptions &&
+                selectedOptions.map((item) => (
+                  <>
+                    <span
+                      style={{ fontSize: "10px" }}
+                      className="badge bg-secondary me-1 rounded-5"
+                      key={item}
+                    >
+                      {item}
+                    </span>
+                  </>
+                ))}
             </div>
           </div>
           {/* End .col */}
 
-          <div className="col-lg-3 col-xl-3">
+          <div className="col-lg-2 col-xl-2">
             <div className="my_profile_setting_input form-group">
               <label htmlFor="formGroupExamplePrice">Built</label>
               <input
@@ -472,7 +511,10 @@ const CreateList = () => {
         <div className="row">
           <div className="col-lg-6">
             <div className="my_profile_setting_input form-group">
-              <label htmlFor="videoID">Add a <i className="fa fa-youtube text-danger"></i>YouTube VideoID</label>
+              <label htmlFor="videoID">
+                Add a <i className="fa fa-youtube text-danger"></i>YouTube
+                VideoID
+              </label>
               <span style={{ fontSize: "11px", display: "block" }}>
                 Ex: https://www.youtube.com/watch?v=
                 <b className="text-success">2PnbGCbcRYU</b>
@@ -482,7 +524,7 @@ const CreateList = () => {
                 className="form-control"
                 id="videoID"
                 name="youtubevideoid"
-                placeholder="Example: 2PnbGCbcRYU"
+                placeholder=""
                 maxLength={11}
               />
             </div>

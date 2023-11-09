@@ -46,7 +46,7 @@ const PropertyDetails = ({ property }) => {
           </li>
           <li>
             <p>
-              Amenities : <span>{property?.amenities}</span>
+              Amenities : <span className="m-0">{property && property.amenities?.join(', ')}</span>
             </p>
           </li>
         </ul>

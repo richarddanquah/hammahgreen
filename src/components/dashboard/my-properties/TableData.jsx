@@ -172,7 +172,7 @@ const TableData = ({ Listings }) => {
             </span>
             <br />
             <span style={{ fontSize: "12px" }}>
-              <b>Amenities</b> • {item.amenities}
+              <b>Amenities</b> • {item.amenities.join(', ')}
             </span>
             <br />
             <span style={{ fontSize: "12px" }}>
