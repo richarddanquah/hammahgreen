@@ -524,6 +524,7 @@ const EditListing = ({ theListing }) => {
                 className="fa fa-info"
                 title="Hold down Ctrl (or Command on Mac) to select multiple options"
               ></i>
+              &nbsp;
               <label>Amenities</label>
               <select
                 multiple
