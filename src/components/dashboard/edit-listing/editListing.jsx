@@ -648,7 +648,7 @@ const EditListing = ({ theListing }) => {
                 className="form-control"
                 id="videoID"
                 name="youtubevideoid"
-                placeholder="Example: 2PnbGCbcRYU"
+                placeholder=""
                 defaultValue={theListing.youtubeVideoID}
                 maxLength={11}
               />
