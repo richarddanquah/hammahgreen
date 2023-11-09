@@ -436,7 +436,7 @@ const CreateList = () => {
                   <>
                     <span
                       style={{ fontSize: "10px" }}
-                      className="badge bg-secondary me-1 rounded-5"
+                      className="badge bg-success me-1 rounded-5"
                       key={item}
                     >
                       {item}
