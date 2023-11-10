@@ -34,7 +34,7 @@ const FeaturedProperties = ({ propertyListings }) => {
     ?.reverse()
     ?.map((item) => (
       <div className="item" key={item._id}>
-        <div className="feat_property rounded-4 shadow-sm">
+        <div className="feat_property rounded-4">
           <div className="thumb rounded-4">
             {/* <div style={{"backgroundImage": url({{item.mainImage}}) }} className="img-whp">
           </div> */}
