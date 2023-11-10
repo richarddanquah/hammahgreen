@@ -3,7 +3,7 @@ import Categorie from "../../components/common/listing/Categorie";
 import FeaturedListings from "../../components/common/listing/FeaturedListings";
 import FeatureProperties from "../../components/common/listing/FeatureProperties";
 
-const SidebarListings = () => {
+const SidebarListings = (listings) => {
   return (
     <div className="sidebar_listing_grid1">
       <div className="sidebar_listing_list">
@@ -16,7 +16,7 @@ const SidebarListings = () => {
 
       <div className="terms_condition_widget style_two-pro">
         <h4 className="title">Featured Properties</h4>
-        <FeatureProperties />
+        <FeatureProperties listings={listings} />
       </div>
       {/* End Featured Properties widget */}
 

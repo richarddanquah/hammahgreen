@@ -10,8 +10,10 @@ import PopupSignInUp from "../../components/common/PopupSignInUp";
 import properties from "../../data/properties";
 import DetailsContent from "../../components/listing-details-v1/DetailsContent";
 import Sidebar from "../../components/listing-details-v1/Sidebar";
+import connectDB from "../../lib/connectMongoDB";
+import Listing from "../../models/listing";
 
-const ListingDynamicDetailsV1 = () => {
+const ListingDynamicDetailsV1 = ({ allListings, listings }) => {
   const router = useRouter();
   const [property, setProperty] = useState({});
   const id = router.query.id;
@@ -154,7 +156,7 @@ const ListingDynamicDetailsV1 = () => {
             {/* End details content .col-lg-8 */}
 
             <div className="col-lg-4 col-xl-4">
-              <Sidebar />
+              <Sidebar listings={listings} />
             </div>
             {/* End sidebar content .col-lg-4 */}
           </div>
@@ -182,3 +184,24 @@ const ListingDynamicDetailsV1 = () => {
 };
 
 export default ListingDynamicDetailsV1;
+
+export async function getServerSideProps() {
+  console.log("CONNECTING TO DATABASE...");
+  await connectDB();
+  console.log("CONNECTED TO DATABASE ✔");
+
+  console.log("FETCHING Listing...");
+  const featuredListings = await Listing.find({featured: "Yes"});
+
+  console.log("FETCHING Listing...");
+  const allListings = await Listing.find({});
+
+  // console.log(listings);
+
+  return {
+    props: {
+      listings: JSON.parse(JSON.stringify(featuredListings)),
+      allListings: JSON.parse(JSON.stringify(allListings)),
+    },
+  };
+}

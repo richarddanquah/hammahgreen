@@ -9,8 +9,10 @@ import MobileMenu from "../../components/common/header/MobileMenu";
 import PopupSignInUp from "../../components/common/PopupSignInUp";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import connectDB from "../../lib/connectMongoDB";
+import Listing from "../../models/listing";
 
-const AgentDetailsDynamic = () => {
+const AgentDetailsDynamic = ({ allListings, listings }) => {
   const router = useRouter();
   const [agent, setAgentItem] = useState({});
   const id = router.query.id;
@@ -114,7 +116,7 @@ const AgentDetailsDynamic = () => {
             {/* End .col-md-12 col-lg-8 content left side */}
 
             <div className="col-lg-4 col-xl-4">
-              <SidebarListings />
+              <SidebarListings listings={listings} />
             </div>
             {/* End .col-lg-4 col-xl-4 content left side */}
           </div>
@@ -143,3 +145,24 @@ const AgentDetailsDynamic = () => {
 };
 
 export default AgentDetailsDynamic;
+
+export async function getServerSideProps() {
+  console.log("CONNECTING TO DATABASE...");
+  await connectDB();
+  console.log("CONNECTED TO DATABASE ✔");
+
+  console.log("FETCHING Listing...");
+  const featuredListings = await Listing.find({featured: "Yes"});
+
+  console.log("FETCHING Listing...");
+  const allListings = await Listing.find({});
+
+  // console.log(listings);
+
+  return {
+    props: {
+      listings: JSON.parse(JSON.stringify(featuredListings)),
+      allListings: JSON.parse(JSON.stringify(allListings)),
+    },
+  };
+}

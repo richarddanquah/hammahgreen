@@ -12,7 +12,6 @@ import DetailsContent from "../../components/listing-details-v1/DetailsContent";
 import Sidebar from "../../components/listing-details-v1/Sidebar";
 import connectDB from "../../lib/connectMongoDB";
 import Listing from "../../models/listing";
-import Image from "next/image";
 
 const ListingDynamicDetailsV2 = ({ allListings, listings }) => {
   const router = useRouter();
